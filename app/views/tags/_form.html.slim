@@ -1,0 +1,24 @@
+= form_for @tag do |f|
+  - if @tag.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@tag.errors.count, "error")} prohibited this tag from being saved:"
+      ul
+        - @tag.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :repo
+    = f.text_field :repo
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :git_url
+    = f.text_field :git_url
+  .field
+    = f.label :git_commit
+    = f.text_field :git_commit
+  .field
+    = f.label :dockerfile_dir
+    = f.text_field :dockerfile_dir
+  .actions = f.submit

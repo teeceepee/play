@@ -1,0 +1,29 @@
+h1 Listing tags
+
+table
+  thead
+    tr
+      th Repo
+      th Name
+      th Git url
+      th Git commit
+      th Dockerfile dir
+      th
+      th
+      th
+
+  tbody
+    - @tags.each do |tag|
+      tr
+        td = tag.repo
+        td = tag.name
+        td = tag.git_url
+        td = tag.git_commit
+        td = tag.dockerfile_dir
+        td = link_to 'Show', tag
+        td = link_to 'Edit', edit_tag_path(tag)
+        td = link_to 'Destroy', tag, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Tag', new_tag_path

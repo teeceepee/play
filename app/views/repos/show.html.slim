@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @repo.name
+p
+  strong Tag count:
+  = @repo.tag_count
+
+= link_to 'Edit', edit_repo_path(@repo)
+'|
+= link_to 'Back', repos_path

@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Repo:
+  = @tag.repo
+p
+  strong Name:
+  = @tag.name
+p
+  strong Git url:
+  = @tag.git_url
+p
+  strong Git commit:
+  = @tag.git_commit
+p
+  strong Dockerfile dir:
+  = @tag.dockerfile_dir
+
+= link_to 'Edit', edit_tag_path(@tag)
+'|
+= link_to 'Back', tags_path
