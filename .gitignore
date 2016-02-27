@@ -28,3 +28,6 @@
 
 # Ignore precompiled assets.
 /public/assets/
+
+# Ignore data
+/data

@@ -12,6 +12,9 @@ group :development, :test do
 
   # https://github.com/evrone/quiet_assets
   gem 'quiet_assets', '~> 1.1.0'
+
+  # https://github.com/michaeldv/awesome_print
+  gem 'awesome_print', '~> 1.6.1'
 end
 
 
