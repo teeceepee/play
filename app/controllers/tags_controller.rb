@@ -1,10 +1,16 @@
 class TagsController < ApplicationController
+
+  before_action :set_repo, only: [:index, :new, :create]
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
 
   # GET /tags
   # GET /tags.json
   def index
-    @tags = Tag.all
+    if @repo.present?
+      @tags = @repo.tags
+    else
+      @tags = Tag.all
+    end
   end
 
   # GET /tags/1
@@ -14,7 +20,7 @@ class TagsController < ApplicationController
 
   # GET /tags/new
   def new
-    @tag = Tag.new
+    @tag = @repo.tags.build
   end
 
   # GET /tags/1/edit
@@ -24,7 +30,7 @@ class TagsController < ApplicationController
   # POST /tags
   # POST /tags.json
   def create
-    @tag = Tag.new(tag_params)
+    @tag = @repo.tags.build(tag_params)
 
     respond_to do |format|
       if @tag.save
@@ -69,6 +75,6 @@ class TagsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tag_params
-      params.require(:tag).permit(:repo_id, :name, :git_url, :git_commit, :dockerfile_dir)
+      params.require(:tag).permit(:name, :git_url, :git_commit, :dockerfile_dir)
     end
 end
