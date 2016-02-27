@@ -16,6 +16,9 @@ class TagsController < ApplicationController
   # GET /tags/1
   # GET /tags/1.json
   def show
+    if @tag.dockerfile_content.blank?
+      @tag.download_docerfile
+    end
   end
 
   # GET /tags/new

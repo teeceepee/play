@@ -15,6 +15,12 @@ p
 p
   strong Dockerfile dir:
   = @tag.dockerfile_dir
+p
+  strong Dockerfile url:
+  = @tag.dockerfile_url
+p
+  strong Dockerfile content:
+  pre = @tag.dockerfile_content
 
 = link_to 'Edit', edit_tag_path(@tag)
 '|

@@ -5,9 +5,10 @@ table
     tr
       th Repo
       th Name
-      th Git url
-      th Git commit
-      th Dockerfile dir
+      /th Git url
+      /th Git commit
+      /th Dockerfile dir
+      th Dockerfile url
       th
       th
       th
@@ -17,9 +18,10 @@ table
       tr
         td = tag.repo
         td = tag.name
-        td = tag.git_url
-        td = tag.git_commit
-        td = tag.dockerfile_dir
+        /td = tag.git_url
+        /td = tag.git_commit
+        /td = tag.dockerfile_dir
+        td = link_to tag.dockerfile_url, tag.dockerfile_url, target: '_blank'
         td = link_to 'Show', tag
         td = link_to 'Edit', edit_tag_path(tag)
         td = link_to 'Destroy', tag, data: {:confirm => 'Are you sure?'}, :method => :delete

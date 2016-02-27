@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227140658) do
+ActiveRecord::Schema.define(version: 20160227142128) do
 
   create_table "repos", force: :cascade do |t|
     t.string   "name"
@@ -28,8 +28,10 @@ ActiveRecord::Schema.define(version: 20160227140658) do
     t.string   "git_url"
     t.string   "git_commit"
     t.string   "dockerfile_dir"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "dockerfile_content"
+    t.datetime "dockerfile_downloaded_at"
   end
 
   add_index "tags", ["repo_id"], name: "index_tags_on_repo_id"
