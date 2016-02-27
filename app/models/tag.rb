@@ -16,9 +16,16 @@ class Tag < ApplicationRecord
     GitRepoParser.dockerfile_url(git_url, git_commit, dockerfile_dir)
   end
 
+  # download dockerfile and record download time
+  # @return [TrueClass]
+  # @return [FalseClass]
   def download_dockerfile
     content = Net::HTTP.get(URI(self.dockerfile_url))
-    self.update(dockerfile_content: content.force_encoding('utf-8'))
-    content
+    self.update(
+      {
+        dockerfile_content: content.force_encoding('utf-8'),
+        dockerfile_downloaded_at: DateTime.now,
+      }
+    )
   end
 end
