@@ -1,5 +1,19 @@
 source 'https://ruby.taobao.org'
 
+# https://github.com/slim-template/slim-rails
+gem 'slim-rails', '~> 3.0.1'
+
+group :development, :test do
+  # https://github.com/rweng/pry-rails
+  gem 'pry-rails', '~> 0.3.4'
+
+  # https://github.com/thoughtbot/factory_girl_rails
+  gem 'factory_girl_rails', '~> 4.6.0'
+
+  # https://github.com/evrone/quiet_assets
+  gem 'quiet_assets', '~> 1.1.0'
+end
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 5.0.0.beta3', '< 5.1'
