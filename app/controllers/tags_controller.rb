@@ -17,7 +17,7 @@ class TagsController < ApplicationController
   # GET /tags/1.json
   def show
     if @tag.dockerfile_content.blank?
-      @tag.download_docerfile
+      @tag.download_dockerfile
     end
   end
 
