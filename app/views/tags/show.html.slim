@@ -15,9 +15,9 @@ p
 p
   strong Dockerfile dir:
   = @tag.dockerfile_dir
-p
+div
   strong Dockerfile url:
-  = @tag.dockerfile_url
+  div = link_to @tag.dockerfile_url, @tag.dockerfile_url, target: '_blank'
 p
   strong Dockerfile downloaded at:
   = @tag.dockerfile_downloaded_at
@@ -33,3 +33,8 @@ div
 = link_to 'Edit', edit_tag_path(@tag)
 '|
 = link_to 'Back', tags_path
+
+css:
+  pre {
+    background: #eee;
+  }
