@@ -75,4 +75,14 @@ module GitRepoParser
     end
   end
 
+  # buildable url, could pass to `docker build` command
+  # https://docs.docker.com/engine/reference/commandline/build/
+  def self.buildable_url(git_url, git_commit_id, dockerfile_dir = nil)
+    if dockerfile_dir
+      "#{git_url}##{git_commit_id}:#{dockerfile_dir}"
+    else
+      "#{git_url}##{git_commit_id}"
+    end
+  end
+
 end

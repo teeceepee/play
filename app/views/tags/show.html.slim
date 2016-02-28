@@ -22,7 +22,11 @@ p
   strong Dockerfile downloaded at:
   = @tag.dockerfile_downloaded_at
 
-p
+div
+  strong Buildable url:
+  div = @tag.buildable_url
+
+div
   strong Dockerfile content:
   pre = @tag.dockerfile_content
 

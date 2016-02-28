@@ -28,4 +28,8 @@ class Tag < ApplicationRecord
       }
     )
   end
+
+  def buildable_url
+    GitRepoParser.buildable_url(git_url, git_commit, dockerfile_dir)
+  end
 end
