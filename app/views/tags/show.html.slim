@@ -28,13 +28,8 @@ div
 
 div
   strong Dockerfile content:
-  pre = @tag.dockerfile_content
+  = sanitize @tag.highlighted_content
 
 = link_to 'Edit', edit_tag_path(@tag)
 '|
 = link_to 'Back', tags_path
-
-css:
-  pre {
-    background: #eee;
-  }

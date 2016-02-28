@@ -1,5 +1,6 @@
 require 'net/http'
 require 'git_repo_parser'
+require 'highlight'
 
 class Tag < ApplicationRecord
 
@@ -31,5 +32,15 @@ class Tag < ApplicationRecord
 
   def buildable_url
     GitRepoParser.buildable_url(git_url, git_commit, dockerfile_dir)
+  end
+
+  # @return [String]
+  # @return [NilClass]
+  def highlighted_content
+    if dockerfile_content.present?
+      lexer = Rouge::Lexers::Dockerfile.new
+      formatter = Rouge::Formatters::HTML.new
+      formatter.format(lexer.lex(dockerfile_content))
+    end
   end
 end

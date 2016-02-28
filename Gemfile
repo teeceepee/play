@@ -1,5 +1,8 @@
 source 'https://ruby.taobao.org'
 
+# https://github.com/jneen/rouge
+gem 'rouge', '~> 1.10.1'
+
 # https://github.com/slim-template/slim-rails
 gem 'slim-rails', '~> 3.0.1'
 
