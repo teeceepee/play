@@ -1,5 +1,8 @@
 source 'https://ruby.taobao.org'
 
+# https://github.com/carrierwaveuploader/carrierwave
+gem 'carrierwave', '~> 0.10.0'
+
 # https://github.com/jneen/rouge
 gem 'rouge', '~> 1.10.1'
 

@@ -1,0 +1,10 @@
+h3 Dockerfile Highlighter
+
+= form_for :highlighter, html: {multipart: true}, remote: false do |f|
+
+  .file
+    = f.file_field :dockerfile
+  .actions
+    = f.submit 'Highlight!'
+
+
