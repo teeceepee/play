@@ -31,3 +31,6 @@
 
 # Ignore data
 /data
+
+# Ignore Finder tmp file.
+.DS_Store
