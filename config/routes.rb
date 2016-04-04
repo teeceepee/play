@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root to: 'pages#index'
+
   resources :repos do
     resources :tags
   end

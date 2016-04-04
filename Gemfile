@@ -1,5 +1,11 @@
 source 'https://ruby.taobao.org'
 
+# https://github.com/reactjs/react-rails
+gem 'react-rails', '~> 1.6.2'
+
+# https://github.com/TannerRogalsky/sprockets-es6
+gem 'sprockets-es6', '~> 0.9.0'
+
 # https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave', '~> 0.10.0'
 
