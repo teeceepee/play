@@ -34,3 +34,6 @@
 
 # Ignore Finder tmp file.
 .DS_Store
+
+# Ignore vendor assets
+/vendor/assets/bower_components/

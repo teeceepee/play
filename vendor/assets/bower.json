@@ -1,0 +1,20 @@
+{
+  "name": "assets",
+  "version": "0.0.0",
+  "homepage": "https://github.com/teeceepee/docker_tag_tree",
+  "authors": [
+    "Yu Haidong <yuhaidongyhd@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.3.6",
+    "font-awesome": "4.5.0"
+  }
+}
