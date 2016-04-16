@@ -13,3 +13,12 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w(
   pages/index_page.js
 )
+
+Rails.application.config.assets.precompile += %w(
+  font-awesome/fonts/fontawesome-webfont.eot
+  font-awesome/fonts/fontawesome-webfont.woff2
+  font-awesome/fonts/fontawesome-webfont.woff
+  font-awesome/fonts/fontawesome-webfont.ttf
+  font-awesome/fonts/fontawesome-webfont.svg
+)
+

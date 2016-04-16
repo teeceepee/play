@@ -1,4 +1,6 @@
 @import "bootstrap/dist/css/bootstrap";
+$fa-font-path: "/assets/font-awesome/fonts" !default;
+@import "font-awesome/scss/font-awesome";
 @import "rouge_theme";
 
 @import "styles";
