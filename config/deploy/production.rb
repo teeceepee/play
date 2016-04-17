@@ -1,4 +1,4 @@
-server 'teeceepee.com'
+server 'teeceepee.com', roles: %w(web db)
 
 # server-based syntax
 # ======================

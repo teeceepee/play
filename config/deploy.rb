@@ -34,6 +34,19 @@ set :repo_url, 'https://github.com/teeceepee/docker_tag_tree.git'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+set :rbenv_type, :user
+set :rbenv_ruby, File.read('.ruby-version').strip
+
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'db/production.sqlite3')
+
+LINKED_DIRS = %w(
+  log
+  tmp/pids tmp/cache tmp/sockets
+  vendor/assets/bower_components
+)
+set :linked_dirs, fetch(:linked_dirs, []).push(*LINKED_DIRS)
+
+
 namespace :deploy do
 
   after :restart, :clear_cache do
@@ -45,4 +58,11 @@ namespace :deploy do
     end
   end
 
+end
+
+desc 'Report Uptimes'
+task :uptime do
+  on roles(:all) do |host|
+    info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
+  end
 end

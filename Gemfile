@@ -1,7 +1,5 @@
 source 'https://ruby.taobao.org'
 
-gem 'capistrano', '3.4.1'
-
 # https://github.com/reactjs/react-rails
 gem 'react-rails', '~> 1.6.2'
 
@@ -18,6 +16,15 @@ gem 'rouge', '~> 1.10.1'
 gem 'slim-rails', '~> 3.0.1'
 
 group :development, :test do
+  # https://github.com/capistrano/capistrano
+  gem 'capistrano', '3.4.1'
+  # https://github.com/capistrano/rbenv
+  gem 'capistrano-rbenv', '2.0.4'
+  # https://github.com/capistrano/bundler
+  gem 'capistrano-bundler', '1.1.4'
+  # https://github.com/capistrano/rails
+  gem 'capistrano-rails', '1.1.6'
+
   # https://github.com/rweng/pry-rails
   gem 'pry-rails', '~> 0.3.4'
 
