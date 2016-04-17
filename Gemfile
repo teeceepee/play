@@ -1,5 +1,7 @@
 source 'https://ruby.taobao.org'
 
+gem 'capistrano', '3.4.1'
+
 # https://github.com/reactjs/react-rails
 gem 'react-rails', '~> 1.6.2'
 
