@@ -1,4 +1,4 @@
-server 'teeceepee.com', roles: %w(web db)
+server 'teeceepee.com', roles: %w(app web db)
 
 # server-based syntax
 # ======================
@@ -48,8 +48,7 @@ server 'teeceepee.com', roles: %w(web db)
 #    forward_agent: false,
 #    auth_methods: %w(password)
 #  }
-#
-# The server-based syntax can be used to override options:
+## The server-based syntax can be used to override options:
 # ------------------------------------
 # server 'example.com',
 #   user: 'user_name',

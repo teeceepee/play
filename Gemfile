@@ -24,6 +24,8 @@ group :development, :test do
   gem 'capistrano-bundler', '1.1.4'
   # https://github.com/capistrano/rails
   gem 'capistrano-rails', '1.1.6'
+  # https://github.com/seuros/capistrano-puma
+  gem 'capistrano3-puma', '1.2.1'
 
   # https://github.com/rweng/pry-rails
   gem 'pry-rails', '~> 0.3.4'
