@@ -40,6 +40,7 @@ set :rbenv_ruby, File.read('.ruby-version').strip
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'db/production.sqlite3')
 
 LINKED_DIRS = %w(
+  data
   log
   tmp/pids tmp/cache tmp/sockets
   vendor/assets/bower_components

@@ -9,7 +9,6 @@ sh setup.sh
 
 ## Initiate data
 ```
-mkdir data
-cd data
-git clone https://github.com/docker-library/official-images
+mkdir -p data
+git clone https://github.com/docker-library/official-images data/official-images
 ```
