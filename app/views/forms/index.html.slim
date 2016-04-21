@@ -1,0 +1,25 @@
+h1 Form
+
+= render partial: 'ul', locals: {items: [:item1]}
+
+= form_for :form, url: forms_path, method: :post, remote: true, html: {class: 'form'} do |f|
+  .form-group
+    = f.label :item, 'ITEM'
+    = f.text_field :item, class: 'form-control'
+  .checkbox
+    label
+      = f.check_box :capital
+      | Capital
+
+  .form-group
+    = f.submit 'Submit', class: 'btn btn-default', data: {disable_with: 'Submit'}
+
+javascript:
+
+  $('.form').on('ajax:send', function (e) {
+    console.log($(e.currentTarget).find('#form_item').val(''));
+  });
+
+  $('.form').on('ajax:success', function (e, data, status, xhr) {
+    $('.items-container').replaceWith(data.html);
+  });

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :tags
   resource :highlighter, only: [:show, :create]
+  resources :forms
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
