@@ -1,5 +1,8 @@
 source 'https://ruby.taobao.org'
 
+# https://github.com/plataformatec/simple_form
+gem 'simple_form', '~> 3.2.1'
+
 # https://github.com/reactjs/react-rails
 gem 'react-rails', '~> 1.6.2'
 
