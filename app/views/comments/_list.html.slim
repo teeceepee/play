@@ -1,0 +1,11 @@
+/ locals: {comments: @comments}
+
+.comments-container.row
+  .col-sm-6
+    ul.list-group
+      - comments.each do |comment|
+        li.list-group-item
+          .list-group-item-heading
+            = comment.created_at
+          p.list-group-item-text
+            = comment.text

@@ -1,0 +1,24 @@
+h1 Comments
+
+= render partial: 'comments/form', locals: {comment: @comment}
+= render partial: 'comments/list', locals: {comments: @comments}
+
+javascript:
+  var commentForm = $('#comment-form');
+
+  commentForm.on('ajax:send', function (e) {
+    $(e.currentTarget).find('#comment_text').val('');
+  });
+
+  commentForm.on('ajax:success', function (e, data, status, xhr) {
+    console.log(status);
+    if (status === 'success') {
+      $('.comments-container').replaceWith(data.html);
+    }
+  });
+
+  commentForm.on('ajax:error', function (e, xhr, status, error) {
+    $('.form-container').replaceWith(xhr.responseJSON.html);
+    console.log(xhr.responseText);
+
+  });
