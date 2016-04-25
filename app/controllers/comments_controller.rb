@@ -5,6 +5,10 @@ class CommentsController < ApplicationController
     @comment = Comment.new
   end
 
+  def new
+    @comment = Comment.new
+  end
+
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
@@ -12,9 +16,17 @@ class CommentsController < ApplicationController
       html = render_to_string(partial: 'comments/list', locals: {comments: comments})
       render json: {html: html}
     else
-      @comment.text = 'asdf'
       html = render_to_string(partial: 'comments/form', locals: {comment: @comment})
       render json: {html: html}, status: :unprocessable_entity
+    end
+  end
+
+  def normal_create
+    @comment = Comment.new(comment_params)
+    if @comment.save
+      redirect_to comments_url
+    else
+      render 'new'
     end
   end
 

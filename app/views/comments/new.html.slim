@@ -1,0 +1,5 @@
+h1 New Comment
+
+= simple_form_for @comment, url: normal_create_comments_path do |f|
+  = f.input :text
+  = f.submit class: 'btn btn-default'
