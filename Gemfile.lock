@@ -53,6 +53,8 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
+    capistrano-nvm (0.0.6)
+      capistrano (~> 3.1)
     capistrano-rails (1.1.6)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -233,6 +235,7 @@ DEPENDENCIES
   byebug
   capistrano (= 3.4.1)
   capistrano-bundler (= 1.1.4)
+  capistrano-nvm (= 0.0.6)
   capistrano-rails (= 1.1.6)
   capistrano-rbenv (= 2.0.4)
   capistrano3-puma (= 1.2.1)

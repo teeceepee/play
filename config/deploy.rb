@@ -37,6 +37,10 @@ set :repo_url, 'https://github.com/teeceepee/docker_tag_tree.git'
 set :rbenv_type, :user
 set :rbenv_ruby, File.read('.ruby-version').strip
 
+set :nvm_type, :user
+set :nvm_node, 'v5.10.1'
+set :nvm_map_bins, fetch(:nvm_map_bins, []).push('bower')
+
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'db/production.sqlite3')
 
 LINKED_DIRS = %w(
