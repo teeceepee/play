@@ -31,6 +31,8 @@ group :development, :test do
   gem 'capistrano3-puma', '1.2.1'
   # https://github.com/koenpunt/capistrano-nvm
   gem 'capistrano-nvm', '0.0.6'
+  # https://github.com/platanus/capistrano-bower
+  gem 'capistrano-bower', '1.1.0'
 
   # https://github.com/rweng/pry-rails
   gem 'pry-rails', '~> 0.3.4'
