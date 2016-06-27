@@ -13,24 +13,25 @@
 
 ActiveRecord::Schema.define(version: 20160421151843) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: :cascade do |t|
     t.string   "commentable_type"
     t.integer  "commentable_id"
     t.text     "text"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
   end
-
-  add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
 
   create_table "repos", force: :cascade do |t|
     t.string   "name"
     t.integer  "tag_count",  default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.index ["name"], name: "index_repos_on_name", using: :btree
   end
-
-  add_index "repos", ["name"], name: "index_repos_on_name"
 
   create_table "tags", force: :cascade do |t|
     t.integer  "repo_id"
@@ -42,8 +43,8 @@ ActiveRecord::Schema.define(version: 20160421151843) do
     t.datetime "updated_at",               null: false
     t.text     "dockerfile_content"
     t.datetime "dockerfile_downloaded_at"
+    t.index ["repo_id"], name: "index_tags_on_repo_id", using: :btree
   end
 
-  add_index "tags", ["repo_id"], name: "index_tags_on_repo_id"
-
+  add_foreign_key "tags", "repos"
 end

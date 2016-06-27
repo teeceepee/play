@@ -1,5 +1,8 @@
 source 'https://ruby.taobao.org'
 
+# https://github.com/ged/ruby-pg
+gem 'pg', '~> 0.18.4'
+
 # https://github.com/plataformatec/simple_form
 gem 'simple_form', '~> 3.2.1'
 
