@@ -1,5 +1,8 @@
 source 'https://ruby.taobao.org'
 
+# https://github.com/httprb/http
+gem 'http', '~> 2.0.1'
+
 # https://github.com/ged/ruby-pg
 gem 'pg', '~> 0.18.4'
 
