@@ -1,0 +1,2 @@
+class JiandanComment < ApplicationRecord
+end
