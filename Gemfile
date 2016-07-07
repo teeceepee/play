@@ -1,7 +1,7 @@
 source 'https://ruby.taobao.org'
 
 # https://github.com/sparklemotion/nokogiri
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.6.8'
 
 # https://github.com/httprb/http
 gem 'http', '~> 2.0.1'
