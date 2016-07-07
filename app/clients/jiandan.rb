@@ -67,14 +67,13 @@ class Jiandan
       code = el.at_css('.row .author strong').attr('title')
       time = el.at_css('.row .author small a').text
 
-      urls = el.css('.row .text p').map do |p|
-        original_url = p.at_css('a.view_img_link')&.attr('href')
-        thumb_url = p.at_css('img').attr('src')
-        {
-          original_url: original_url,
-          thumb_url: thumb_url,
-        }
-      end
+      text_el = el.css('.row .text')
+      originals =  text_el.css('a.view_img_link').map { |a| a.attr('href') }
+      thumbs = text_el.css('img').map { |img| img.attr('src') }
+      urls = {
+        originals: originals,
+        thumbs: thumbs,
+      }
 
       {
         comment_id: comment_id,
