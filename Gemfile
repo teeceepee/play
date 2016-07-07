@@ -25,7 +25,7 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'rouge', '~> 1.10.1'
 
 # https://github.com/slim-template/slim-rails
-gem 'slim-rails', '~> 3.0.1'
+gem 'slim-rails', '~> 3.1.0'
 
 group :development, :test do
   # https://github.com/capistrano/capistrano
