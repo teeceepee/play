@@ -23,7 +23,8 @@ class Jiandan
   # 增量保存
   def save_comments_incr
     page_range = if stored_max_page.present?
-      (stored_max_page..max_page)
+      min_page = [stored_max_page - 1, 1].max
+      (min_page..max_page)
     else
       ((max_page - LIMIT)..max_page)
     end
