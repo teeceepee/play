@@ -1,0 +1,14 @@
+
+.girl-images {
+  .girl-image-item {
+    display: inline-block;
+    max-width: 150px;
+
+    img.girl-image {
+      min-width: 100px;
+      min-height: 100px;
+      height: auto;
+      max-width: 100%;
+    }
+  }
+}

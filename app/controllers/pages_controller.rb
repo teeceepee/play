@@ -4,4 +4,8 @@ class PagesController < ApplicationController
 
   end
 
+  def girls
+    @urls = JiandanComment.all_urls
+  end
+
 end

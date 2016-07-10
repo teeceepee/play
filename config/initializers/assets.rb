@@ -12,6 +12,8 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w(
   pages/index_page.js
+  pages/girls.js
+  pages/girls.css
 )
 
 Rails.application.config.assets.precompile += %w(
