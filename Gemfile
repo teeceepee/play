@@ -1,5 +1,8 @@
 source 'https://ruby.taobao.org'
 
+# https://github.com/redis/redis-rb
+gem 'redis', '~> 3.3.0'
+
 # https://github.com/sparklemotion/nokogiri
 gem 'nokogiri', '~> 1.6.8'
 
