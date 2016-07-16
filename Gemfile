@@ -1,5 +1,8 @@
 source 'https://ruby.taobao.org'
 
+# https://github.com/mperham/sidekiq
+gem 'sidekiq', '~> 4.1.2'
+
 # https://github.com/redis/redis-rb
 gem 'redis', '~> 3.3.0'
 

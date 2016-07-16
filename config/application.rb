@@ -14,5 +14,7 @@ module DockerTagTree
 
     config.time_zone = 'Beijing'
     config.active_record.default_timezone = :utc
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
