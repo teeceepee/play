@@ -2,8 +2,8 @@ class GuestsCleanupJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    logger.debug 'start guests cleanup...'
+    logger.info 'start guests cleanup...'
     sleep(5)
-    logger.debug 'stop guests cleanup.'
+    logger.info 'stop guests cleanup.'
   end
 end
