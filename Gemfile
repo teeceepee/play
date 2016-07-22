@@ -1,5 +1,8 @@
 source 'https://ruby.taobao.org'
 
+# https://github.com/smartinez87/exception_notification
+gem 'exception_notification', '4.2.1'
+
 # https://github.com/mperham/sidekiq
 gem 'sidekiq', '~> 4.1.2'
 
