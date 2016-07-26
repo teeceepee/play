@@ -1,0 +1,12 @@
+defaults: &defaults
+  foo:
+    bar: baz
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

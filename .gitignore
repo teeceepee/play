@@ -37,3 +37,6 @@
 
 # Ignore vendor assets
 /vendor/assets/bower_components/
+
+# Ignore settings file
+/config/settings.yml

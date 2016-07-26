@@ -1,5 +1,6 @@
 source 'https://ruby.taobao.org'
 
+gem 'settingslogic', '2.0.9'  # https://github.com/settingslogic/settingslogic
 gem 'exception_notification', '4.2.1'  # https://github.com/smartinez87/exception_notification
 gem 'sidekiq', '~> 4.1.2'  # https://github.com/mperham/sidekiq
 gem 'redis', '~> 3.3.0'  # https://github.com/redis/redis-rb
