@@ -16,5 +16,9 @@ module DockerTagTree
     config.active_record.default_timezone = :utc
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.autoload_paths += [
+      Rails.root.join('lib')
+    ]
   end
 end
