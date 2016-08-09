@@ -20,5 +20,7 @@ module DockerTagTree
     config.autoload_paths += [
       Rails.root.join('lib')
     ]
+
+    config.action_mailer.preview_path = "#{Rails.root}/app/mailers/previews"
   end
 end
