@@ -15,4 +15,8 @@ class PagesController < ApplicationController
     render plain: mailer.message
   end
 
+  def exception
+    raise
+  end
+
 end
