@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705131529) do
+ActiveRecord::Schema.define(version: 20160813024842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20160705131529) do
     t.jsonb    "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "foo"
+    t.text     "baz"
   end
 
   create_table "comments", force: :cascade do |t|
