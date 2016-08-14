@@ -1,5 +1,6 @@
 source 'https://ruby.taobao.org'
 
+gem 'slack-notifier', '1.5.1'  # https://github.com/stevenosloan/slack-notifier
 gem 'settingslogic', '2.0.9'  # https://github.com/settingslogic/settingslogic
 gem 'exception_notification', '4.2.1'  # https://github.com/smartinez87/exception_notification
 gem 'sidekiq', '~> 4.1.2'  # https://github.com/mperham/sidekiq
