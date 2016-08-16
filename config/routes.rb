@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-
-  get 'comments/index'
-
-  get 'comment/index'
-
   root to: 'pages#index'
+  get 'comments/index'
+  get 'login', to: 'sessions#new'
+  delete 'logout', to: 'sessions#destroy'
 
   resources :repos do
     resources :tags
@@ -18,6 +16,7 @@ Rails.application.routes.draw do
       post :normal_create
     end
   end
+  resources :sessions, only: [:create]
 
   namespace :pages do
     get :girls

@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  skip_before_action :auth_user, only: [:index]
 
   def index
 
