@@ -42,7 +42,7 @@ set :nvm_node, 'v5.10.1'
 set :nvm_map_bins, fetch(:nvm_map_bins, []).push('bower', 'rake')
 set :bower_flags, '--config.interactive=false --allow-root'
 
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'db/production.sqlite3')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/settings.yml')
 
 LINKED_DIRS = %w(
   data
