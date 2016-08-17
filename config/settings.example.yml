@@ -1,6 +1,12 @@
 defaults: &defaults
   foo:
     bar: baz
+  smtp_settings:
+    user_name:
+    password:
+  mailer:
+    default_from:
+    default_to:
 
 development:
   <<: *defaults
