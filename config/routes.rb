@@ -24,6 +24,14 @@ Rails.application.routes.draw do
     get :exception
   end
 
+  namespace :d do
+    resources :photos do
+      collection do
+        get :random
+      end
+    end
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Serve websocket cable requests in-process
