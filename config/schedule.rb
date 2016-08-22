@@ -22,7 +22,7 @@
 env :PATH, ENV['PATH']
 set :output, '~/cron_log.log'
 
-every 1.minute do
-  # command 'echo $PATH'
-  runner 'puts Time.now'
+every 12.hours do
+  command 'echo $PATH'
+  runner 'Jiandan.fetch_new'
 end
