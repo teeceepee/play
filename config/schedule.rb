@@ -19,6 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
+env :PATH, ENV['PATH']
 set :output, '~/cron_log.log'
 
 every 1.minute do
