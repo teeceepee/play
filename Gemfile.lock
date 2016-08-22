@@ -75,7 +75,6 @@ GEM
       mime-types (>= 1.16)
     chronic (0.10.2)
     coderay (1.1.1)
-    coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
     connection_pool (2.2.0)
     debug_inspector (0.0.2)
@@ -172,13 +171,6 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
-    react-rails (1.6.2)
-      babel-transpiler (>= 0.7.0)
-      coffee-script-source (~> 1.8)
-      connection_pool
-      execjs
-      rails (>= 3.2)
-      tilt
     redis (3.3.0)
     rouge (1.10.1)
     sass (3.4.22)
@@ -272,7 +264,6 @@ DEPENDENCIES
   pry-rails (~> 0.3.4)
   puma (~> 3.0)
   rails (= 5.0.0)
-  react-rails (~> 1.6.2)
   redis (~> 3.3.0)
   rouge (~> 1.10.1)
   sass-rails (~> 5.0)
