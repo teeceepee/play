@@ -10,6 +10,13 @@ class Jiandan
     }
   end
 
+  def self.fetch_new
+    Timeout.timeout(60) do
+      j = self.new
+      j.save_comments_incr
+    end
+  end
+
   # @return [Integer]
   def max_page
     self.class.doc_page(@newest_page_doc)
