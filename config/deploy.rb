@@ -39,7 +39,7 @@ set :rbenv_ruby, File.read('.ruby-version').strip
 
 set :nvm_type, :user
 set :nvm_node, 'v5.10.1'
-set :nvm_map_bins, fetch(:nvm_map_bins, []).push('bower', 'rake')
+set :nvm_map_bins, fetch(:nvm_map_bins, []).push('bower', 'rake', 'bundle')
 set :bower_flags, '--config.interactive=false --allow-root'
 
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/settings.yml')
@@ -70,5 +70,12 @@ desc 'Report Uptimes'
 task :uptime do
   on roles(:all) do |host|
     info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
+  end
+end
+
+desc 'Echo $PATH'
+task :echo_path do
+  on roles(:all) do |host|
+    execute :echo, '$PATH'
   end
 end
