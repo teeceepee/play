@@ -20,4 +20,8 @@ class PagesController < ApplicationController
     raise
   end
 
+  def vertical_center
+
+  end
+
 end

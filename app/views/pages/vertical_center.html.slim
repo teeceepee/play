@@ -1,0 +1,90 @@
+h1 Vertical Center
+
+
+.cont
+  i.fa.fa-info-circle
+  | Inner Text
+
+.cont
+  .inner Inner Text
+
+.table-container
+  .table-cell
+    | table cell 1
+  .table-cell table cell 2
+
+.block.rect
+  .centered centered
+  .centered centered
+
+.flex-cont.rect
+  .flex-inner flex centered
+  .flex-inner flex centered
+
+
+.footer footer
+
+scss:
+  .flex-cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer {
+    margin-top: 50px;
+  }
+
+  .rect {
+    border: 10px solid gray;
+    width: 500px;
+    height: 300px;
+  }
+
+  .cont {
+    width: 500px;
+    height: 300px;
+    border: 10px solid gray;
+    line-height: 300px;
+    margin-bottom: 20px;
+    .inner {
+
+    }
+  }
+
+  .table-container {
+    display: table;
+    width: 500px;
+    height: 300px;
+    border: 100px solid teal;
+  }
+
+  .table-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  /*https://css-tricks.com/centering-in-the-unknown/*/
+  /* This parent can be any width and height */
+  .block {
+    text-align: center;
+
+    /* May want to do this if there is risk the container may be narrower than the element inside */
+    white-space: nowrap;
+  }
+
+  /* The ghost, nudged to maintain perfect centering */
+  .block:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em; /* Adjusts for spacing */
+  }
+
+  /* The element to be centered, can also be of any width and height */
+  .centered {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: chocolate;
+  }
