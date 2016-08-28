@@ -20,7 +20,7 @@ gem 'slim-rails', '~> 3.1.0'  # https://github.com/slim-template/slim-rails
 gem 'awesome_print', '~> 1.6.1'  # https://github.com/michaeldv/awesome_print
 
 group :development, :test do
-  gem 'capistrano', '3.4.1'  # https://github.com/capistrano/capistrano
+  gem 'capistrano', '3.6.1'  # https://github.com/capistrano/capistrano
   gem 'capistrano-rbenv', '2.0.4'  # https://github.com/capistrano/rbenv
   gem 'capistrano-bundler', '1.1.4'  # https://github.com/capistrano/bundler
   gem 'capistrano-rails', '1.1.6'  # https://github.com/capistrano/rails
