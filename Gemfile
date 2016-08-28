@@ -1,5 +1,6 @@
 source 'https://ruby.taobao.org'
 
+gem 'redis-activesupport', '5.0.1'  # https://github.com/redis-store/redis-activesupport
 gem 'whenever', '0.9.7', require: false  # https://github.com/javan/whenever
 gem 'bcrypt', '3.1.10'  # https://github.com/codahale/bcrypt-ruby
 gem 'slack-notifier', '1.5.1'  # https://github.com/stevenosloan/slack-notifier

@@ -21,9 +21,13 @@ Rails.application.configure do
       'Cache-Control' => 'public, max-age=172800'
     }
   else
-    config.action_controller.perform_caching = false
+    config.action_controller.perform_caching = true
+    # config.cache_store = :file_store, 'tmp/file_cache_store', {expires_in: 24.hours}
 
-    config.cache_store = :null_store
+    config.cache_store = :redis_store, {
+      db: 2,
+      expires_in: 24.hours,
+    }
   end
 
   # Don't care if the mailer can't send.

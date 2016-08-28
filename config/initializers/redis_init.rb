@@ -1,6 +1,7 @@
 # Redis db number distribution
-# 0 => data
+# 0 => Data
 # 1 => Sidekiq
+# 2 => Cache
 
 Redis.current = Redis.new(db: 0)
 
