@@ -17,6 +17,7 @@ gem 'sprockets-es6', '~> 0.9.0'  # https://github.com/TannerRogalsky/sprockets-e
 gem 'carrierwave', '~> 0.10.0'  # https://github.com/carrierwaveuploader/carrierwave
 gem 'rouge', '~> 1.10.1'  # https://github.com/jneen/rouge
 gem 'slim-rails', '~> 3.1.0'  # https://github.com/slim-template/slim-rails
+gem 'awesome_print', '~> 1.6.1'  # https://github.com/michaeldv/awesome_print
 
 group :development, :test do
   gem 'capistrano', '3.4.1'  # https://github.com/capistrano/capistrano
@@ -29,7 +30,6 @@ group :development, :test do
 
   gem 'pry-rails', '~> 0.3.4'  # https://github.com/rweng/pry-rails
   gem 'factory_girl_rails', '~> 4.6.0'  # https://github.com/thoughtbot/factory_girl_rails
-  gem 'awesome_print', '~> 1.6.1'  # https://github.com/michaeldv/awesome_print
 end
 
 
