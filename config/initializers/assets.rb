@@ -14,6 +14,8 @@ Rails.application.config.assets.precompile += %w(
   pages/index_page.js
   pages/girls.js
   pages/girls.css
+  pages/bilibili_gifs.js
+  pages/bilibili_gifs.css
 )
 
 Rails.application.config.assets.precompile += %w(
