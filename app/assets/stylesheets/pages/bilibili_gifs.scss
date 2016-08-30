@@ -5,6 +5,10 @@
   margin: 10px;
   border-bottom: 1px dotted hsl(0, 0%, 80%);
   text-align: center;
+
+  &.new {
+    background-color: hsla(60, 100%, 50%, 0.2);
+  }
 }
 
 .gif img {
