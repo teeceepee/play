@@ -10,7 +10,7 @@ var Gif = React.createClass({
   is_new: function() {
     var now = Math.floor(Date.now() / 1000);
     var postTime = Number.parseInt(this.props.gif.posttime);
-    return now - postTime > (3 * 24 * 3600);
+    return now - postTime < (3 * 24 * 3600);
   },
 
   img: function() {
