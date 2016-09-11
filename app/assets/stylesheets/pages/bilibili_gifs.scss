@@ -20,7 +20,7 @@
   transition: transform 0.2s;
 }
 
-.gif img:hover {
+.gif.selected img {
   transform: scale(2);
 }
 

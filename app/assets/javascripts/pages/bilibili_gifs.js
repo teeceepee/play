@@ -3,6 +3,36 @@
 var Gif = React.createClass({
   displayName: 'Gif',
 
+  getInitialState: function () {
+    return {
+      selected: false
+    };
+  },
+
+  handleClick: function () {
+    this.setState({
+      selected: true
+    });
+
+    setTimeout(function () {
+      this.setState({
+        selected: false
+      })
+    }.bind(this), 1500);
+  },
+
+  handleMouseEnter: function () {
+    this.setState({
+      selected: true
+    });
+  },
+
+  handleMouseLeave: function () {
+    this.setState({
+      selected: false
+    });
+  },
+
   href: function() {
     return this.props.gif.links[0];
   },
@@ -13,11 +43,18 @@ var Gif = React.createClass({
     return now - postTime < (3 * 24 * 3600);
   },
 
+  isSelected: function () {
+    return this.state.selected;
+  },
+
   img: function() {
     return React.createElement('img', {
       src: this.props.gif.icon,
       title: this.props.gif.title,
-      alt: this.props.gif.title
+      alt: this.props.gif.title,
+      onClick: this.handleClick,
+      onMouseEnter: this.handleMouseEnter,
+      onMouseLeave: this.handleMouseLeave,
     });
   },
 
@@ -47,10 +84,17 @@ var Gif = React.createClass({
   },
 
   render: function() {
-    var classes = this.isNew() ? 'gif new' : 'gif';
+    var classes = ['gif'];
+    if (this.isNew()) {
+      classes.push('new');
+    }
+    if (this.isSelected()) {
+      classes.push('selected')
+    }
+
     return React.createElement(
       'div',
-      {className: classes},
+      {className: classes.join(' ')},
       this.title(),
       this.a());
   }
