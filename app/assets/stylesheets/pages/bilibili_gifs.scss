@@ -1,5 +1,10 @@
+.gif-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .gif {
-  display: inline-block;
   width: 180px;
   height: 80px;
   margin: 10px;
