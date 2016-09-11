@@ -7,7 +7,7 @@ var Gif = React.createClass({
     return this.props.gif.links[0];
   },
 
-  is_new: function() {
+  isNew: function() {
     var now = Math.floor(Date.now() / 1000);
     var postTime = Number.parseInt(this.props.gif.posttime);
     return now - postTime < (3 * 24 * 3600);
@@ -47,7 +47,7 @@ var Gif = React.createClass({
   },
 
   render: function() {
-    var classes = this.is_new() ? 'gif new' : 'gif';
+    var classes = this.isNew() ? 'gif new' : 'gif';
     return React.createElement(
       'div',
       {className: classes},
