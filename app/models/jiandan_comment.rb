@@ -5,21 +5,22 @@ class JiandanComment < ApplicationRecord
 
   # @return [Array]
   def self.random_urls
-    c = self.all_urls.size
+    urls = self.all_urls
+    c = urls.size
 
     if c > RANDOM_COUNT
       (1..RANDOM_COUNT).map do
         rand = Random.rand((1..RANDOM_COUNT))
-        self.all_urls[rand]
+        urls[rand]
       end
     else
-      self.all_urls
+      urls
     end
   end
 
   # @return [Array]
   def self.all_urls
-    @all_urls ||= JiandanComment.all.order(created_at: :desc).map do |comment|
+    JiandanComment.all.order(created_at: :desc).map do |comment|
       comment.better_urls
     end.flatten
   end
