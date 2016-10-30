@@ -28,4 +28,8 @@ class PagesController < ApplicationController
 
   end
 
+  def bilibili_random
+
+  end
+
 end

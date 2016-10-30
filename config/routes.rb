@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     get :exception
     get :vertical_center
     get :bilibili_gifs
+    get :bilibili_random
   end
 
   namespace :d do
@@ -33,7 +34,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :bilibili_gifs, only: [:index]
+    resources :bilibili_gifs, only: [:index] do
+      collection do
+        get :random
+      end
+    end
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

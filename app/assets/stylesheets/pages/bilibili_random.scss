@@ -1,0 +1,44 @@
+.gif-container {
+  display: inline-block;
+  margin: auto;
+  min-height: 100px;
+
+  .gif-img {
+    width: 200px;
+
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #737373;
+  }
+
+  .gif-title {
+    text-align: center;
+  }
+}
+
+
+
+
+
+.tabs {
+  list-style: none;
+  border-bottom: 1px solid gray;
+  .tab {
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #eee;
+    }
+
+    &.active {
+      color: white;
+      background-color: #337ab7;
+    }
+  }
+}
