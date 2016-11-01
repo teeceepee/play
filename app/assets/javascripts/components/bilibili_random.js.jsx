@@ -17,13 +17,17 @@ class BilibiliRandom extends React.Component {
       $.get({
         url: '/d/bilibili_gifs/random',
       }).done((data) => {
-        (new Image()).src = data.icon
-
         setTimeout(() => {
-          this.setState({
-            gifState: 'fetched',
-            gif: data
+          let img = new Image()
+
+          img.addEventListener("load", () => {
+            this.setState({
+              gifState: 'fetched',
+              gif: data
+            })
           })
+
+          img.src = data.icon
         }, 2000)
       })
     }, 2000)
@@ -41,10 +45,6 @@ class BilibiliRandom extends React.Component {
     return JSON.stringify(this.state, undefined, 2)
   }
 
-  onImgLoad() {
-    console.log("onImgLoad")
-  }
-
   container() {
     if (this.state.gifState == 'fetched') {
       return (
@@ -53,9 +53,6 @@ class BilibiliRandom extends React.Component {
             src={this.gif().icon}
             alt={this.gif().title}
             className="gif-img img-thumbnail"
-            onLoad={() => {
-              this.onImgLoad()
-            }}
           />
           <div className="gif-title help-block">
             {this.gif().title}
