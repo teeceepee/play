@@ -1,3 +1,4 @@
+@import "gallery_component";
 
 .girl-images {
   .girl-image-item {
@@ -9,6 +10,7 @@
       min-height: 100px;
       height: auto;
       max-width: 100%;
+      cursor: pointer;
     }
   }
 }

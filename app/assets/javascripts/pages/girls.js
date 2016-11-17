@@ -1,9 +1,13 @@
 //= require jquery_lazyload/jquery.lazyload
+//= require gallery_component
 
 $(document).ready(function () {
-  $('img.girl-image').lazyload({
+  $("img.girl-image").lazyload({
     effect : "fadeIn",
-    placeholder:"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+    placeholder:"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==",
+    load: function () {
+      $(this).data({"loaded": true})
+    }
     //threshold       : 0,
     //failure_limit   : 0,
     //event           : "scroll",
@@ -12,6 +16,13 @@ $(document).ready(function () {
     //data_attribute  : "original",
     //skip_invisible  : false,
     //appear          : null,
-    //load            : null,
   });
+
+  $(document).on("click", "img.girl-image", function (e) {
+    var el = $(e.target)
+    if (el.data("loaded") && el.attr("src")) {
+      var g = new Gallery(el.attr("src"))
+      g.show()
+    }
+  })
 });
