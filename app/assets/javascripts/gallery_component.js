@@ -92,6 +92,12 @@ Gallery.prototype.rotateRight = function () {
 }
 
 Gallery.prototype.listenEvents = function () {
+  this.el.on("click", function (e) {
+    if (e.target === e.currentTarget) {
+      this.hide()
+    }
+  }.bind(this))
+
   this.el.one("click", ".gallery-close", function () {
     this.hide()
   }.bind(this))
