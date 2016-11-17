@@ -1,4 +1,5 @@
 //= require jquery_lazyload/jquery.lazyload
+//= require jquery_lazyload/jquery.scrollstop
 //= require gallery_component
 
 $(document).ready(function () {
@@ -7,7 +8,8 @@ $(document).ready(function () {
     placeholder:"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==",
     load: function () {
       $(this).data({"loaded": true})
-    }
+    },
+    event: "scrollstop"
     //threshold       : 0,
     //failure_limit   : 0,
     //event           : "scroll",
@@ -16,6 +18,7 @@ $(document).ready(function () {
     //data_attribute  : "original",
     //skip_invisible  : false,
     //appear          : null,
+    //event           : null,
   });
 
   $(document).on("click", "img.girl-image", function (e) {
