@@ -4,7 +4,8 @@
     .girl-image-item data-index=index
       img.girl-image data-original=url
 
-= content_for :page_styles do
+- content_for :page_styles do
   = stylesheet_link_tag 'pages/girls'
-= javascript_include_tag 'pages/girls'
+- content_for :page_js do
+  = javascript_include_tag 'pages/girls'
 
