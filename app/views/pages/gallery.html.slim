@@ -1,0 +1,11 @@
+
+h1.open Open
+
+- 20.times do
+  h1 placeholder
+
+- content_for :page_styles do
+  = stylesheet_link_tag 'pages/gallery'
+
+- content_for :page_js do
+  = javascript_include_tag 'pages/gallery'

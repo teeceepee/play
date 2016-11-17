@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     get :vertical_center
     get :bilibili_gifs
     get :bilibili_random
+    get :gallery
   end
 
   namespace :d do
