@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get :bilibili_gifs
     get :bilibili_random
     get :gallery
+    get :web_socket
   end
 
   namespace :d do
@@ -41,6 +42,9 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  mount EchoServer.new => '/ws/echo_server', as: :echo_server
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

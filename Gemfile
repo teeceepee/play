@@ -1,5 +1,6 @@
 source 'https://ruby.taobao.org'
 
+gem 'faye-websocket', '0.10.5'  # https://github.com/faye/faye-websocket-ruby
 gem 'redis-activesupport', '5.0.1'  # https://github.com/redis-store/redis-activesupport
 gem 'whenever', '0.9.7', require: false  # https://github.com/javan/whenever
 gem 'bcrypt', '3.1.10'  # https://github.com/codahale/bcrypt-ruby

@@ -1,0 +1,12 @@
+= link_to 'Echo Server', echo_server_path
+
+.messages
+
+form#form
+  .form-group
+    input.form-control#text
+  button.btn.btn-default Send
+  .btn.btn-default.close-socket Close
+
+- content_for :page_js do
+  = javascript_include_tag 'pages/web_socket'

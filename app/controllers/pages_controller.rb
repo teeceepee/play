@@ -35,4 +35,8 @@ class PagesController < ApplicationController
   def gallery
 
   end
+
+  def web_socket
+
+  end
 end
