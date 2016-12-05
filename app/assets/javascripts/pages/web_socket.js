@@ -1,36 +1,46 @@
 
-var socket = new WebSocket("ws://localhost:3000/ws/echo_server")
+var echoSocket = new WebSocket("ws://localhost:3000/ws/echo_server")
+var broadcastSocket = new WebSocket("ws://localhost:3000/ws/broadcast_server")
 
-socket.addEventListener("open", function (e) {
-  socket.send("ping")
+var sockets = {
+  echo: echoSocket,
+  broadcast: broadcastSocket,
+}
 
-  $(document).ready(function () {
-    $("#form").on("submit", function (e) {
-      e.preventDefault()
+Object.keys(sockets).forEach(function (k) {
+  var socket = sockets[k]
 
-      var text = $("#text").val()
-      if (text.length > 0 && socket.readyState == WebSocket.OPEN) {
-        socket.send(text)
-        $("#text").val("")
-      }
-    })
+  socket.addEventListener("message", function (e) {
+    console.log("Message: " + e.data)
+    $('<div class="alert alert-info"></div>').text(e.data).hide().appendTo($(".messages")).fadeIn()
+  })
 
-    $("#form .close-socket").on("click", function () {
-      $("#text").prop("disabled", true)
-      socket.close()
-    })
+  socket.addEventListener("close", function (e) {
+    console.log("on close")
+  })
+
+  socket.addEventListener("error", function (e) {
+    console.log("on error")
   })
 })
 
-socket.addEventListener("message", function (e) {
-  console.log("Message: " + e.data)
-  $('<div class="alert alert-info"></div>').text(e.data).hide().appendTo($(".messages")).fadeIn()
-})
+$(document).ready(function () {
+  $("#form").on("submit", function (e) {
+    e.preventDefault()
 
-socket.addEventListener("close", function (e) {
-  console.log("on close")
-})
+    var text = $("#text").val()
+    var socket = sockets[$("#form input[name=socket]:checked").val()]
 
-socket.addEventListener("error", function (e) {
-  console.log("on error")
+    if (text.length > 0 && socket.readyState == WebSocket.OPEN) {
+      socket.send(text)
+      $("#text").val("")
+    }
+  })
+
+  $("#form .close-socket").on("click", function () {
+    $("#text").prop("disabled", true)
+    for (k in sockets) {
+      sockets[k].close()
+    }
+  })
 })

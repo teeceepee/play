@@ -43,7 +43,8 @@ Rails.application.routes.draw do
     end
   end
 
-  mount EchoServer.new => '/ws/echo_server', as: :echo_server
+  mount EchoServer.new, at: '/ws/echo_server', as: :echo_server
+  mount BroadcastServer.new, at: '/ws/broadcast_server', as: :broadcast_server
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

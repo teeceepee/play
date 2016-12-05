@@ -1,10 +1,21 @@
-= link_to 'Echo Server', echo_server_path
+ul.list-group
+  li.list-group-item
+    = link_to 'Echo Server', echo_server_path
+  li.list-group-item
+    = link_to 'Broadcast Server', broadcast_server_path
 
 .messages
 
 form#form
   .form-group
-    input.form-control#text
+    input.form-control#text autocomplete="off"
+  .form-group
+    label.radio-inline
+      input type="radio" name="socket" value="echo" checked=true
+      | Echo
+    label.radio-inline
+      input type="radio" name="socket" value="broadcast"
+      | Broadcast
   button.btn.btn-default Send
   .btn.btn-default.close-socket Close
 
