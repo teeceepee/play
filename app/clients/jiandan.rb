@@ -4,10 +4,11 @@ class Jiandan
   LIMIT = 5
 
   def initialize
-    @newest_page_doc = self.class.fetch(URL_BASE)
+    @newest_page_doc = self.fetch(URL_BASE)
     @docs = {
       max_page => @newest_page_doc
     }
+    @connection = nil
   end
 
   def self.fetch_new
@@ -62,7 +63,7 @@ class Jiandan
   # @return [Array]
   def page_comments(page)
     if @docs[page].blank?
-      @docs[page] = self.class.fetch(self.class.page_url(page))
+      @docs[page] = self.fetch(self.class.page_url(page))
     end
     self.class.parse_comments(@docs[page])
   end
@@ -94,8 +95,9 @@ class Jiandan
     end
   end
 
-  def self.fetch(url)
-    resp = HTTP.get(url)
+  def fetch(url)
+    @connection ||= HTTP.persistent(url)
+    resp = @connection.get(url)
     body = resp.body.to_s
     Nokogiri::HTML(body)
   end
