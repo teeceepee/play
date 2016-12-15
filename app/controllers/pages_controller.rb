@@ -39,4 +39,8 @@ class PagesController < ApplicationController
   def web_socket
 
   end
+
+  def chat
+
+  end
 end

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get :bilibili_random
     get :gallery
     get :web_socket
+    get :chat
   end
 
   namespace :d do

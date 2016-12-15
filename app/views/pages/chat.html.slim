@@ -1,0 +1,11 @@
+h1 Chat Demo
+
+.messages
+
+form#form
+  .form-group
+    input.form-control#text autocomplete="off"
+  button.btn.btn-default Send
+
+- content_for :page_js do
+  = javascript_include_tag 'pages/chat'
