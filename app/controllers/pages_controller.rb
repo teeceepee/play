@@ -43,4 +43,8 @@ class PagesController < ApplicationController
   def chat
 
   end
+
+  def hupu_news_list
+    @hupu_news = HupuNews.all.order(created_at: :desc)
+  end
 end

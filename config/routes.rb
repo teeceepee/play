@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get :gallery
     get :web_socket
     get :chat
+    get :hupu_news_list
   end
 
   namespace :d do
