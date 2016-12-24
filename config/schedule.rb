@@ -23,5 +23,5 @@ env :PATH, ENV['PATH']
 set :output, '~/cron_log.log'
 
 every 12.hours do
-  runner 'Jiandan.fetch_new'
+  runner 'Fetcher.fetch_all'
 end
