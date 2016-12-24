@@ -3,8 +3,9 @@ class Hupu
 
   def self.fetch_recent_news
     Timeout.timeout(60) do
+      h = Hupu.new
       (1..12).to_a.reverse.each do |page|
-        self.fetch(self.page_url(page)) do |news_data|
+        h.fetch(self.page_url(page)) do |news_data|
           if HupuNews.exists?(["json->>'news_id' = ?", news_data[:news_id]])
             HupuNews.find_by("json->>'news_id' = ?", news_data[:news_id]).update(json: news_data)
           else
@@ -15,8 +16,9 @@ class Hupu
     end
   end
 
-  def self.fetch(url, &block)
-    resp = HTTP.get(url)
+  def fetch(url, &block)
+    @connection ||= HTTP.persistent(url)
+    resp = @connection.get(url)
     body = resp.body.to_s
     doc = Nokogiri::HTML(body)
 
