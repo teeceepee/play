@@ -40,3 +40,6 @@
 
 # Ignore settings file
 /config/settings.yml
+
+# Ignore I18n-js tmp segment files
+/app/assets/javascripts/i18n_segments/

@@ -22,5 +22,7 @@ module DockerTagTree
     ]
 
     config.action_mailer.preview_path = "#{Rails.root}/app/mailers/previews"
+
+    config.i18n.available_locales = [:zh, :en]
   end
 end

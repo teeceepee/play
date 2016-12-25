@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+  js:
+    index: "Index page"
+    hello: "Hello"

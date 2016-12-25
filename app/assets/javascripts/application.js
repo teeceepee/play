@@ -14,3 +14,5 @@
 //= require jquery_ujs
 
 //= require bootstrap/dist/js/bootstrap
+//= require i18n
+//= require i18n_segments/js_trans

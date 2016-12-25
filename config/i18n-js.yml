@@ -1,0 +1,6 @@
+export_i18n_js: false
+
+translations:
+  - file: "app/assets/javascripts/i18n_segments/js_trans.js"
+    only: "*.js.*"
+    pretty_print: true
