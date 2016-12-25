@@ -79,3 +79,7 @@ task :echo_path do
     execute :echo, '$PATH'
   end
 end
+
+# Load i18n-js rake task
+load 'tasks/export.rake'
+before 'deploy:compile_assets', 'i18n:js:export'
