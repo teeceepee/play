@@ -2,7 +2,7 @@ class Hupu
   URL_BASE = 'https://m.hupu.com/nba/news'
 
   def self.fetch_recent_news
-    Timeout.timeout(60) do
+    Timeout.timeout(600) do
       h = Hupu.new
       (1..12).to_a.reverse.each do |page|
         h.fetch(self.page_url(page)) do |news_data|
