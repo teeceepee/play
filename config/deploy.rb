@@ -81,5 +81,12 @@ task :echo_path do
 end
 
 # Load i18n-js rake task
-load 'tasks/export.rake'
+namespace :i18n do
+  namespace :js do
+    desc 'Export translations to JS file(s)'
+    task :export do
+      I18n::JS.export
+    end
+  end
+end
 before 'deploy:compile_assets', 'i18n:js:export'
