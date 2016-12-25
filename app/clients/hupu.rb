@@ -1,6 +1,8 @@
 class Hupu
   URL_BASE = 'https://m.hupu.com/nba/news'
 
+  attr_accessor :logger
+
   def self.fetch_recent_news
     Timeout.timeout(600) do
       h = Hupu.new
@@ -16,8 +18,19 @@ class Hupu
     end
   end
 
+  def self.page_url(page)
+    "#{URL_BASE}/#{page}"
+  end
+
+  def initialize
+    @logger = Rails.logger
+  end
+
   def fetch(url, &block)
-    @connection ||= HTTP.persistent(url)
+    logger.info("Fetching url: #{url}")
+    @connection ||= HTTP.persistent(url).headers({
+      'User-Agent': Fetcher::IOS_USER_AGENT
+    })
     resp = @connection.get(url)
     body = resp.body.to_s
     doc = Nokogiri::HTML(body)
@@ -44,7 +57,4 @@ class Hupu
     end
   end
 
-  def self.page_url(page)
-    "#{URL_BASE}/#{page}"
-  end
 end
