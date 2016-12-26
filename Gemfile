@@ -1,6 +1,6 @@
 source 'https://ruby.taobao.org'
 
-gem 'i18n-js', '3.0.0.rc11'  # https://github.com/fnando/i18n-js
+gem 'i18n-js', '3.0.0.rc15'  # https://github.com/fnando/i18n-js
 gem 'faye-websocket', '0.10.5'  # https://github.com/faye/faye-websocket-ruby
 gem 'redis-activesupport', '5.0.1'  # https://github.com/redis-store/redis-activesupport
 gem 'whenever', '0.9.7', require: false  # https://github.com/javan/whenever
