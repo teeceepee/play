@@ -1,13 +1,21 @@
 //= require cable
 
-Notification.requestPermission(function (permission) {
-  console.log("permission: " + permission)
-})
+var canNotify = typeof(Notification) !== "undefined"
+
+if (canNotify) {
+  Notification.requestPermission(function (permission) {
+    console.log("permission: " + permission)
+  })
+}
 
 $(document).ready(function () {
-  displayNo = function (message) {
-    n = new Notification("New message", {
-      icon: 'http://i0.hdslb.com/bfs/archive/07d57f5ead6702d0f5ef9d5b7e5d778b9ce67062.jpg',
+  var displayNo = function (message) {
+    if (!canNotify) {
+      return
+    }
+
+    var n = new Notification("New message", {
+      icon: 'https://i0.hdslb.com/bfs/archive/07d57f5ead6702d0f5ef9d5b7e5d778b9ce67062.jpg',
       body: message,
       tag: "tag",
     })
