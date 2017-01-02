@@ -6,6 +6,7 @@ module UserAuth
 
     def auth_user
       if current_user.nil?
+        store_location
         redirect_to login_path
       end
     end
@@ -33,6 +34,15 @@ module UserAuth
 
     def sign_out
       cookies.delete(User::REMEMBER_TOKEN_KEY)
+    end
+
+    def redirect_back_or(default)
+      redirect_to(session[:return_to] || default)
+      session.delete(:return_to)
+    end
+
+    def store_location
+      session[:return_to] = request.fullpath if request.get?
     end
 
   end
