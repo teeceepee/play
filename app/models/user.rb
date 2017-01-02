@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   REMEMBER_TOKEN_KEY = 'remember_token'
+  REMEMBER_ME_DURATION = 30.days
 
   has_secure_password
   has_secure_token :auth_token

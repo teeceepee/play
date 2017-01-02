@@ -17,9 +17,18 @@ module UserAuth
     end
 
 
-    # @param [User] user
-    def sign_in(user)
-      cookies.signed[User::REMEMBER_TOKEN_KEY] = [user.id, user.auth_token]
+    # @param user [User]
+    # @param remember_me [Boolean]
+    def sign_in(user, remember_me: false)
+      options = {
+        value: [user.id, user.auth_token],
+        httponly: true,
+      }
+      if remember_me
+        options[:expires] = User::REMEMBER_ME_DURATION.from_now
+      end
+
+      cookies.signed[User::REMEMBER_TOKEN_KEY] = options
     end
 
     def sign_out
