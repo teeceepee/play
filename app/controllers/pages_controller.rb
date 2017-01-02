@@ -47,4 +47,8 @@ class PagesController < ApplicationController
   def hupu_news_list
     @hupu_news = HupuNews.all.order(created_at: :desc)
   end
+
+  def path_diff
+
+  end
 end

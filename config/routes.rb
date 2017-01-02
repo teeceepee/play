@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     get :web_socket
     get :chat
     get :hupu_news_list
+    get :path_diff
   end
 
   namespace :d do
