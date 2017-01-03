@@ -14,5 +14,10 @@
 //= require jquery_ujs
 
 //= require bootstrap/dist/js/bootstrap
+//= require fastclick/lib/fastclick
 //= require i18n
 //= require i18n_segments/js_trans
+
+$(document).ready(function() {
+  FastClick.attach(document.body)
+})
