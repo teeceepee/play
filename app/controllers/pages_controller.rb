@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :auth_user, only: [:index]
+  before_action :auth_user, only: [:send_mail, :exception]
 
   def index
 

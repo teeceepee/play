@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
 
   include UserAuth
 
-  before_action :auth_user
-
   private
 
   def set_repo
