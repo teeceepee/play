@@ -93,7 +93,7 @@ Gallery.prototype.rotateRight = function () {
 
 Gallery.prototype.listenEvents = function () {
   this.el.on("click", function (e) {
-    if (e.target === e.currentTarget) {
+    if ($(e.target).is('.img-container, .operations')) {
       this.hide()
     }
   }.bind(this))
