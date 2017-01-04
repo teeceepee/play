@@ -16,7 +16,6 @@
   "dependencies": {
     "bootstrap": "3.3.6",
     "fastclick": "1.0.6",
-    "font-awesome": "4.5.0",
     "jquery_lazyload": "jquery.lazyload#1.9.7"
   }
 }
