@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.6.1'
 
-set :application, 'docker_tag_tree'
-set :repo_url, 'https://github.com/teeceepee/docker_tag_tree.git'
+set :application, 'play'
+set :repo_url, 'https://github.com/teeceepee/play.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
