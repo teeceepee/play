@@ -2,7 +2,7 @@ module UserAuth
   extend ActiveSupport::Concern
 
   included do
-    helper_method :current_user, :sign_in, :sign_out
+    helper_method :current_user, :sign_in, :sign_out if respond_to?(:helper_method)
 
     def auth_user
       if current_user.nil?

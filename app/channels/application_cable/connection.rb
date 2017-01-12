@@ -1,6 +1,8 @@
 # Be sure to restart your server when you modify this file. Action Cable runs in a loop that does not support auto reloading.
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
+    include UserAuth
+
     identified_by :current_user
 
     def connect
@@ -9,7 +11,6 @@ module ApplicationCable
 
     protected
     def find_verified_user
-      current_user = User.find_by(id: cookies.signed[User::REMEMBER_TOKEN_KEY])
       if current_user.present?
         current_user
       else
