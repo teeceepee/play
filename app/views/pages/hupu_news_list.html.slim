@@ -1,4 +1,7 @@
 h1 Hupu News List
+
+p = page_entries_info @hupu_news
+
 .row
   - @hupu_news.each do |hupu_news|
     .col-sm-7
@@ -6,3 +9,6 @@ h1 Hupu News List
         = image_tag(hupu_news.img_url)
         .caption
           = link_to hupu_news.title, hupu_news.href, target: '_blank'
+
+div
+  = paginate @hupu_news
