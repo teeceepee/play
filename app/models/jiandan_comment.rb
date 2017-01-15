@@ -35,7 +35,7 @@ class JiandanComment < ApplicationRecord
         url_array.first
       else
         selected = url_array.select { |url| url.match(/large|mw600/)}
-        if selected.size >= 2
+        if selected.present?
           selected.find { |url| url.match(/large/) } || selected.first
         else
           url_array.first
