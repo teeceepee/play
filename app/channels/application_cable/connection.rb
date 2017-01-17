@@ -3,10 +3,10 @@ module ApplicationCable
   class Connection < ActionCable::Connection::Base
     include UserAuth
 
-    identified_by :current_user
+    identified_by :current_u
 
     def connect
-      self.current_user = find_verified_user
+      self.current_u = find_verified_user
     end
 
     protected
