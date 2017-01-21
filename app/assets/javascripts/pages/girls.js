@@ -4,7 +4,6 @@
 
 $(document).ready(function () {
   $("img.girl-image").lazyload({
-    effect : "fadeIn",
     placeholder:"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==",
     load: function () {
       $(this).data({"loaded": true})
