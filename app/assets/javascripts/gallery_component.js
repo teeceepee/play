@@ -51,6 +51,8 @@ Gallery.BODY_CLASS = "gallery-open"
 Gallery.OPERTATIONS =
   '<div class="operations">' +
     '<div class="operation gallery-rotate"><i class="fa fa-rotate-right"></i></div>' +
+    '<div class="operation gallery-baidu"><i class="fa fa-search"></i></div>' +
+    '<div class="operation gallery-google"><i class="fa fa-google"></i></div>' +
     '<div class="operation gallery-close"><i class="fa fa-close"></i></div>' +
   '</div>'
 Gallery.TEMPLATE =
@@ -58,6 +60,9 @@ Gallery.TEMPLATE =
     '<div class="img-container"><img></div>' +
     Gallery.OPERTATIONS +
   '</div>'
+
+Gallery.BAIDU_IMAGE_SEARCH_URL = "https://image.baidu.com/n/pc_search"
+Gallery.GOOGLE_IMAGE_SEARCH_URL = "https://www.google.com.hk/searchbyimage"
 
 Gallery.prototype.show = function () {
   this.checkScrollbar()
@@ -105,6 +110,21 @@ Gallery.prototype.listenEvents = function () {
   this.el.on("click", ".gallery-rotate", function () {
     this.rotateRight()
   }.bind(this))
+
+  this.el.on("click", ".gallery-baidu", function () {
+    var a = document.createElement('a')
+    a.href = Gallery.BAIDU_IMAGE_SEARCH_URL
+    a.search = $.param({"queryImageUrl": Gallery.thumbImgSrc(this.imgSrc)})
+    window.open(a.href, '_blank')
+  }.bind(this))
+
+  this.el.on("click", ".gallery-google", function () {
+    var a = document.createElement('a')
+    a.href = Gallery.GOOGLE_IMAGE_SEARCH_URL
+    a.search = $.param({"image_url": Gallery.thumbImgSrc(this.imgSrc)})
+    console.log(a.href);
+    window.open(a.href, '_blank')
+  }.bind(this))
 }
 
 Gallery.prototype.unbindEvents = function () {
@@ -149,4 +169,9 @@ Gallery.prototype.measureScrollbar = function () { // thx walsh
   var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth
   this.body[0].removeChild(scrollDiv)
   return scrollbarWidth
+}
+
+// image source
+Gallery.thumbImgSrc = function (imgSrc) {
+  return imgSrc.replace("sinaimg.cn/large", "sinaimg.cn/mw600")
 }
