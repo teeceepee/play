@@ -40,7 +40,7 @@ class Hupu
       news_id = File.basename(URI.parse(href).path, '.*')
       title = el.at_css('.news-txt h3').text
       style = el.at_css('.img-wrap').attr('style')
-      img_url = style.sub(/.*url\((.+)\).*/, '\1')
+      img_url = Utils.normalize_url(style.sub(/.*url\((.+)\).*/, '\1'))
 
       news_data = {
         news_id: news_id,

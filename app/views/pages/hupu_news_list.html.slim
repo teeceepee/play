@@ -10,9 +10,9 @@ p = page_entries_info @hupu_news
         .caption
           = link_to hupu_news.title, hupu_news.href, target: '_blank'
           .pull-right
-            = link_to 'Baidu', baidu_image_search_url(hupu_news.img_url), target: '_blank'
+            = link_to 'Baidu', Utils.baidu_image_search_url(hupu_news.img_url), target: '_blank'
             | &nbsp;
-            = link_to 'Google', google_image_search_url(hupu_news.img_url), target: '_blank'
+            = link_to 'Google', Utils.google_image_search_url(hupu_news.img_url), target: '_blank'
 
 div
   = paginate @hupu_news

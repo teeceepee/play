@@ -77,8 +77,8 @@ class Jiandan
       time = el.at_css('.row .author small a').text
 
       text_el = el.css('.row .text')
-      originals =  text_el.css('a.view_img_link').map { |a| a.attr('href') }
-      thumbs = text_el.css('img').map { |img| img.attr('src') }
+      originals =  text_el.css('a.view_img_link').map { |a| Utils.normalize_url(a.attr('href')) }
+      thumbs = text_el.css('img').map { |img| Utils.normalize_url(img.attr('src')) }
       urls = {
         originals: originals,
         thumbs: thumbs,
