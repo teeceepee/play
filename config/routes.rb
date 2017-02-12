@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     end
   end
   resources :sessions, only: [:create]
+  resources :pictures, only: [:index, :create]
 
   namespace :pages do
     get :girls

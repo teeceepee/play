@@ -1,0 +1,7 @@
+.row
+  .col-sm-6.col-sm-offset-3
+    h1 Select Picture
+    .well
+      = simple_form_for :picture, url: pictures_path do |f|
+        = f.input :file, as: :file
+        = f.submit class: 'btn btn-default btn-block'

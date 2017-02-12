@@ -1,0 +1,8 @@
+.row
+  .col-sm-6.col-sm-offset-3
+    - if @picture.persisted?
+      h1 Uploaded Picture
+      .thumbnail
+        = image_tag(@picture.sinaimg_url)
+    - else
+      h1 Upload Failed
