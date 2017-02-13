@@ -45,7 +45,7 @@ class PagesController < ApplicationController
   end
 
   def hupu_news_list
-    @hupu_news = HupuNews.order(created_at: :desc).page(params[:page]).per(params[:per_page])
+    @hupu_news = HupuNews.order(id: :desc).page(params[:page]).per(params[:per_page])
   end
 
   def path_diff

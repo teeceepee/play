@@ -1,7 +1,7 @@
 class PicturesController < ApplicationController
 
   def index
-
+    @pictures = Picture.order(id: :desc).page(params[:page]).per(params[:per_page])
   end
 
   def create
