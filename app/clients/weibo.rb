@@ -2,6 +2,7 @@ class Weibo
   UPLOAD_URL = 'http://picupload.service.weibo.com/interface/pic_upload.php?' +
   'cb=http%3A%2F%2Fwww.weibo.com%2F&url=0&markpos=1&logo=&nick=0&marks=1&app=miniblog&s=rdxt'
   COOKIE_STRING_KEY = 'weibo:cookie_string'
+  USERNAME_PASSWORD_KEY = 'weibo:username_password'
 
   def initialize
   end
@@ -25,5 +26,25 @@ class Weibo
 
   def self.get_cookie_string
     Redis.current.get(COOKIE_STRING_KEY)
+  end
+
+  def self.set_username_password(username, password)
+    encrypted = encryptor.encrypt_and_sign([username, password])
+    Redis.current.set(USERNAME_PASSWORD_KEY, encrypted)
+  end
+
+  # @return [Array]
+  def self.get_username_password
+    encrypted = Redis.current.get(USERNAME_PASSWORD_KEY)
+    if encrypted
+      encryptor.decrypt_and_verify(encrypted)
+    else
+      []
+    end
+  end
+
+  def self.encryptor
+    secret = Rails.application.secrets.secret_key_base
+    ActiveSupport::MessageEncryptor.new(secret, serializer: JSON)
   end
 end
