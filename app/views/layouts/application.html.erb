@@ -18,6 +18,8 @@
 
   <body>
     <div class="container">
+      <%= render partial: 'shared/alerts' %>
+
       <%= yield %>
     </div>
     <%= content_for :page_js %>
