@@ -4,5 +4,5 @@ class Comment < ApplicationRecord
   # belongs_to :commentable, polymorphic: true
 
   ## validations
-  validates :text, presence: true, length: {maximum: 10}
+  validates :text, presence: true, length: {minimum: 5, maximum: 10}
 end

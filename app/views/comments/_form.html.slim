@@ -2,12 +2,21 @@
 
 .form-container.row
   .col-sm-6
+    /= simple_form_for comment, remote: true, html: {id: 'comment-form'} do |f|
+      = f.input :text
+      = f.submit
     = form_for comment, url: comments_path, method: :post, remote: true, html: {id: 'comment-form'} do |f|
+      - if comment.errors.full_messages.present?
+        .alert.alert-danger
+          ul
+            - comment.errors.full_messages.each do |full_message|
+              li = full_message
+
       .form-group class=('has-error' if comment.errors[:text].present?)
         = f.label :text, 'Comment', class: 'control-label'
         = f.text_field :text, class: 'form-control'
         - if comment.errors[:text].present?
-          .help-block = comment.errors[:text].join(',')
+          .help-block = comment.errors[:text].first
       .checkbox
         label
           = f.check_box(:reverse)
