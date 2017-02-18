@@ -12,11 +12,13 @@ class PicturesController < ApplicationController
     if params[:picture].present?
       @picture = Picture.new(picture_params)
       @picture.upload_picture
-      @picture.save
-
-      redirect_to picture_path(@picture.pid)
+      if @picture.save
+        redirect_to picture_path(@picture.pid)
+      else
+        redirect_back(fallback_location: root_path)
+      end
     else
-      redirect_to :back
+      redirect_back(fallback_location: root_path)
     end
   end
 

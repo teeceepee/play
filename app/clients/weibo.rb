@@ -20,6 +20,14 @@ class Weibo
     @cookie_string ||= self.class.get_cookie_string
   end
 
+  def self.fetch_cookie
+    Timeout.timeout(60) do
+      username, password = self.get_username_password
+      cookie_string = `phantomjs lib/weibo-login.js #{username} #{password}`
+      self.set_cookie_string(cookie_string)
+    end
+  end
+
   def self.set_cookie_string(cookie_string)
     Redis.current.set(COOKIE_STRING_KEY, cookie_string)
   end
