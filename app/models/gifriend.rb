@@ -2,11 +2,6 @@ require 'bindata'
 
 module Gifriend
 
-  def self.foo
-    f = File.new(Rails.root.join('app/assets/images/test.gif'))
-    Gif.read(f)
-  end
-
   # primary blocks
 
   class DataSubBlock < BinData::Record
@@ -40,13 +35,26 @@ module Gifriend
     uint8 :background_color_index
     uint8 :pixel_aspect_ratio
 
+    def color_count
+      2 ** (self.size_of_global_color_table + 1)
+    end
+
     def table_size
-      3 * (2 ** (self.size_of_global_color_table + 1))
+      3 * self.color_count
     end
   end
 
-  class ColorTable < BinData::Record
-    # TODO
+  class Color < BinData::Record
+    uint8 :red
+    uint8 :green
+    uint8 :blue
+
+    def to_gray!
+      gray = (self.red + self.green + self.blue) / 3
+      self.red = gray
+      self.green = gray
+      self.blue = gray
+    end
   end
 
   class ImageDescriptor < BinData::Record
@@ -61,8 +69,12 @@ module Gifriend
     bit2 :reserved
     bit3 :size_of_local_color_table
 
+    def color_count
+      2 ** (self.size_of_local_color_table + 1)
+    end
+
     def table_size
-      3 * (2 ** (self.size_of_local_color_table + 1))
+      3 * self.color_count
     end
   end
 
@@ -115,7 +127,11 @@ module Gifriend
   # 0x2C ','
   class TableBasedImage < BinData::Record
     image_descriptor :image_descriptor
-    string :local_color_table, length: -> { self.image_descriptor.table_size }, onlyif: :has_lct?
+    array :local_color_table, {
+      type: :color,
+      read_until: -> { index + 1 == self.image_descriptor.color_count },
+      onlyif: :has_lct?,
+    }
     image_data :image_data
 
     def has_lct?
@@ -162,18 +178,68 @@ module Gifriend
   class DataWrapper < BinData::Record
     uint8 :separator
     data_block_inner :inner, selection: :separator
+
+    def graphic?
+      self.separator == 0x21 && self.inner.label == 0xF9 # self.separator == 0x2C
+    end
   end
 
 
   class Gif < BinData::Record
     header :header
     logical_screen_descriptor :logical_screen_descriptor
-    string :global_color_table, read_length: -> { self.logical_screen_descriptor.table_size }, onlyif: :has_gct?
+    array :global_color_table, {
+      type: :color,
+      read_until: -> { index + 1 == self.logical_screen_descriptor.color_count },
+      onlyif: :has_gct?,
+    }
 
     array :data_list, type: :data_wrapper, read_until: :eof
 
+    def images
+      r = []
+      self.data_list.each do |b|
+        if b.separator == 0x21 && b.inner.label == 0xF9 && b.inner.inner.graphic_rendering_block.separator == 0x2C
+          r.push b.inner.inner.graphic_rendering_block.inner
+        end
+      end
+
+      r
+    end
+
+
     def has_gct?
       self.logical_screen_descriptor.global_color_table_flag == 1
+    end
+  end
+
+  def self.foo
+    f = File.new(Rails.root.join('app/assets/images/test.gif'))
+    Gif.read(f)
+  end
+
+
+  def self.gray
+    f = File.new(Rails.root.join('app/assets/images/test.gif'))
+    g = Gif.read(f)
+
+    if g.has_gct?
+      gct = g.global_color_table
+      gct.each do |color|
+        color.to_gray!
+      end
+    end
+
+    g.images.each do |image|
+      if image.has_lct?
+        image.local_color_table.each do |color|
+          color.to_gray!
+        end
+      end
+    end
+
+    File.open('gray.gif', 'wb') do |f|
+      f.write(g.to_binary_s)
     end
   end
 end
