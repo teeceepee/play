@@ -4,7 +4,7 @@ class HupuNews < ApplicationRecord
   store_accessor :json, [:news_id, :href, :title, :img_url]
 
   def self.search_by_query(query)
-    if query.present?
+    if query.present? && self.respond_to?(:search)
       self.search(query).records
     else
       self.order(id: :desc)
