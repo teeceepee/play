@@ -1,5 +1,10 @@
 h1 Hupu News List
 
+p
+  form.form-inline
+    .form-group
+      = search_field_tag 'query', @query, class: 'form-control', placeholder: 'Search'
+
 p = page_entries_info @hupu_news
 
 .row
