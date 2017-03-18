@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     get :chat
     get :hupu_news_list
     get :path_diff
+    get :gif_parser
   end
 
   namespace :d do

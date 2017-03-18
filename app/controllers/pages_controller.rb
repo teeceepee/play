@@ -51,4 +51,8 @@ class PagesController < ApplicationController
   def path_diff
 
   end
+
+  def gif_parser
+
+  end
 end

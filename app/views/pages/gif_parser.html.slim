@@ -1,0 +1,234 @@
+
+input type="file"
+/= image_tag('foo.gif', id: 'gif')
+
+javascript:
+
+  var SubBlock = function (stream) {
+    this.size = stream.readByte()
+    this.data = stream.readBytes(this.size)
+  }
+
+
+  var Stream = function (arrayBuffer) {
+    this.arrayBuffer = arrayBuffer
+    this.bytes = new Uint8Array(arrayBuffer)
+    this.pos = 0
+  }
+
+  Stream.prototype.peek = function () {
+    return this.bytes[this.pos]
+  }
+
+  Stream.prototype.readByte = function () {
+    return this.bytes[this.pos++]
+  }
+
+  Stream.prototype.readUint16 = function () {
+    var bytes = this.readBytes(2)
+    return (bytes[1] << 8) + bytes[0]
+  }
+
+  Stream.prototype.readBytes = function (n) {
+    var bytes = this.bytes.slice(this.pos, this.pos + n)
+    this.pos += n
+    return bytes
+  }
+
+  // Application Extension 0x21 0xFF
+  var parseApplicationExtension = function (stream) {
+    console.log("Application Extension begin");
+    var extensionLabel = stream.readByte()
+    var blockSize = stream.readByte()  // blockSize == 11
+    var applicationIdentifier = stream.readBytes(8)
+    var applicationAuthenticationCode = stream.readBytes(3)
+
+    var subBlockSize = stream.readByte()
+    var subBlockData = stream.readBytes(subBlockSize)
+
+    var blockTerminator = stream.readByte()
+    if (blockTerminator == 0) {
+      console.log("Application Extension end");
+    }
+  }
+
+  // Graphic Control Extension 0x21 0xF9
+  var parseGraphicControlExtension = function (stream) {
+    console.log("Graphic Control Extension begin");
+    var label = stream.readByte()
+    var blockSize = stream.readByte()  //blockSize == 4
+    var packedFields = stream.readByte()
+    var delayTime = stream.readBytes(2)
+    var transparentColorIndex = stream.readByte()
+
+    var blockTerminator = stream.readByte()
+    if (blockTerminator == 0) {
+      console.log("Graphic Control Extension end");
+    }
+  }
+
+  // Comment Extension 0x21 0xFE
+  var parseCommentExtension = function (stream) {
+    console.log("Comment Extension begin");
+    var label = stream.readByte()
+
+    for (; stream.peek() != 0;) {
+      parseSubBlock(stream)
+    }
+
+    var blockTerminator = stream.readByte()
+    if (blockTerminator == 0) {
+      console.log("Comment Extension end");
+    }
+  }
+
+  var parseExtension = function (stream) {
+    var extensionIntroducer = stream.readByte()
+    var label = stream.peek()
+
+    switch (label) {
+      case 0xF9:
+        parseGraphicControlExtension(stream)
+        break;
+      case 0xFE:
+        parseCommentExtension(stream)
+        break;
+      case 0xFF:
+        parseApplicationExtension(stream)
+        break;
+      default:
+    }
+  }
+
+  // Image Descriptor 0x2c
+  var parseImageDescriptor = function (stream) {
+    console.log("Image Descriptor begin");
+    var seperator = stream.readByte()
+
+    var leftPosition = stream.readUint16()
+    var topPosition = stream.readUint16()
+    var width = stream.readUint16()
+    var height = stream.readUint16()
+    var packedFields = stream.readByte()
+
+    var localColorTableFlag = packedFields >> 7
+    var sizeOfLocalColorTable = packedFields & 0b111
+    console.log("Image Descriptor end");
+
+    return {
+      localColorTableFlag: localColorTableFlag,
+      sizeOfLocalColorTable: sizeOfLocalColorTable,
+    }
+  }
+
+  var parseLocalColorTable = function (stream) {
+
+  }
+
+  var parseSubBlock = function (stream) {
+    //console.log("Sub-block begin");
+    var size = stream.readByte()
+    var data = stream.readBytes(size)
+    //console.log("Sub-block end");
+  }
+
+  var parseImageData = function (stream) {
+    console.log("Image Data begin");
+    var minimumCodeSize = stream.readByte()
+
+    for (; stream.peek() != 0; ) {
+      parseSubBlock(stream)
+    }
+
+    var blockTerminator = stream.readByte()
+    if (blockTerminator == 0) {
+      console.log("Image Data end");
+    }
+  }
+
+  var parseBlock = function (stream) {
+    var introducer = stream.peek()
+
+    switch (introducer) {
+      case 0x21:  // '!'
+        parseExtension(stream)
+        break;
+      case 0x2c:  // ','
+        var imageDescriptor = parseImageDescriptor(stream)
+        if (imageDescriptor.localColorTableFlag == 1) {
+          stream.readBytes(3 * Math.pow(2, imageDescriptor.sizeOfLocalColorTable + 1))
+          //parseLocalColorTable(stream)
+        }
+        parseImageData(stream)
+        break;
+      default:
+        throw "parseBlock error!"
+    }
+  }
+  
+  var a;
+  var parseGIF = function (arrayBuffer) {
+    var stream = new Stream(arrayBuffer)
+    a = stream
+    // Header
+    //var header = bytes.slice(0, 6)
+    var header = stream.readBytes(6)
+    //console.log(String.fromCharCode.apply(null, header) === 'GIF89a');
+
+    // Logical Screen Descriptor
+    var logicalScreenWidth = stream.readBytes(2)
+    var logicalScreenHeight = stream.readBytes(2)
+    //console.log(new Uint16Array(logicalScreenWidth.buffer));
+    //console.log(new Uint16Array(logicalScreenHeight.buffer));
+
+    var packedFields = stream.readByte()
+    var backgroundColorIndex = stream.readByte()
+    var pixelAspectRatio = stream.readByte()
+
+
+    var globalColorTableFlag = packedFields >> 7
+    var sizeOfGlobalColorTable = packedFields & 0b111
+
+
+    var tableSize = 3 * Math.pow(2, sizeOfGlobalColorTable + 1)
+    var globalColorTable = stream.readBytes(tableSize)
+
+
+    while (stream.peek() != 0x3B) {
+      parseBlock(stream)
+    }
+
+
+
+
+    console.log(stream.arrayBuffer.byteLength - stream.pos);
+
+
+
+  }
+
+
+
+
+
+
+  var previewFile = function (file) {
+    var fileReader = new FileReader()
+    fileReader.onload = function (e) {
+      var result = e.target.result
+
+      parseGIF(result)
+
+    }
+    //fileReader.readAsBinaryString(file)
+    //fileReader.readAsText(file)
+    fileReader.readAsArrayBuffer(file)
+  }
+
+  var fileEl = document.querySelector("input[type=file]")
+  fileEl.addEventListener("change", function (e) {
+    previewFile(e.target.files[0])
+  })
+
+
+
