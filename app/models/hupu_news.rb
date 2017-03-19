@@ -3,6 +3,13 @@ class HupuNews < ApplicationRecord
 
   store_accessor :json, [:news_id, :href, :title, :img_url]
 
+  mapping do
+    indexes :title, type: 'text' do
+      indexes :chinese, type: 'text', analyzer: 'smartcn'
+      indexes :keyword, type: 'text'
+    end
+  end
+
   def self.search_by_query(query)
     if query.present? && self.respond_to?(:search)
       self.search(query).records
