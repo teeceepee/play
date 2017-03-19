@@ -8,7 +8,7 @@ class HupuNews < ApplicationRecord
       indexes :chinese, type: 'text', analyzer: 'smartcn'
       indexes :keyword, type: 'text'
     end
-  end
+  end if self.respond_to?(:mapping)
 
   def self.search_by_query(query)
     if query.present? && self.respond_to?(:search)

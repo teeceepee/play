@@ -16,6 +16,6 @@ class Article < ApplicationRecord
 
     indexes :created_at, type: 'date'
     indexes :updated_at, type: 'date'
-  end
+  end if self.respond_to?(:mapping)
 
 end
