@@ -1,4 +1,4 @@
-//= require react
+// require react
 
 var Gif = React.createClass({
   displayName: 'Gif',

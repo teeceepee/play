@@ -13,11 +13,10 @@ gem 'settingslogic', '2.0.9'  # https://github.com/settingslogic/settingslogic
 gem 'exception_notification', '4.2.1'  # https://github.com/smartinez87/exception_notification
 gem 'sidekiq', '~> 4.1.2'  # https://github.com/mperham/sidekiq
 gem 'redis', '~> 3.3.0'  # https://github.com/redis/redis-rb
-gem 'nokogiri', '~> 1.6.8'  # https://github.com/sparklemotion/nokogiri
+gem 'nokogiri', '1.6.8'  # https://github.com/sparklemotion/nokogiri
 gem 'http', '~> 2.0.1'  # https://github.com/httprb/http
 gem 'pg', '~> 0.18.4'  # https://github.com/ged/ruby-pg
 gem 'simple_form', '~> 3.2.1'  # https://github.com/plataformatec/simple_form
-gem 'react-rails', '~> 1.6.2'  # https://github.com/reactjs/react-rails
 gem 'sprockets-es6', '~> 0.9.0'  # https://github.com/TannerRogalsky/sprockets-es6
 gem 'carrierwave', '~> 0.10.0'  # https://github.com/carrierwaveuploader/carrierwave
 gem 'rouge', '~> 1.10.1'  # https://github.com/jneen/rouge
@@ -40,11 +39,11 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.0'
+gem 'rails', '5.1.0.rc2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -57,13 +56,16 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '~> 2.13.0'
+  gem 'selenium-webdriver'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console'
-  gem 'listen', '~> 3.0.5'
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
