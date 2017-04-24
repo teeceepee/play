@@ -43,3 +43,7 @@
 
 # Ignore I18n-js tmp segment files
 /app/assets/javascripts/i18n_segments/
+
+# Ignore yarn module files
+/node_modules/
+/yarn-error.log

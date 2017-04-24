@@ -1,5 +1,11 @@
 source 'https://ruby.taobao.org'
 
+# http://bundler.io/git.html
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
+  "https://github.com/#{repo_name}.git"
+end
+
 gem 'bindata', '2.3.5' # https://github.com/dmendel/bindata
 gem 'kaminari', '1.0.1' # https://github.com/kaminari/kaminari
 gem 'font-awesome-sass', '4.7.0'  # https://github.com/FortAwesome/font-awesome-sass
