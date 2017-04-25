@@ -47,6 +47,7 @@
 # Ignore yarn module files
 /node_modules/
 /yarn-error.log
+/public/packs
 
 # Ignore encrypted secrets key file.
 config/secrets.yml.key
