@@ -1,5 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+require("../pages/index_page/style.scss")
+
+import React from "react"
+import ReactDOM from "react-dom"
 
 const Index = props => (
   <h1>{props.name}</h1>
