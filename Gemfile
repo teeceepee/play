@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'webpacker'
+gem 'webpacker', '1.2.0'
 gem 'bindata', '2.3.5' # https://github.com/dmendel/bindata
 gem 'kaminari', '1.0.1' # https://github.com/kaminari/kaminari
 gem 'font-awesome-sass', '4.7.0'  # https://github.com/FortAwesome/font-awesome-sass

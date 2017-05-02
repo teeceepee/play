@@ -4,7 +4,7 @@
   "dependencies": {
     "autoprefixer": "^6.7.7",
     "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
+    "babel-loader": "7.x",
     "babel-preset-env": "^1.4.0",
     "babel-preset-react": "^6.24.1",
     "coffee-loader": "^0.7.3",
@@ -30,6 +30,6 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
-    "webpack-dev-server": "^2.4.4"
+    "webpack-dev-server": "^2.4.5"
   }
 }
