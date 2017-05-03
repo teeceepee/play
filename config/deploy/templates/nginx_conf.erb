@@ -12,15 +12,17 @@ end
   <%= server %><% end %>
 }
 
-server {
-  listen 80;
-  return 301 https://$host$request_uri;
-}
-
 # WebSocket
 map $http_upgrade $connection_upgrade {
   default upgrade;
   '' close;
+}
+
+server {
+  listen 80;
+  return 301 https://$host$request_uri;
+
+  server_tokens off;
 }
 
 server {
@@ -58,4 +60,13 @@ server {
     add_header Cache-Control public;
     etag off;
   }
+
+  location ^~ /packs/ {
+    gzip_static on;
+    expires max;
+    add_header Cache-Control public;
+    etag off;
+  }
+
+  server_tokens off;
 }
