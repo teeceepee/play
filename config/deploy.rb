@@ -54,6 +54,7 @@ LINKED_DIRS = %w(
 set :linked_dirs, fetch(:linked_dirs, []).push(*LINKED_DIRS)
 
 set :nginx_server_name, 'teeceepee.com'
+set :nginx_assets_server_name, 'nerv.teeceepee.com'
 
 namespace :deploy do
 

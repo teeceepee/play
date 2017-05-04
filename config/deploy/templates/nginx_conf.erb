@@ -20,7 +20,7 @@ map $http_upgrade $connection_upgrade {
 
 server {
   listen 80;
-  server_name <%= fetch(:nginx_server_name) %>;
+  server_name <%= fetch(:nginx_server_name) %> <%= fetch(:nginx_assets_server_name) %>;
 
   return 301 https://$host$request_uri;
 
@@ -55,6 +55,26 @@ server {
     access_log <%= shared_path %>/log/nginx.access.log;
     error_log <%= shared_path %>/log/nginx.error.log;
   }
+
+  location ^~ /assets/ {
+    return 404;
+  }
+
+  location ^~ /packs/ {
+    return 404;
+  }
+
+  server_tokens off;
+}
+
+server {
+  listen 443 ssl;
+
+  ssl_certificate /etc/letsencrypt/live/teeceepee.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/teeceepee.com/privkey.pem;
+
+  server_name <%= fetch(:nginx_assets_server_name) %>;
+  root <%= current_path %>/public;
 
   location ^~ /assets/ {
     gzip_static on;
