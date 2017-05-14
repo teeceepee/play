@@ -51,3 +51,6 @@
 
 # Ignore encrypted secrets key file.
 config/secrets.yml.key
+
+# Ignore Let's Encrypt files
+/letsencrypt/

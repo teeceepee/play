@@ -50,6 +50,7 @@ LINKED_DIRS = %w(
   tmp/pids tmp/cache tmp/sockets
   vendor/assets/bower_components
   node_modules
+  letsencrypt
 )
 set :linked_dirs, fetch(:linked_dirs, []).push(*LINKED_DIRS)
 
@@ -67,6 +68,24 @@ namespace :deploy do
     end
   end
 
+end
+
+namespace :letsencrypt do
+
+  desc 'Generate certificates'
+  task :gen_certs do
+    on release_roles(:web) do
+      within release_path do
+        pem_file = 'letsencrypt/key_file.pem'
+        unless test("[ -f #{pem_file} ]")
+          execute :rake, 'gen_key', '>', pem_file
+          # execute :openssl, 'genrsa 4096',  '>', pem_file
+        end
+
+        execute :rake, 'letsencrypt_plugin'
+      end
+    end
+  end
 end
 
 desc 'Report Uptimes'

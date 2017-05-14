@@ -51,6 +51,8 @@ Rails.application.routes.draw do
   mount EchoServer.new, at: '/ws/echo_server', as: :echo_server
   mount BroadcastServer.new, at: '/ws/broadcast_server', as: :broadcast_server
 
+  mount LetsencryptPlugin::Engine, at: '/'  # It must be at root level
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

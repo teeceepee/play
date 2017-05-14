@@ -30,8 +30,8 @@ server {
 server {
   listen 443 ssl;
 
-  ssl_certificate /etc/letsencrypt/live/teeceepee.com/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/teeceepee.com/privkey.pem;
+  ssl_certificate <%= current_path %>/letsencrypt/teeceepee.com-fullchain.pem;
+  ssl_certificate_key <%= current_path %>/letsencrypt/teeceepee.com-key.pem;
 
   client_max_body_size 4G;
   keepalive_timeout 10;
@@ -70,11 +70,15 @@ server {
 server {
   listen 443 ssl;
 
-  ssl_certificate /etc/letsencrypt/live/teeceepee.com/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/teeceepee.com/privkey.pem;
+  ssl_certificate <%= current_path %>/letsencrypt/teeceepee.com-fullchain.pem;
+  ssl_certificate_key <%= current_path %>/letsencrypt/teeceepee.com-key.pem;
 
   server_name <%= fetch(:nginx_assets_server_name) %>;
   root <%= current_path %>/public;
+
+  location ^~ /.well-known/ {
+    return 302 https://<%= fetch(:nginx_server_name) %>$request_uri;
+  }
 
   location ^~ /assets/ {
     gzip_static on;
