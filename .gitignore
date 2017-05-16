@@ -54,3 +54,7 @@ config/secrets.yml.key
 
 # Ignore Let's Encrypt files
 /letsencrypt/
+
+# Ignore database backup files
+/db/backup/*
+!/db/backup/.keep

@@ -51,6 +51,7 @@ LINKED_DIRS = %w(
   vendor/assets/bower_components
   node_modules
   letsencrypt
+  db/backup
 )
 set :linked_dirs, fetch(:linked_dirs, []).push(*LINKED_DIRS)
 
