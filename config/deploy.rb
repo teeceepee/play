@@ -89,6 +89,17 @@ namespace :letsencrypt do
   end
 end
 
+desc 'Backup database'
+task :db_backup do
+  on primary(:db) do
+    within release_path do
+      with rails_env: fetch(:rails_env) do
+        execute :rake, 'db_backup'
+      end
+    end
+  end
+end
+
 desc 'Report Uptimes'
 task :uptime do
   on roles(:all) do |host|
