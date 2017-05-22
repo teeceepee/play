@@ -33,13 +33,14 @@ gem 'awesome_print', '~> 1.6.1'  # https://github.com/michaeldv/awesome_print
 
 group :development, :test do
   gem 'elasticsearch-model', '0.1.9'  # https://github.com/elastic/elasticsearch-rails
+
   gem 'capistrano', '3.6.1'  # https://github.com/capistrano/capistrano
   gem 'capistrano-rbenv', '2.0.4'  # https://github.com/capistrano/rbenv
   gem 'capistrano-bundler', '1.1.4'  # https://github.com/capistrano/bundler
   gem 'capistrano-rails', '1.1.6'  # https://github.com/capistrano/rails
   gem 'capistrano3-puma', '1.2.1'  # https://github.com/seuros/capistrano-puma
-  gem 'capistrano-nvm', '0.0.6'  # https://github.com/koenpunt/capistrano-nvm
   gem 'capistrano-bower', '1.1.0'  # https://github.com/platanus/capistrano-bower
+  gem 'capistrano-rails-db', '0.0.2'  # https://github.com/kentaroi/capistrano-rails-db
 
   gem 'pry-rails', '~> 0.3.4'  # https://github.com/rweng/pry-rails
   gem 'factory_girl_rails', '~> 4.6.0'  # https://github.com/thoughtbot/factory_girl_rails

@@ -1,4 +1,8 @@
 server 'teeceepee.com', roles: %w(app web db)
+set :rails_env, 'production'
+
+set :nginx_server_name, 'teeceepee.com'
+set :nginx_assets_server_name, 'nerv.teeceepee.com'
 
 # server-based syntax
 # ======================
