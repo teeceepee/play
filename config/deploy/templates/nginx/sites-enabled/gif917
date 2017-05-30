@@ -1,0 +1,6 @@
+server {
+  listen 80;
+  server_name gif917.com www.gif917.com;
+  return 204;
+  server_tokens off;
+}
