@@ -34,6 +34,10 @@ Rails.application.routes.draw do
     get :path_diff
   end
 
+  namespace :demos do
+    get :material
+  end
+
   namespace :d do
     resources :photos do
       collection do
