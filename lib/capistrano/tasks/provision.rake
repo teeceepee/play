@@ -37,7 +37,6 @@ namespace :provision do
         execute :cp, 'nginx.conf', 'nginx.conf.default'
         execute :mkdir, '-p', 'sites-available', 'sites-enabled'
         upload!('config/deploy/templates/nginx/nginx.conf', '/etc/nginx/nginx.conf')
-        upload!('config/deploy/templates/nginx/sites-enabled/gif917', '/etc/nginx/sites-enabled/gif917')
       end
     end
   end

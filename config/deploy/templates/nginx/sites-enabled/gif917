@@ -1,3 +1,7 @@
+upstream puma_gif_production {
+  server unix:/var/www/play/shared/tmp/sockets/puma.sock fail_timeout=0;
+}
+
 server {
   listen 80;
   server_name gif917.com;
@@ -7,5 +11,22 @@ server {
 server {
   listen 80;
   server_name www.gif917.com;
-  return 204;
+  root /var/www/play/current/public;
+  try_files $uri/index.html $uri @puma_gif_production;
+
+  location @puma_gif_production {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $host;
+    proxy_redirect off;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    # WebSocket
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+
+    proxy_pass http://puma_gif_production;
+    # limit_req zone=one;
+    access_log /var/www/play/shared/log/nginx.access.log;
+    error_log /var/www/play/shared/log/nginx.error.log;
+  }
 }

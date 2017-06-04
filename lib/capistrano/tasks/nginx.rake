@@ -26,4 +26,15 @@ namespace :nginx do
       execute :service, 'nginx', 'stop'
     end
   end
+
+  desc 'Upload site configs'
+  task :upload_sites do
+    on release_roles(:web) do
+      within('/etc/nginx') do
+        execute :cp, 'nginx.conf', 'nginx.conf.default'
+        execute :mkdir, '-p', 'sites-available', 'sites-enabled'
+        upload!('config/deploy/templates/nginx/sites-enabled/gif917', '/etc/nginx/sites-enabled/gif917')
+      end
+    end
+  end
 end
