@@ -16,6 +16,7 @@
   "dependencies": {
     "bootstrap": "3.3.6",
     "fastclick": "1.0.6",
-    "jquery_lazyload": "jquery.lazyload#1.9.7"
+    "jquery_lazyload": "jquery.lazyload#1.9.7",
+    "materialize": "~0.98.2"
   }
 }

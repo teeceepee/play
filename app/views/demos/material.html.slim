@@ -1,6 +1,53 @@
+header
+  nav
+    .nav-wrapper
+      .container
+        a.brand-logo href="#" Logo
+        ul.right.hide-on-med-and-down
+          li
+            a href="#" Sass
+          li
+            a href="#" Components
+          li
+            a href="#" JavaScript
+
+main
+  .container.section
+    .row
+      .col.s8
+        .row
+          .col.s12
+            .card
+              .card-image
+                = image_tag('test.gif')
+              .card-content
+                p Drive
+              .card-action
+                a href="#" Link
+      .col.s4
+        .card-panel NBA
+
+
+footer.page-footer
+  .container.white-text
+    .row
+      .col.l6.s12
+        h5 Footer
+        p.grey-text.text-lighten-4 You can use rows and columns here to organize your footer content.
+
+      .col.l4.offset-l2.s12
+        h5 Links
+        ul
+          li
+            a.grey-text.text-lighten-3 href="#" Link 1
+          li
+            a.grey-text.text-lighten-3 href="#" Link 2
+  .footer-copyright
+    .container © Copyright
+
 
 - content_for :page_styles do
-  = stylesheet_pack_tag 'material'
+  = stylesheet_link_tag 'pages/material'
 
 - content_for :page_js do
-  = javascript_pack_tag 'material'
+  = javascript_include_tag 'pages/material'
