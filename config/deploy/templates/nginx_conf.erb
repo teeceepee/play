@@ -23,8 +23,6 @@ server {
   server_name <%= fetch(:nginx_server_name) %> <%= fetch(:nginx_assets_server_name) %>;
 
   return 301 https://$host$request_uri;
-
-  server_tokens off;
 }
 
 server {
@@ -53,7 +51,7 @@ server {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header Host $host;
     proxy_redirect off;
-    proxy_set_header X-Forwarded-Proto https;
+    proxy_set_header X-Forwarded-Proto $scheme;
 
     # WebSocket
     proxy_set_header Upgrade $http_upgrade;
@@ -72,8 +70,6 @@ server {
   location ^~ /packs/ {
     return 404;
   }
-
-  server_tokens off;
 }
 
 server {
@@ -111,6 +107,4 @@ server {
     add_header Cache-Control public;
     etag off;
   }
-
-  server_tokens off;
 }
