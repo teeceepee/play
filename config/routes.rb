@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   namespace :demos do
     get :material
+    get :show
   end
 
   namespace :d do

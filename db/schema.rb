@@ -10,92 +10,102 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318093347) do
+ActiveRecord::Schema.define(version: 20170605121826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "articles", force: :cascade do |t|
-    t.string   "title"
-    t.text     "content"
+  create_table "articles", id: :serial, force: :cascade do |t|
+    t.string "title"
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "bars", force: :cascade do |t|
-    t.jsonb    "data"
+  create_table "bars", id: :serial, force: :cascade do |t|
+    t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "foo"
-    t.text     "baz"
+    t.string "foo"
+    t.text "baz"
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.string   "commentable_type"
-    t.integer  "commentable_id"
-    t.text     "text"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
-  end
-
-  create_table "hupu_news", force: :cascade do |t|
-    t.json     "json"
-    t.json     "box"
+  create_table "comments", id: :serial, force: :cascade do |t|
+    t.string "commentable_type"
+    t.integer "commentable_id"
+    t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
   end
 
-  create_table "jiandan_comments", force: :cascade do |t|
-    t.jsonb    "json"
-    t.jsonb    "box"
+  create_table "hupu_news", id: :serial, force: :cascade do |t|
+    t.json "json"
+    t.json "box"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "pictures", force: :cascade do |t|
-    t.string   "filename"
-    t.string   "pid"
+  create_table "jiandan_comments", id: :serial, force: :cascade do |t|
+    t.jsonb "json"
+    t.jsonb "box"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "positions", force: :cascade do |t|
-    t.jsonb    "json"
-    t.jsonb    "box"
+  create_table "pictures", id: :serial, force: :cascade do |t|
+    t.string "filename"
+    t.string "pid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "repos", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "tag_count",  default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.index ["name"], name: "index_repos_on_name", using: :btree
+  create_table "positions", id: :serial, force: :cascade do |t|
+    t.jsonb "json"
+    t.jsonb "box"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "tags", force: :cascade do |t|
-    t.integer  "repo_id"
-    t.string   "name"
-    t.string   "git_url"
-    t.string   "git_commit"
-    t.string   "dockerfile_dir"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.text     "dockerfile_content"
+  create_table "repos", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.integer "tag_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_repos_on_name"
+  end
+
+  create_table "tags", id: :serial, force: :cascade do |t|
+    t.integer "repo_id"
+    t.string "name"
+    t.string "git_url"
+    t.string "git_commit"
+    t.string "dockerfile_dir"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "dockerfile_content"
     t.datetime "dockerfile_downloaded_at"
-    t.index ["repo_id"], name: "index_tags_on_repo_id", using: :btree
+    t.index ["repo_id"], name: "index_tags_on_repo_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "email"
-    t.string   "password_digest"
-    t.string   "auth_token"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+  create_table "taobao_items", force: :cascade do |t|
+    t.string "item_id"
+    t.string "cover"
+    t.string "title"
+    t.string "description"
+    t.jsonb "json"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.string "auth_token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "tags", "repos"
