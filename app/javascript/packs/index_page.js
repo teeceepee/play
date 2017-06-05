@@ -14,7 +14,10 @@ const Index = props => (
     transitionEnter={false}
     transitionLeave={false}
   >
-    <h1 >Welcome to {props.name}</h1>
+    <h1>
+      Welcome to&nbsp;
+      <a href="/demos/show">{props.name}</a>
+    </h1>
   </CSSTransitionGroup>
 )
 
