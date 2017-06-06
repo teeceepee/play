@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  root to: 'demos#show', constraints: {domain: 'xiumaijia.com'}
   root to: 'pages#index'
+
   get 'comments/index'
   get 'login', to: 'sessions#new'
   delete 'logout', to: 'sessions#destroy'

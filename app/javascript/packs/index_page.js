@@ -16,7 +16,7 @@ const Index = props => (
   >
     <h1>
       Welcome to&nbsp;
-      <a href="/demos/show">{props.name}</a>
+      <a href="http://www.xiumaijia.com/">{props.name}</a>
     </h1>
   </CSSTransitionGroup>
 )

@@ -1,9 +1,11 @@
 - content_for :title, t('show.brand')
+- content_for :description, t('show.main_description')
+
 header
   nav
     .nav-wrapper
       .container
-        a.brand-logo href=demos_show_path = t('show.brand')
+        a.brand-logo href="/" = t('show.brand')
         /ul.right.hide-on-med-and-down
           li
             a href="#" Sass
