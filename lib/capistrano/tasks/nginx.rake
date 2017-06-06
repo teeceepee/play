@@ -34,6 +34,7 @@ namespace :nginx do
         execute :cp, 'nginx.conf', 'nginx.conf.default'
         execute :mkdir, '-p', 'sites-available', 'sites-enabled'
         upload!('config/deploy/templates/nginx/sites-enabled/gif917', '/etc/nginx/sites-enabled/gif917')
+        upload!('config/deploy/templates/nginx/sites-enabled/xiumaijia', '/etc/nginx/sites-enabled/xiumaijia')
       end
     end
   end
