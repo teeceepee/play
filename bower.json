@@ -17,6 +17,7 @@
     "bootstrap": "3.3.6",
     "fastclick": "1.0.6",
     "jquery_lazyload": "jquery.lazyload#1.9.7",
+    "masonry": "4.2.0",
     "materialize": "~0.98.2"
   }
 }
