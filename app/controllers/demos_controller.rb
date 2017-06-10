@@ -4,8 +4,4 @@ class DemosController < ApplicationController
   def material
 
   end
-
-  def show
-
-  end
 end

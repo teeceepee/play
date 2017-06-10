@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'demos#show', constraints: {domain: 'xiumaijia.com'}
+  root to: 'buyers#index', constraints: {domain: 'xiumaijia.com'}
   root to: 'pages#index'
 
   get 'comments/index'
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   namespace :demos do
     get :material
-    get :show
+    get :show, to: redirect('https://www.xiumaijia.com', status: 301)
   end
 
   namespace :d do
