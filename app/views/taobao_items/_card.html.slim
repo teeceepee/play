@@ -1,0 +1,7 @@
+/ locals: {taobao_item: @taobao_item}
+.card
+  .card-image
+    = link_to taobao_item_path(taobao_item) do
+      = image_tag(taobao_item.cover_url, alt: taobao_item.title, title: taobao_item.title)
+  .card-action
+    = link_to taobao_item.title, taobao_item.item_url, target: '_blank'

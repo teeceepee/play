@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605121826) do
+ActiveRecord::Schema.define(version: 20170611094720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 20170605121826) do
   end
 
   create_table "taobao_items", force: :cascade do |t|
-    t.string "item_id"
+    t.string "item_no"
     t.string "cover"
     t.string "title"
     t.string "description"

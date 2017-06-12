@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root to: 'buyers#index', constraints: {domain: 'xiumaijia.com'}
   root to: 'pages#index'
 
+  resources :taobao_items, path: :items, param: :item_no, only: [:index, :show]
+
   get 'comments/index'
   get 'login', to: 'sessions#new'
   delete 'logout', to: 'sessions#destroy'

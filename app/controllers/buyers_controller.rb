@@ -1,5 +1,5 @@
 class BuyersController < ApplicationController
-  layout 'lite'
+  layout 'buyer'
 
   def index
 

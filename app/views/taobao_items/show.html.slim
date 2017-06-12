@@ -1,0 +1,6 @@
+- content_for :title, @taobao_item.title
+
+.row
+  .col.m8.s12
+    .card-grid
+      = render partial: 'taobao_items/card', locals: {taobao_item: @taobao_item}

@@ -1,71 +1,45 @@
 - content_for :title, t('show.brand')
 - content_for :description, t('show.main_description')
 
-header
-  nav
-    .nav-wrapper
-      .container
-        a.brand-logo href="/" = t('show.brand')
-        /ul.right.hide-on-med-and-down
-          li
-            a href="#" Sass
-          li
-            a href="#" Components
-          li
-            a href="#" JavaScript
+.row
+  .col.m8.s12
+    .card-grid
+      .card-wrapper data-js="card-wrapper"
+        .card
+          .card-image
+            = image_tag('https://img.alicdn.com/imgextra/i3/356060603/TB2toNIhgxlpuFjSszbXXcSVpXa_!!356060603.jpg', alt: '七了个三日系cos紧缚死库水分体泳衣性感羞耻学生情趣内衣制服', title: '七了个三日系cos紧缚死库水分体泳衣性感羞耻学生情趣内衣制服')
+          .card-action
+            a href="https://s.click.taobao.com/t?e=m%3D2%26s%3DApf%2FPWEWo%2FkcQipKwQzePOeEDrYVVa64LKpWJ%2Bin0XLjf2vlNIV67j6GS8n5pEPQxF5AHBg6Tr70DNG6kGsa%2FvCq6cqqDSJT0vKxvArqtERE35MeTKEs9%2BGQbNvysF5eVrB%2B37dutUM4Iid2910sH%2BZ0hyQTFg0yIYULNg46oBA%3D&pvid=10_211.161.242.80_859_1496841019090" target="_blank" 七了个三日系cos紧缚死库水分体泳衣性感羞耻学生情趣内衣制服
+      .card-wrapper data-js="card-wrapper"
+        .card
+          .card-image
+            = image_tag('https://img.alicdn.com/imgextra/i3/0/TB209pRoW8lpuFjy0FpXXaGrpXa_!!0-rate.jpg')
+          .card-action
+            a href="https://s.click.taobao.com/Y9GXRiw" target="_blank" [七了个三]1件包邮 萌款 体操服 分体式 游泳衣 固定胸垫 死库水
+      .card-wrapper data-js="card-wrapper"
+        .card
+          .card-image
+            = image_tag('https://img.alicdn.com/imgextra/i1/50852803/TB2NNePmpXXXXbyXpXXXXXXXXXX_!!50852803.jpg', alt: '[七了个三] 五芒星荷叶边泳衣 死库水', title: '[七了个三] 五芒星荷叶边泳衣 死库水')
+          .card-action
+            a href="https://s.click.taobao.com/t?e=m%3D2%26s%3D8kZ56u2cYzscQipKwQzePOeEDrYVVa64LKpWJ%2Bin0XLjf2vlNIV67lVqYs8u3RCfsUZsiWgXrvj0DNG6kGsa%2FvCq6cqqDSJT0vKxvArqtERE35MeTKEs92bas5lsLnqemI09YSSDvbbynPkiDJF866%2FPQJZtNixGxg5p7bh%2BFbQ%3D&pvid=10_211.161.242.80_404_1496841680406" target="_blank" [七了个三] 五芒星荷叶边泳衣 死库水
+      .card-wrapper data-js="card-wrapper"
+        .card
+          .card-image
+            = image_tag('https://img.alicdn.com/imgextra/i2/673336836/TB2PSpdrHFlpuFjy0FgXXbRBVXa_!!673336836.jpg', alt: '【撩汉出品】120D天鹅绒长筒丝袜 过膝袜高筒袜 防滑加长大腿袜', title: '【撩汉出品】120D天鹅绒长筒丝袜 过膝袜高筒袜 防滑加长大腿袜')
+          .card-action
+            a href="https://s.click.taobao.com/t?e=m%3D2%26s%3Dp%2Be0iOTxOdocQipKwQzePOeEDrYVVa64LKpWJ%2Bin0XLjf2vlNIV67m8pGyTVxUBNCtmXdOL%2FlDn0DNG6kGsa%2FvCq6cqqDSJT0vKxvArqtERE35MeTKEs9zSRhM2wN%2BcRGZfm44zoUSx86DbkPVwDLlmxQF%2BdHKETIYULNg46oBA%3D&pvid=10_211.161.245.80_412_1496842108906" target="_blank" 【撩汉出品】120D天鹅绒长筒丝袜 过膝袜高筒袜 防滑加长大腿袜
+  .col.m4.hide-on-small-and-down
+    .card-panel = t('show.slogan')
 
-main
-  .container.section
-    .row
-      .col.m8.s12
-        .card-grid
-          .card-wrapper data-js="card-wrapper"
-            .card
-              .card-image
-                = image_tag('https://img.alicdn.com/imgextra/i3/356060603/TB2toNIhgxlpuFjSszbXXcSVpXa_!!356060603.jpg', alt: '七了个三日系cos紧缚死库水分体泳衣性感羞耻学生情趣内衣制服', title: '七了个三日系cos紧缚死库水分体泳衣性感羞耻学生情趣内衣制服')
-              .card-action
-                a href="https://s.click.taobao.com/t?e=m%3D2%26s%3DApf%2FPWEWo%2FkcQipKwQzePOeEDrYVVa64LKpWJ%2Bin0XLjf2vlNIV67j6GS8n5pEPQxF5AHBg6Tr70DNG6kGsa%2FvCq6cqqDSJT0vKxvArqtERE35MeTKEs9%2BGQbNvysF5eVrB%2B37dutUM4Iid2910sH%2BZ0hyQTFg0yIYULNg46oBA%3D&pvid=10_211.161.242.80_859_1496841019090" target="_blank" 七了个三日系cos紧缚死库水分体泳衣性感羞耻学生情趣内衣制服
-          .card-wrapper data-js="card-wrapper"
-            .card
-              .card-image
-                = image_tag('https://img.alicdn.com/imgextra/i3/0/TB209pRoW8lpuFjy0FpXXaGrpXa_!!0-rate.jpg')
-              .card-action
-                a href="https://s.click.taobao.com/Y9GXRiw" target="_blank" [七了个三]1件包邮 萌款 体操服 分体式 游泳衣 固定胸垫 死库水
-          .card-wrapper data-js="card-wrapper"
-            .card
-              .card-image
-                = image_tag('https://img.alicdn.com/imgextra/i1/50852803/TB2NNePmpXXXXbyXpXXXXXXXXXX_!!50852803.jpg', alt: '[七了个三] 五芒星荷叶边泳衣 死库水', title: '[七了个三] 五芒星荷叶边泳衣 死库水')
-              .card-action
-                a href="https://s.click.taobao.com/t?e=m%3D2%26s%3D8kZ56u2cYzscQipKwQzePOeEDrYVVa64LKpWJ%2Bin0XLjf2vlNIV67lVqYs8u3RCfsUZsiWgXrvj0DNG6kGsa%2FvCq6cqqDSJT0vKxvArqtERE35MeTKEs92bas5lsLnqemI09YSSDvbbynPkiDJF866%2FPQJZtNixGxg5p7bh%2BFbQ%3D&pvid=10_211.161.242.80_404_1496841680406" target="_blank" [七了个三] 五芒星荷叶边泳衣 死库水
-          .card-wrapper data-js="card-wrapper"
-            .card
-              .card-image
-                = image_tag('https://img.alicdn.com/imgextra/i2/673336836/TB2PSpdrHFlpuFjy0FgXXbRBVXa_!!673336836.jpg', alt: '【撩汉出品】120D天鹅绒长筒丝袜 过膝袜高筒袜 防滑加长大腿袜', title: '【撩汉出品】120D天鹅绒长筒丝袜 过膝袜高筒袜 防滑加长大腿袜')
-              .card-action
-                a href="https://s.click.taobao.com/t?e=m%3D2%26s%3Dp%2Be0iOTxOdocQipKwQzePOeEDrYVVa64LKpWJ%2Bin0XLjf2vlNIV67m8pGyTVxUBNCtmXdOL%2FlDn0DNG6kGsa%2FvCq6cqqDSJT0vKxvArqtERE35MeTKEs9zSRhM2wN%2BcRGZfm44zoUSx86DbkPVwDLlmxQF%2BdHKETIYULNg46oBA%3D&pvid=10_211.161.245.80_412_1496842108906" target="_blank" 【撩汉出品】120D天鹅绒长筒丝袜 过膝袜高筒袜 防滑加长大腿袜
+/.row
+  .col.m8.s12
+    .card-grid
+      - @taobao_items.each do |taobao_item|
+        .card-wrapper
+          = render partial: 'taobao_items/card', locals: {taobao_item: taobao_item}
 
-      .col.m4.hide-on-small-and-down
-        .card-panel = t('show.slogan')
-
-
-footer.page-footer
-  .container.white-text
-    .row
-      .col.l6.s12
-        h5 = t('show.brand')
-        p.grey-text.text-lighten-4 = t('show.slogan')
-
-      /.col.l4.offset-l2.s12
-        h5 Links
-        ul
-          li
-            a.grey-text.text-lighten-3 href="#" Link 1
-          li
-            a.grey-text.text-lighten-3 href="#" Link 2
-  .footer-copyright
-    .container © 2017
-
+  .col.m4.hide-on-small-and-down
+    .card-panel = t('show.slogan')
 
 - content_for :page_styles do
-  = stylesheet_link_tag 'pages/materialize_custom'
   = stylesheet_link_tag 'pages/buyer'
