@@ -45,6 +45,7 @@
 /app/assets/javascripts/i18n_segments/
 
 # Ignore yarn module files
+/yarn.lock
 /node_modules/
 /yarn-error.log
 /public/packs
