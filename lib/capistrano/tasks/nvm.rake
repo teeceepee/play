@@ -26,9 +26,11 @@ namespace :nvm do
   end
 end
 
-Capistrano::DSL.stages.each do |stage|
-  after stage, 'nvm:validate'
-  after stage, 'nvm:map_bins'
+unless ENV['PROVISION']
+  Capistrano::DSL.stages.each do |stage|
+    after stage, 'nvm:validate'
+    after stage, 'nvm:map_bins'
+  end
 end
 
 namespace :load do
