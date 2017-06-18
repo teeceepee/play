@@ -116,6 +116,16 @@ namespace :provision do
     end
   end
 
+  # For the host in China, use taobao registry to download packages
+  desc 'Upload .npmrc file'
+  task :upload_npmrc do
+    if ENV['TAOBAO_REGISTRY']
+      on release_roles(:all) do
+        upload!('config/deploy/templates/dot_files/.npmrc', '.npmrc')
+      end
+    end
+  end
+
 end
 
 namespace :load do
