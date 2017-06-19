@@ -74,14 +74,18 @@ end
 namespace :yarn do
   desc 'Replace yarn registry'
   task :replace_registry do
-    on release_roles(:app) do
-      within release_path do
-        execute :rake, 'yarn:replace_yarn'
+    if fetch(:yarn_registry, 'taobao') == 'official'
+      on release_roles(:app) do
+        within release_path do
+          with rails_env: fetch(:rails_env) do
+            execute :rake, 'yarn:replace_registry'
+          end
+        end
       end
     end
   end
 
-  if fetch(:yarn_registry, 'taobao') == 'official' && Rake::Task.task_defined?('deploy:compile_assets')
+  if Rake::Task.task_defined?('deploy:compile_assets')
     before 'deploy:compile_assets', 'yarn:replace_registry'
   end
 end
@@ -93,7 +97,9 @@ namespace :letsencrypt do
       within release_path do
         pem_file = 'letsencrypt/key_file.pem'
         unless test("[ -f #{pem_file} ]")
-          execute :rake, 'gen_key', '>', pem_file
+          with rails_env: fetch(:rails_env) do
+            execute :rake, 'gen_key', '>', pem_file
+          end
           # execute :openssl, 'genrsa 4096',  '>', pem_file
         end
 

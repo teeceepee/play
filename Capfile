@@ -1,5 +1,7 @@
 # environment variables:
-# ENV['PROVISION'] ENV['DB_SETUP'] ENV['TAOBAO_REGISTRY']
+# ENV['PROVISION']
+# ENV['TAOBAO_REGISTRY']
+# ENV['DB_SETUP']
 
 # Load DSL and set up stages
 require 'capistrano/setup'
