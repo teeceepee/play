@@ -4,6 +4,8 @@ set :rails_env, 'production'
 set :nginx_server_name, 'teeceepee.com'
 set :nginx_assets_server_name, 'nerv.teeceepee.com'
 
+set :yarn_registry, 'official'
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.

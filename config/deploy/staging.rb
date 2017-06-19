@@ -1,5 +1,6 @@
 server 'pst.local', user: 'root', roles: %w(app web db), ssh_options: {password: 'root'}
 set :rails_env, 'production'
+set :yarn_registry, 'taobao'
 
 # server-based syntax
 # ======================

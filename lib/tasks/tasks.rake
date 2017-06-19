@@ -50,3 +50,14 @@ task letsencrypt: :setup_logger do
   end
 
 end
+
+namespace :yarn do
+  desc 'Replace yarn registry'
+  task :replace_registry do
+    # macOS
+    # cmd = "sed -i '.bak' -e 's#http://registry.npm.taobao.org#https://registry.yarnpkg.com#' yarn.lock"
+    # Linux
+    cmd = "sed -i 's#http://registry.npm.taobao.org#https://registry.yarnpkg.com#' yarn.lock"
+    system(cmd)
+  end
+end

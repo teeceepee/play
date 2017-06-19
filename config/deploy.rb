@@ -44,6 +44,9 @@ set :bower_flags, '--config.interactive=false --allow-root'
 
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/settings.yml')
 
+# 'taobao' 'official'
+set :yarn_registry, 'taobao'
+
 LINKED_DIRS = %w(
   data
   log
@@ -68,8 +71,22 @@ namespace :deploy do
 
 end
 
-namespace :letsencrypt do
+namespace :yarn do
+  desc 'Replace yarn registry'
+  task :replace_registry do
+    on release_roles(:app) do
+      within release_path do
+        execute :rake, 'yarn:replace_yarn'
+      end
+    end
+  end
 
+  if fetch(:yarn_registry, 'taobao') == 'official' && Rake::Task.task_defined?('deploy:compile_assets')
+    before 'deploy:compile_assets', 'yarn:replace_registry'
+  end
+end
+
+namespace :letsencrypt do
   desc 'Generate certificates'
   task :gen_certs do
     on release_roles(:web) do
