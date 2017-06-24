@@ -4,6 +4,7 @@ task :gen_key do
   puts OpenSSL::PKey::RSA.generate(4096).to_pem
 end
 
+# import command: psql pg_production < 20xxxxxxxxxxxx.sql
 desc 'Backup database'
 task :db_backup do
   db_conf = Rails.configuration.database_configuration[Rails.env]
@@ -30,6 +31,7 @@ task :db_backup do
   filename = backup_dir.join("#{Time.now.utc.strftime('%Y%m%d%H%M%S')}.sql").to_s
   file = ['--file', filename].join(' ')
 
+  # cmd = "pg_dump #{conn} #{file} --data-only --table taobao_items --table taobao_reviews #{database}"
   cmd = "pg_dump #{conn} #{file} #{database}"
 
   system(cmd)
