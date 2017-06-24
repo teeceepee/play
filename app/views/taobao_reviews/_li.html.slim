@@ -1,0 +1,23 @@
+/ locals: {taobao_review: taobao_review}
+- taobao_review = taobao_review
+li.collection-item.avatar data-review-no=taobao_review.review_no
+  = image_tag(taobao_review.avatar, class: 'circle') if taobao_review.avatar.present?
+  span.title
+    = link_to taobao_review.name, taobao_review_path(taobao_review), class: 'orange-text accent-2'
+    | &nbsp;
+    = taobao_review.date
+  p.title = taobao_review.content
+
+  - taobao_review.photos&.each do |photo|
+    .photo-wrapper
+      = image_tag(photo, class: 'materialboxed responsive-img')
+
+  / 追加评论
+  - if taobao_review.child_revision.present?
+    - taobao_review = taobao_review.child_revision
+    br
+    span.grey-text = taobao_review.date
+    p.title = taobao_review.content
+    - taobao_review.photos.each do |photo|
+      .photo-wrapper
+        = image_tag(photo, class: 'materialboxed responsive-img')

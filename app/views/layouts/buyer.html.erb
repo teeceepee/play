@@ -4,26 +4,28 @@
 <head>
   <title><%= content_for(:title) %></title>
   <meta name="description" content="<%= content_for(:description) %>">
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="apple-touch-icon" href="/con.png">
+  <link rel="icon" type="image/png" href="/icon.png">
+  <link rel="apple-touch-icon" href="/icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <%= csrf_meta_tags %>
   <%= action_cable_meta_tag %>
   <%= content_for :page_styles %>
   <%= stylesheet_link_tag 'pages/materialize_custom' %>
+  <%= stylesheet_link_tag 'pages/buyer' %>
 
   <%= render partial: 'shared/ga' %>
 </head>
 
 <body>
   <%= render partial: 'layouts/buyer/navigation' %>
-  <main>
+  <main class="grey-text text-darken-2">
     <div class="container section">
       <%= yield %>
     </div>
   </main>
 
   <%= render partial: 'layouts/buyer/footer' %>
+  <%= javascript_include_tag 'pages/materialize_custom' %>
   <%= content_for :page_js %>
 </body>
 </html>

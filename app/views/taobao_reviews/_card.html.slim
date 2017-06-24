@@ -1,0 +1,12 @@
+/ locals: {taobao_review: taobao_review}
+- taobao_item = taobao_review.taobao_item
+
+.card
+  - if taobao_review.cover_url.present?
+    .card-image
+      = link_to taobao_review_path(taobao_review)
+        = image_tag(taobao_review.cover_url)
+  .card-content
+    = taobao_review.content
+  .card-action
+    = link_to t('show.show_review'), taobao_review_path(taobao_review)

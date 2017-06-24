@@ -1,0 +1,29 @@
+- taobao_review = @taobao_review
+- taobao_item = taobao_review.taobao_item
+- content_for :title, taobao_item.title
+
+.row
+  .col.m8.s12
+    .section
+      .card.horizontal
+        .card-image
+          = link_to taobao_item.item_url do
+            = image_tag taobao_item.cover_url
+
+        .card-stacked
+          .card-content
+            = taobao_item.title
+          .card-action
+            = link_to t('show.warp_gate'), taobao_item.item_url, target: '_blank'
+
+    ul.collection
+      = render partial: 'taobao_reviews/li', locals: {taobao_review: taobao_review}
+
+    .section
+      = link_to taobao_item.item_url, class: 'btn red lighten-2 waves-effect waves-light', target: '_blank' do
+        = t('show.warp_gate')
+        = taobao_item.title
+
+    .section
+      = link_to taobao_item_path(taobao_item), class: 'btn grey' do
+        = t('show.all_reviews')

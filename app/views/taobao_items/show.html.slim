@@ -1,6 +1,12 @@
 - content_for :title, @taobao_item.title
 
 .row
-  .col.m8.s12
+  .col.m4.s12
     .card-grid
       = render partial: 'taobao_items/card', locals: {taobao_item: @taobao_item}
+
+.row
+  .col.m8.s12
+    ul.collection.grey-text.text-darken-2
+      - @taobao_item.taobao_reviews.root.each do |taobao_review|
+        = render partial: 'taobao_reviews/li', locals: {taobao_review: taobao_review}

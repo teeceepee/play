@@ -7,7 +7,7 @@ class TaobaoItemsController < ApplicationController
   end
 
   def show
-    @taobao_item
+
   end
 
   private

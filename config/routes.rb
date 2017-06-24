@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#index'
 
   resources :taobao_items, path: :items, param: :item_no, only: [:index, :show]
+  resources :taobao_reviews, path: :reviews, param: :review_no, only: [:show]
 
   get 'comments/index'
   get 'login', to: 'sessions#new'
