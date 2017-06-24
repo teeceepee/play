@@ -8,7 +8,7 @@
       .card.horizontal
         .card-image
           = link_to taobao_item.item_url do
-            = image_tag taobao_item.cover_url
+            = image_tag(taobao_item.cover_url, alt: taobao_item.title, title: taobao_item.title)
 
         .card-stacked
           .card-content

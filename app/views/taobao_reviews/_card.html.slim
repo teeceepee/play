@@ -5,7 +5,7 @@
   - if taobao_review.cover_url.present?
     .card-image
       = link_to taobao_review_path(taobao_review)
-        = image_tag(taobao_review.cover_url)
+        = image_tag(taobao_review.cover_url, alt: taobao_item.title, title: taobao_item.title)
   .card-content
     = taobao_review.content
   .card-action
