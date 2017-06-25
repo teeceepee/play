@@ -1,0 +1,11 @@
+h3 = params[:time_zone]
+
+pre
+  = "Time.zone = #{Time.zone}\n"
+  = "Time.current = #{Time.current}\n"
+  = "Time.now     = #{Time.now}\n"
+
+form
+  .form-group
+    = time_zone_select nil, :time_zone, @priority_zones, {default: params[:time_zone], include_blank: true}, class: 'form-control'
+  input.btn.btn-default type="submit"

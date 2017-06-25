@@ -51,4 +51,28 @@ class PagesController < ApplicationController
   def path_diff
 
   end
+
+  around_action :set_time_zone, only: [:time_zone]
+
+  def time_zone
+    priorities = [
+      'Beijing',
+      'Pacific Time (US & Canada)',
+      'Singapore',
+      'Sydney',
+    ]
+
+    @priority_zones = priorities.map { |p| ActiveSupport::TimeZone[p] }
+  end
+
+  private
+  def set_time_zone
+    new_zone = ::Time.find_zone(params[:time_zone])
+    begin
+      old_zone, ::Time.zone = ::Time.zone, new_zone
+      yield
+    ensure
+      ::Time.zone = old_zone
+    end
+  end
 end

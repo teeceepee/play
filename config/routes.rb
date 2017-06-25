@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     get :chat
     get :hupu_news_list
     get :path_diff
+    get :time_zone
   end
 
   namespace :demos do
