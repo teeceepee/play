@@ -1,6 +1,7 @@
 - content_for :title, t('show.brand')
 - content_for :description, t('show.main_description')
 
+
 .row
   .col.m8.s12
     .card-grid
@@ -11,3 +12,5 @@
 
   .col.m4.hide-on-small-and-down
     .card-panel = t('show.slogan')
+    .card-panel
+      = render partial: 'buyers/ad_sense'
