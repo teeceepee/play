@@ -7,3 +7,6 @@ header
         ul.right
           li
             a href="/" = t('show.newest')
+          - if current_user.present?
+            li
+              a href="#" &Lambda;
