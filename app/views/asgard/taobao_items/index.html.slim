@@ -1,0 +1,35 @@
+
+= form_for @taobao_item, url: [:asgard, @taobao_item] do |f|
+  .input-field
+    = f.text_field :item_no
+    = f.label :item_no
+  .input-field
+    = f.text_area :promotion_url, class: 'materialize-textarea'
+    = f.label :promotion_url
+  = f.submit class: 'btn'
+
+.section
+
+table.striped
+  thead
+    tr
+      th = TaobaoItem.han(:id)
+      th = TaobaoItem.han(:item_no)
+      th = TaobaoItem.han(:title)
+      th = TaobaoItem.han(:updated_at)
+      th = TaobaoItem.han(:created_at)
+      th
+
+  tbody
+    - @taobao_items.each do |taobao_item|
+      tr
+        td = taobao_item.id
+        td = taobao_item.item_no
+        td = taobao_item.title
+        td = l(taobao_item.updated_at)
+        td = l(taobao_item.created_at)
+        td
+          = link_to taobao_item.original_url, target: '_blank', class: 'btn' do
+            | O
+          = link_to taobao_item.promotion_url, target: '_blank', class: 'btn' do
+            | P

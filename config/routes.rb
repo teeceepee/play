@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   resources :taobao_items, path: :items, param: :item_no, only: [:index, :show]
   resources :taobao_reviews, path: :reviews, param: :review_no, only: [:show]
 
+  get 'asgard', to: 'asgard#index'
+  namespace :asgard do
+    resources :taobao_items, only: [:index, :create]
+  end
+
   get 'comments/index'
   get 'login', to: 'sessions#new'
   delete 'logout', to: 'sessions#destroy'
