@@ -15,17 +15,36 @@ main
   .container.section
     .row
       .col.m8.s12
-        .row
-          .col.s12
-            .card
-              .card-image
-                = image_tag('test.gif')
-              .card-content
-                p Drive
-              .card-action
-                a href="#" Link
-      .col.m4.hide-on-small-and-down
-        .card-panel NBA
+        h1.flow-text Body Mass Index
+        .card-panel
+          .row
+            .col.m2.s12
+              p Height
+            .col.m8.s12
+              .row
+                .col.s8
+                  p.range-field
+                    input#height-el data-js="trigger" type="range" min="100" max="200"
+                .col.s4
+                  p
+                    span#height
+                    span = ' cm'
+
+          .row
+            .col.m2.s12
+              p Weight
+            .col.m8.s12
+              .row
+                .col.s8
+                  p.range-field
+                    input#weight-el data-js="trigger" type="range" min="0" max="100"
+                .col.s4
+                  p
+                    span#weight
+                    span = ' Kg'
+          h4
+            span = 'BMI = '
+            span#bmi
 
 
 footer.page-footer
@@ -45,10 +64,36 @@ footer.page-footer
   .footer-copyright
     .container © Copyright
 
+javascript:
+  function bmi (height, weight) {
+    var h = height / 100
+    return weight / (h * h)
+  }
+
+  function renderValues () {
+    var heightEl = $("#height-el")
+    var weightEl = $("#weight-el")
+    var height = parseInt(heightEl.val())
+    var weight = parseInt(weightEl.val())
+    var bmiStr = bmi(height, weight).toFixed(1)
+
+    $("#height").html(height)
+
+    $("#weight").html(weight)
+    $("#bmi").html(bmiStr)
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    $("[data-js=trigger]").on("change", renderValues)
+
+    renderValues()
+  })
+
 
 - content_for :page_styles do
   = stylesheet_link_tag 'pages/materialize_custom'
   = stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Roboto'
 
 - content_for :page_js do
-  = javascript_include_tag 'pages/material'
+  = javascript_include_tag 'pages/materialize_custom'
