@@ -1,4 +1,4 @@
-source 'https://ruby.taobao.org'
+source 'https://gems.ruby-china.org'
 
 # http://bundler.io/git.html
 git_source(:github) do |repo_name|
@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'sassc-rails', '1.3.0'  # https://github.com/sass/sassc-rails
-gem 'letsencrypt_plugin', '0.0.9'  # https://github.com/lgromanowski/letsencrypt-plugin
+gem 'letsencrypt_plugin', '0.0.10'  # https://github.com/lgromanowski/letsencrypt-plugin
 gem 'webpacker', '1.2.0'
 gem 'bindata', '2.3.5' # https://github.com/dmendel/bindata
 gem 'kaminari', '1.0.1' # https://github.com/kaminari/kaminari
@@ -25,7 +25,7 @@ gem 'redis', '~> 3.3.0'  # https://github.com/redis/redis-rb
 gem 'nokogiri', '1.6.8'  # https://github.com/sparklemotion/nokogiri
 gem 'http', '~> 2.0.1'  # https://github.com/httprb/http
 gem 'pg', '~> 0.18.4'  # https://github.com/ged/ruby-pg
-gem 'simple_form', '~> 3.2.1'  # https://github.com/plataformatec/simple_form
+gem 'simple_form', '~> 3.5.0'  # https://github.com/plataformatec/simple_form
 gem 'sprockets-es6', '~> 0.9.0'  # https://github.com/TannerRogalsky/sprockets-es6
 gem 'carrierwave', '~> 0.10.0'  # https://github.com/carrierwaveuploader/carrierwave
 gem 'rouge', '~> 1.10.1'  # https://github.com/jneen/rouge
