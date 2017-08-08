@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create]
   resources :pictures, only: [:index, :show, :create], param: :pid
   resources :articles, only: [:index, :show, :new, :edit, :create, :update]
+  get 'draft', to: 'articles#draft'
 
   namespace :pages do
     get :girls
