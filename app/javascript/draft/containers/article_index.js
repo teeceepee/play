@@ -7,21 +7,21 @@ class ArticleIndex extends React.Component {
   articleItems() {
     const { articles, editArticle } = this.props
     return articles.map(article => (
-      <li onClick={() => { editArticle(article.id) }} className="list-group-item" key={article.id}>
+      <div onClick={() => { editArticle(article.id) }} className="list-group-item list-group-item-action flex-column align-items-start" key={article.id}>
         <h4>{article.title}</h4>
-        <div>{article.content}</div>
-      </li>
+        <pre>{article.content}</pre>
+      </div>
     ))
   }
 
   render() {
     return (
       <div>
-        <h3>Article Index</h3>
+        <h3 className="mt-2">Article Index</h3>
 
-        <ul className="list-group">
+        <div className="list-group">
           {this.articleItems()}
-        </ul>
+        </div>
       </div>
     )
   }

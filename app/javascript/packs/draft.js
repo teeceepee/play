@@ -1,3 +1,5 @@
+import "bootstrap/scss/bootstrap.scss"
+
 import React from "react"
 import ReactDOM from "react-dom"
 import { createStore, applyMiddleware } from "redux"

@@ -28,10 +28,11 @@ class Main extends React.Component {
         <h2>{path}</h2>
         <ul className="nav nav-tabs">
           {paths.map(p => (
-            <li className={path == p ? "active" : ""} key={p} onClick={() => { clickPath(p) }}>
-              <a href="#">{p}</a>
+            <li className="nav-item" key={p} onClick={() => { clickPath(p) }}>
+              <a className={path === p ? "nav-link active" : "nav-link"} href="#">{p}</a>
             </li>
           ))}
+          <li className="nav-item"><a className="nav-link disabled" href="#">Disabled</a></li>
         </ul>
 
         {this.currentTab()}

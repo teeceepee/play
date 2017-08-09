@@ -1,6 +1,11 @@
-#root
-
-/- content_for :page_styles do
-/  = stylesheet_pack_tag 'draft'
-- content_for :page_js do
-  = javascript_pack_tag 'draft'
+== rails_root_comment
+doctype html
+html
+  head
+    title Draft
+    = csrf_meta_tags
+    = stylesheet_pack_tag 'draft'
+  body
+    .container
+      #root
+    = javascript_pack_tag 'draft'
