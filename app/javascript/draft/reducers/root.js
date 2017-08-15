@@ -1,4 +1,8 @@
 import { combineReducers } from "redux"
+import axios from "axios"
+
+let token = document.getElementsByName('csrf-token')[0].content
+axios.defaults.headers.common["X-CSRF-Token"] = token
 
 const UPDATE_TITLE = "UPDATE_TITLE"
 
@@ -50,29 +54,10 @@ function paths(state = initialPaths) {
   return state
 }
 
-let initialArticles = [
-  {
-    id: 1,
-    title: 'First',
-    content: 'First content.',
-  },
-  {
-    id: 2,
-    title: 'Second',
-    content: 'Second content.',
-  }
-]
-
-function articles(state = initialArticles, action) {
+function articles(state = [], action) {
   switch (action.type) {
-    // case UPDATE_ARTICLE:
-    //   return state.map((article) => {
-    //     if (article.id === action.article.id) {
-    //       return action.article
-    //     } else {
-    //       return article
-    //     }
-    //   })
+    case RECEIVE_ARTICLES:
+      return action.articles
     default:
       return state
   }
@@ -88,6 +73,34 @@ function selectedArticleId(state = null, action) {
   }
 }
 
+export const REQUEST_ARTICLES = "REQUEST_ARTICLES"
+export const RECEIVE_ARTICLES = "RECEIVE_ARTICLES"
+
+function requestArticles() {
+  return {
+    type: REQUEST_ARTICLES,
+  }
+}
+
+function receiveArticles(articles) {
+  return {
+    type: RECEIVE_ARTICLES,
+    articles: articles
+  }
+}
+
+export function fetchArticles() {
+  return function(dispatch) {
+    dispatch(requestArticles())
+
+    axios.get("/articles.json")
+      .then(resp => {
+        dispatch(receiveArticles(resp.data))
+      })
+
+  }
+}
+
 export const EDIT_ARTICLE = "EDIT_ARTICLE"
 
 export function editArticle(article) {
@@ -97,20 +110,49 @@ export function editArticle(article) {
   }
 }
 
-export const UPDATE_ARTICLE = "UPDATE_ARTICLE"
+export const UPDATE_ARTICLE_FORM = "UPDATE_ARTICLE_FORM"
 
-export function updateArticle(editedArticle) {
+export function updateArticleForm(editedArticle) {
   return {
-    type: UPDATE_ARTICLE,
+    type: UPDATE_ARTICLE_FORM,
     article: editedArticle
   }
+}
+
+export const SUBMIT_ARTICLE = "SUBMIT_ARTICLE"
+export const SAVED_ARTICLE = "SAVED_ARTICLE"
+
+function submitArticle() {
+  return {
+    type: SUBMIT_ARTICLE,
+  }
+}
+
+function savedArticle(article) {
+  return {
+    type: SAVED_ARTICLE,
+    article: article,
+  }
+}
+
+export function updateArticle(article) {
+  return function(dispatch) {
+    dispatch(submitArticle())
+
+    axios.patch(`/articles/${article.id}.json`, article)
+      .then(_ => {
+        dispatch(savedArticle(article))
+        dispatch(changePath("index"))
+      })
+  }
+
 }
 
 function articleForm(state = {}, action, s) {
   switch (action.type) {
     case EDIT_ARTICLE:
       return action.article
-    case UPDATE_ARTICLE:
+    case UPDATE_ARTICLE_FORM:
       return action.article
     default:
       return state

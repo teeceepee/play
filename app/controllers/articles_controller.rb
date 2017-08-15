@@ -7,6 +7,13 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all.order(updated_at: :desc)
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @articles
+      end
+    end
   end
 
   def show
@@ -32,10 +39,18 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if @article.save
-      redirect_to @article
+    if @article.update(articles_params)
+
+      respond_to do |format|
+        format.html { redirect_to @article }
+        format.json { render json: @article }
+      end
     else
-      render 'edit'
+      respond_to do |format|
+        format.html { render 'edit' }
+        format.json { render json: @article }
+      end
+
     end
   end
 
