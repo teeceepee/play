@@ -1,4 +1,4 @@
-import "bootstrap/scss/bootstrap.scss"
+import "../draft/styles.scss"
 
 import React from "react"
 import ReactDOM from "react-dom"

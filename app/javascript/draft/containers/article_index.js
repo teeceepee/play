@@ -7,7 +7,7 @@ class ArticleIndex extends React.Component {
   articleItems() {
     const { articles, editArticle } = this.props
     return articles.map(article => (
-      <div onClick={() => { editArticle(article.id) }} className="list-group-item list-group-item-action flex-column align-items-start" key={article.id}>
+      <div onClick={() => { editArticle(article) }} className="list-group-item list-group-item-action flex-column align-items-start" key={article.id}>
         <h4>{article.title}</h4>
         <pre>{article.content}</pre>
       </div>
@@ -36,8 +36,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    editArticle: (id) => {
-      dispatch(editArticle(id))
+    editArticle: (article) => {
+      dispatch(editArticle(article))
     }
   }
 }

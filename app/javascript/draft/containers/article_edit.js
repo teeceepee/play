@@ -42,12 +42,8 @@ class ArticleEdit extends React.Component {
 
 
 function mapStateToProps(state) {
-  const article = state.articles.find(function(article) {
-    return article.id == state.selectedArticleId
-  })
-
   return {
-    article: article || {}
+    article: state.forms.articleForm
   }
 }
 

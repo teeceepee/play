@@ -65,14 +65,14 @@ let initialArticles = [
 
 function articles(state = initialArticles, action) {
   switch (action.type) {
-    case UPDATE_ARTICLE:
-      return state.map((article) => {
-        if (article.id === action.article.id) {
-          return action.article
-        } else {
-          return article
-        }
-      })
+    // case UPDATE_ARTICLE:
+    //   return state.map((article) => {
+    //     if (article.id === action.article.id) {
+    //       return action.article
+    //     } else {
+    //       return article
+    //     }
+    //   })
     default:
       return state
   }
@@ -82,7 +82,7 @@ function articles(state = initialArticles, action) {
 function selectedArticleId(state = null, action) {
   switch (action.type) {
     case EDIT_ARTICLE:
-      return action.id
+      return action.article.id
     default:
       return state
   }
@@ -90,10 +90,10 @@ function selectedArticleId(state = null, action) {
 
 export const EDIT_ARTICLE = "EDIT_ARTICLE"
 
-export function editArticle(id) {
+export function editArticle(article) {
   return {
     type: EDIT_ARTICLE,
-    id: id,
+    article: article,
   }
 }
 
@@ -106,10 +106,26 @@ export function updateArticle(editedArticle) {
   }
 }
 
+function articleForm(state = {}, action, s) {
+  switch (action.type) {
+    case EDIT_ARTICLE:
+      return action.article
+    case UPDATE_ARTICLE:
+      return action.article
+    default:
+      return state
+  }
+}
+
+const forms = combineReducers({
+  articleForm
+})
+
 export const rootReducer = combineReducers({
   currentTitle,
   path,
   paths,
   articles,
   selectedArticleId,
+  forms,
 })
