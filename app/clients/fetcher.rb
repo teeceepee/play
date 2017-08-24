@@ -6,4 +6,17 @@ class Fetcher
     Hupu.fetch_recent_news
     # Weibo.fetch_cookie
   end
+
+  def self.bitcoin
+    url = 'https://data.btcchina.com/data/ticker'
+    resp = HTTP.get(url, params: {market: 'btccny'})
+    text = YAML.dump(JSON.parse(resp))
+
+    notifier = Slack::Notifier.new Settings.slack.bitcoin.webhook_url, {
+      channel: '#bitcoin',
+      username: 'bot',
+      icon_emoji: ':moneybag:',
+    }
+    notifier.ping(text)
+  end
 end

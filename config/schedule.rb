@@ -25,3 +25,7 @@ set :output, '~/cron_log.log'
 every 12.hours do
   runner 'Fetcher.fetch_all'
 end
+
+every 30.minutes do
+  runner 'Fetcher.bitcoin'
+end
