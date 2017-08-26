@@ -10,7 +10,7 @@ class Fetcher
   def self.bitcoin
     url = 'https://data.btcchina.com/data/ticker'
     resp = HTTP.get(url, params: {market: 'btccny'})
-    text = YAML.dump(JSON.parse(resp))
+    text = YAML.dump({'last' => nil}.merge(JSON.parse(resp)['ticker']))
 
     notifier = Slack::Notifier.new Settings.slack.bitcoin.webhook_url, {
       channel: '#bitcoin',
