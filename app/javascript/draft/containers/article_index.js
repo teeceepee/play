@@ -1,19 +1,22 @@
 import React from "react"
 import { connect } from "react-redux"
-import { fetchArticles, editArticle } from "../reducers/root"
+import { Link } from 'react-router-dom'
+import { updateTitle, fetchArticles } from "../reducers/root"
 
 class ArticleIndex extends React.Component {
 
   componentDidMount() {
+    this.props.updateTitle('article index')
     this.props.fetchArticles()
   }
 
   articleItems() {
-    const { articles, editArticle } = this.props
+    const { articles } = this.props
     return articles.map(article => (
-      <div onClick={() => { editArticle(article) }} className="list-group-item list-group-item-action flex-column align-items-start" key={article.id}>
+      <div className="list-group-item list-group-item-action flex-column align-items-start" key={article.id}>
         <h4>{article.title}</h4>
         <div>{article.content}</div>
+        <Link to={'/draft/articles/edit/' + article.id} >Edit</Link>
       </div>
     ))
   }
@@ -21,8 +24,6 @@ class ArticleIndex extends React.Component {
   render() {
     return (
       <div>
-        <h3 className="mt-2">Article Index</h3>
-
         <div className="list-group">
           {this.articleItems()}
         </div>
@@ -40,11 +41,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    updateTitle: (title) => {
+      dispatch(updateTitle(title))
+    },
     fetchArticles: () => {
       dispatch(fetchArticles())
-    },
-    editArticle: (article) => {
-      dispatch(editArticle(article))
     }
   }
 }

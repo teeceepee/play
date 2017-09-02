@@ -1,8 +1,6 @@
 import { combineReducers } from "redux"
-import axios from "axios"
-
-let token = document.getElementsByName('csrf-token')[0].content
-axios.defaults.headers.common["X-CSRF-Token"] = token
+import { push } from 'react-router-redux'
+import http from '../../http'
 
 const UPDATE_TITLE = "UPDATE_TITLE"
 
@@ -20,38 +18,6 @@ function currentTitle(state = "draft", action) {
     default:
       return state
   }
-}
-
-export const CHANGE_PATH = "CHANGE_PATH"
-
-export function changePath(path) {
-  return {
-    type: CHANGE_PATH,
-    path: path,
-  }
-}
-
-
-let initialPaths = [
-  'index',
-  'new',
-  'edit',
-]
-
-function path(state = "index", action) {
-  switch (action.type) {
-    case CHANGE_PATH:
-      return action.path
-    case EDIT_ARTICLE:
-      return 'edit'
-    default:
-      return state
-  }
-}
-
-
-function paths(state = initialPaths) {
-  return state
 }
 
 function articles(state = [], action) {
@@ -75,6 +41,7 @@ function selectedArticleId(state = null, action) {
 
 export const REQUEST_ARTICLES = "REQUEST_ARTICLES"
 export const RECEIVE_ARTICLES = "RECEIVE_ARTICLES"
+export const RECEIVE_ARTICLE = "RECEIVE_ARTICLE"
 
 function requestArticles() {
   return {
@@ -89,17 +56,35 @@ function receiveArticles(articles) {
   }
 }
 
+function receiveArticle(article) {
+  return {
+    type: RECEIVE_ARTICLE,
+    article: article
+  }
+}
+
+
 export function fetchArticles() {
   return function(dispatch) {
     dispatch(requestArticles())
 
-    axios.get("/articles.json")
+    http.get("/articles")
       .then(resp => {
         dispatch(receiveArticles(resp.data))
       })
 
   }
 }
+
+export function fetchArticle(id) {
+  return function (dispatch) {
+    http.get(`/articles/${id}`)
+      .then(resp => {
+        dispatch(receiveArticle(resp.data))
+      })
+  }
+}
+
 
 export const EDIT_ARTICLE = "EDIT_ARTICLE"
 
@@ -139,20 +124,22 @@ export function updateArticle(article) {
   return function(dispatch) {
     dispatch(submitArticle())
 
-    axios.patch(`/articles/${article.id}.json`, article)
+    http.patch(`/articles/${article.id}`, article)
       .then(_ => {
         dispatch(savedArticle(article))
-        dispatch(changePath("index"))
+        dispatch(push('/draft/articles'))
       })
   }
 
 }
 
-function articleForm(state = {}, action, s) {
+function articleForm(state = {title: '', content: ''}, action) {
   switch (action.type) {
     case EDIT_ARTICLE:
       return action.article
     case UPDATE_ARTICLE_FORM:
+      return action.article
+    case RECEIVE_ARTICLE:
       return action.article
     default:
       return state
@@ -163,11 +150,9 @@ const forms = combineReducers({
   articleForm
 })
 
-export const rootReducer = combineReducers({
+export const rootReducerObject = {
   currentTitle,
-  path,
-  paths,
   articles,
   selectedArticleId,
   forms,
-})
+}

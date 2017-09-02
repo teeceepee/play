@@ -17,7 +17,12 @@ class ArticlesController < ApplicationController
   end
 
   def show
-
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @article
+      end
+    end
   end
 
   def new
