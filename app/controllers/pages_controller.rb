@@ -65,6 +65,10 @@ class PagesController < ApplicationController
     @priority_zones = priorities.map { |p| ActiveSupport::TimeZone[p] }
   end
 
+  def navigation
+
+  end
+
   private
   def set_time_zone
     new_zone = ::Time.find_zone(params[:time_zone])

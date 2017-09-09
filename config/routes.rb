@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     get :hupu_news_list
     get :path_diff
     get :time_zone
+    get :navigation
   end
 
   namespace :demos do

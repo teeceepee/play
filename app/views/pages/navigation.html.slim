@@ -1,0 +1,295 @@
+scss:
+  @mixin mobile {
+    @media (max-width: 767px) {
+      @content;
+    }
+  }
+
+  @mixin desktop {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+
+  $h: 60px;
+  $duration: .15s;
+  $nav-bg-color: #fff;
+
+  body {
+    background: #eee;
+  }
+
+  body.navigation-open {
+    overflow: hidden;
+  }
+
+  .navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $h;
+    background: transparent;
+    transition: background $duration, height $duration, opacity $duration * 3;
+
+    @include mobile {
+      background: $nav-bg-color;
+
+      // 展开后
+      &.expanded {
+        height: 100%;
+        background: $nav-bg-color;
+
+        .links {
+          opacity: 1;
+          visibility: visible;
+
+          & > * {
+            transform: none;
+          }
+        }
+      }
+
+      // 滚动时
+      &.scrolling {
+        opacity: 0;
+      }
+    }
+
+    &.white {
+      background: $nav-bg-color;
+    }
+
+    .navigation-container {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      padding: 0 20px;
+      max-width: 1040px;
+
+      @include mobile {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .trigger {
+      position: absolute;
+      display: block;
+      top: 20px;
+      left: 20px;
+
+      font-size: 20px;
+      z-index: 1001;
+      cursor: pointer;
+
+      @include desktop {
+        display: none;
+      }
+    }
+
+    .logo-wrapper {
+      display: inline-flex;
+      height: $h;
+      align-items: center;
+      justify-content: center;
+
+      * {
+        height: $h;
+      }
+
+      @include mobile {
+        position: absolute;
+        top: 0;
+        z-index: 1002;
+      }
+    }
+
+    .links {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity $duration, visibility $duration;
+
+      @include desktop {
+        & > *:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+
+      @include mobile {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        color: transparent;
+
+        & > * {
+          transform: scale(1.1) translateY(-50px);
+        }
+
+        & > :nth-child(1) {
+          transition-delay: 0s;
+        }
+
+        & > :nth-child(2) {
+          transition-delay: .05s;
+        }
+
+        & > :nth-child(3) {
+          transition-delay: .1s;
+        }
+
+        & > :not(:last-child) {
+          margin-bottom: 20px;
+        }
+      }
+
+      & > * {
+        transition: transform $duration * 3;
+      }
+    }
+  }
+
+  .banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 600px;
+    background: rgba(51, 51, 51, .3);
+  }
+
+
+header.navigation data-js="nav"
+  .navigation-container
+    i.fa.fa-edit.trigger data-js="nav-trigger"
+
+    .logo-wrapper
+      a href=""
+        img src="http://blog.skylight.io/content/images/2014/Jul/Skylight-Icon-Filled-Border.png"
+
+    .links
+      div
+        a href='' Features
+      div
+        a href='' Login
+      div
+        a href='' Sign Up
+
+
+.banner
+  h1 Nav Demo
+  h1 Nav Demo
+
+table.table.table-striped
+  tbody
+    - 20.times do |i|
+      tr
+        td = i
+
+javascript:
+  /* http://james.padolsey.com/javascript/special-scroll-events-for-jquery/ */
+
+  ;(function() {
+
+    var special = jQuery.event.special,
+      uid1 = "D" + (+new Date()),
+      uid2 = "D" + (+new Date() + 1);
+
+    special.scrollstart = {
+      setup: function() {
+
+        var timer,
+          handler = function(evt) {
+
+            var _self = this,
+              _args = arguments;
+
+            if (timer) {
+              clearTimeout(timer);
+            } else {
+              evt.type = "scrollstart";
+              jQuery.event.dispatch.apply(_self, _args);
+            }
+
+            timer = setTimeout(function() {
+              timer = null;
+            }, special.scrollstop.latency);
+
+          };
+
+        jQuery(this).bind("scroll", handler).data(uid1, handler);
+
+      },
+      teardown: function() {
+        jQuery(this).unbind("scroll", jQuery(this).data(uid1));
+      }
+    };
+
+    special.scrollstop = {
+      latency: 300,
+      setup: function() {
+
+        var timer,
+          handler = function(evt) {
+
+            var _self = this,
+              _args = arguments;
+
+            if (timer) {
+              clearTimeout(timer);
+            }
+
+            timer = setTimeout(function() {
+
+              timer = null;
+              evt.type = "scrollstop";
+              jQuery.event.dispatch.apply(_self, _args);
+
+
+            }, special.scrollstop.latency);
+
+          };
+
+        jQuery(this).bind("scroll", handler).data(uid2, handler);
+
+      },
+      teardown: function() {
+        jQuery(this).unbind("scroll", jQuery(this).data(uid2));
+      }
+    };
+
+  })();
+
+javascript:
+  const navigationEl = $('[data-js=nav]')
+  $('[data-js=nav-trigger]').on('click', function() {
+    navigationEl.toggleClass('expanded')
+    $('body').toggleClass('navigation-open')
+  })
+
+
+  $(document).on('scrollstart', function() {
+    navigationEl.addClass('scrolling')
+  })
+
+  $(document).on('scrollstop', function(e) {
+    navigationEl.removeClass('scrolling')
+  })
+
+  $(document).on('scroll', function(e) {
+    navigationEl.toggleClass('white', $(e.target).scrollTop() > 100)
+
+    setTimeout(function() {
+      navigationEl.removeClass('scrolling')
+    }, 1000)
+  })
+
