@@ -61,5 +61,8 @@ namespace :yarn do
     # Linux
     cmd = "sed -i 's#http://registry.npm.taobao.org#https://registry.yarnpkg.com#' yarn.lock"
     system(cmd)
+
+    cmd = "sed -i 's#/download/#/-/#' yarn.lock"
+    system(cmd)
   end
 end
