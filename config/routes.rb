@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     get :path_diff
     get :time_zone
     get :navigation
+    get :background
   end
 
   namespace :demos do

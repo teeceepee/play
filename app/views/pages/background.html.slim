@@ -1,0 +1,10 @@
+.bg
+
+.wrapper
+  .inner
+    - 100.times do
+      div Lorem ipsum
+
+- content_for :page_styles do
+  = stylesheet_link_tag 'pages/background'
+
