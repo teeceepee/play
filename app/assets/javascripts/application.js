@@ -13,6 +13,7 @@
 //= require jquery
 //= require rails-ujs
 
+//= require axios/dist/axios
 //= require bootstrap/dist/js/bootstrap
 //= require fastclick/lib/fastclick
 //= require i18n

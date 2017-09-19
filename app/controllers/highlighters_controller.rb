@@ -21,6 +21,13 @@ class HighlightersController < ApplicationController
 
       @data.merge!(highlighted: highlighted)
     end
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @data
+      end
+    end
   end
 
   private

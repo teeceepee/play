@@ -7,4 +7,78 @@ h3 Dockerfile Highlighter
   .actions
     = f.submit 'Highlight!'
 
+hr
+p
+  .btn.btn-default data-js="upload-by-jquery" Upload by jQuery
+p
+  .btn.btn-default data-js="upload-by-fetch" Upload by fetch
+p
+  .btn.btn-default data-js="upload-by-axios" Upload by axios
+p
+  .btn.btn-default data-js="upload-by-xhr" Upload by XMLHttpRequest
 
+javascript:
+  const csrfToken = document.querySelector('meta[name=csrf-token]').content
+  function getFormData() {
+    let form = document.querySelector('form')
+    return new FormData(form)
+  }
+
+  $('[data-js=upload-by-jquery]').on('click', function() {
+    $.ajax({
+      url: '/highlighter',
+      method: 'post',
+      dataType: 'json',
+      data: getFormData(),
+      contentType: false,
+      processData: false,
+    }).done(function(data) {
+      console.log(data);
+    })
+  })
+
+  $('[data-js=upload-by-fetch]').on('click', function() {
+    fetch('/highlighter', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'X-CSRF-Token': csrfToken,
+      },
+      body: getFormData(),
+      credentials: 'same-origin',
+    })
+      .then(r => r.json())
+      .then(resp => {
+        console.log(resp)
+      })
+  })
+
+  $('[data-js=upload-by-axios]').on('click', function() {
+    axios.post('/highlighter', getFormData(), {
+      headers: {
+         Accept: "application/json",
+        //"X-Requested-With": "XMLHttpRequest",
+        'X-CSRF-Token': csrfToken,
+      }
+    })
+      .then(resp => {
+        console.log(resp.data);
+      })
+  })
+
+  $('[data-js=upload-by-xhr]').on('click', function() {
+    let xhr = new XMLHttpRequest()
+
+    xhr.open('post', '/highlighter')
+    xhr.setRequestHeader('Accept', 'application/json')
+    xhr.setRequestHeader('X-CSRF-Token', csrfToken)
+
+    xhr.onreadystatechange = function(e) {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        const json = JSON.parse(xhr.responseText)
+        console.log(json)
+      }
+    }
+
+    xhr.send(getFormData())
+  })
