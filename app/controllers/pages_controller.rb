@@ -1,3 +1,5 @@
+require 'dns'
+
 class PagesController < ApplicationController
   before_action :auth_user, only: [:send_mail, :exception]
 
@@ -71,6 +73,11 @@ class PagesController < ApplicationController
 
   def background
     render layout: 'lite'
+  end
+
+  def dns
+    @domain = params[:domain]
+    @result = Dns.question(@domain) if @domain.present?
   end
 
   private

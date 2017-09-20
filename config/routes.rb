@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     get :time_zone
     get :navigation
     get :background
+    get :dns
   end
 
   namespace :demos do

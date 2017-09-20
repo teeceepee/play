@@ -1,0 +1,10 @@
+h1 DNS
+
+form
+  .form-group
+    input.form-control name="domain" value=@domain
+  .form-group
+    input.btn.btn-default type="submit"
+
+- if @result.present?
+  pre = @result.to_yaml
