@@ -5,6 +5,7 @@ class Fetcher
     Jiandan.fetch_new
     Hupu.fetch_recent_news
     # Weibo.fetch_cookie
+    self.bitcoin
   end
 
   def self.bitcoin
