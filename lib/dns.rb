@@ -1,3 +1,6 @@
+# https://www.ietf.org/rfc/rfc1034.txt
+# https://www.ietf.org/rfc/rfc1035.txt
+
 # 3.2.2. TYPE values
 #
 # TYPE fields are used in resource records.  Note that these types are a
@@ -123,6 +126,10 @@ class Dns
     bit4 :opcode # QUERY: 0, IQUERY: 1, STATUS: 2
     bit1 :aa # Authoritative Answer
     bit1 :tc # Truncation
+    # Recursion Desired - this bit may be set in a query and
+    # is copied into the response.  If RD is set, it directs
+    # the name server to pursue the query recursively.
+    # Recursive query support is optional.
     bit1 :rd # Recursion Desired
     bit1 :ra # Recursion Available
     bit3 :z, value: 0 # reserved
@@ -247,12 +254,12 @@ class Dns
   def self.question(domain, dest = '8.8.8.8')
     msg = RequestMessage.new
     msg.header.id = Random.rand(1..65535)
+    msg.header.rd = 1 # 设置为 1 启用服务端的递归查询，只需一次请求即可返回地址
     msg.header.qdcount = 1
     msg.question = Question.from_domain(domain)
     request = msg.to_binary_s
 
 
-    msg.parent
     puts msg
     puts request.inspect
 
