@@ -85,9 +85,9 @@ namespace :yarn do
     end
   end
 
-  # if Rake::Task.task_defined?('deploy:compile_assets')
-  #   before 'deploy:compile_assets', 'yarn:replace_registry'
-  # end
+  if Rake::Task.task_defined?('deploy:compile_assets')
+    before 'deploy:compile_assets', 'yarn:replace_registry'
+  end
 end
 
 namespace :letsencrypt do
