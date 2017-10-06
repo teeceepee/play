@@ -1,4 +1,4 @@
-import "../draft/styles.scss"
+import "draft/styles.scss"
 
 import React from "react"
 import ReactDOM from "react-dom"
@@ -10,9 +10,9 @@ import { createBrowserHistory } from 'history'
 import { Route } from 'react-router-dom'
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
 
-import { HeaderCont } from "../draft/containers/header"
-import { MainCont } from "../draft/containers/main"
-import { rootReducerObject } from "../draft/reducers/root"
+import { HeaderCont } from "draft/containers/header"
+import { MainCont } from "draft/containers/main"
+import { rootReducerObject } from "draft/reducers/root"
 
 
 const history = createBrowserHistory()

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux"
 import { push } from 'react-router-redux'
-import http from '../../http'
+import http from 'utils/http'
 
 const UPDATE_TITLE = "UPDATE_TITLE"
 
