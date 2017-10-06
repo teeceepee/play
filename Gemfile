@@ -9,7 +9,7 @@ end
 gem 'active_model_serializers', '0.10.6'  # https://github.com/rails-api/active_model_serializers
 gem 'sassc-rails', '1.3.0'  # https://github.com/sass/sassc-rails
 gem 'letsencrypt_plugin', '0.0.10'  # https://github.com/lgromanowski/letsencrypt-plugin
-gem 'webpacker', '1.2.0'
+gem 'webpacker', '3.0.2'  # https://github.com/rails/webpacker
 gem 'bindata', '2.3.5' # https://github.com/dmendel/bindata
 gem 'kaminari', '1.0.1' # https://github.com/kaminari/kaminari
 gem 'font-awesome-sass', '4.7.0'  # https://github.com/FortAwesome/font-awesome-sass

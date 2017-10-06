@@ -48,6 +48,7 @@
 /node_modules/
 /yarn-error.log
 /public/packs
+/public/packs-test
 
 # Ignore encrypted secrets key file.
 config/secrets.yml.key
