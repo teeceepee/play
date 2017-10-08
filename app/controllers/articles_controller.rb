@@ -37,9 +37,15 @@ class ArticlesController < ApplicationController
     @article = Article.new(articles_params)
 
     if @article.save
-      redirect_to @article
+      respond_to do |format|
+        format.html { redirect_to @article }
+        format.json { render json: @article }
+      end
     else
-      render 'new'
+      respond_to do |format|
+        format.html { render 'new' }
+        format.json { render json: {}, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -12,7 +12,8 @@ class Main extends React.Component {
       <div>
         <Switch>
           <Route path="/draft/articles/edit/:id" component={ArticleEditCont} />
-          <Route path="/draft/articles" component={ArticleIndexCont} />
+          <Route path="/draft/articles" exact={true} component={ArticleIndexCont} />
+          <Route path="/draft/articles/new" component={ArticleNewCont} />
           <Route path="/draft" render={() => <Link to="/draft/articles">Articles</Link>} />
         </Switch>
       </div>

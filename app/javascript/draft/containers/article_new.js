@@ -1,13 +1,60 @@
 import React from "react"
 import { connect } from "react-redux"
+import { Link } from 'react-router-dom'
+import { Field, reduxForm } from 'redux-form'
 
-const ArticleNew = ({}) => (
-  <div>
-    <h2>Article New</h2>
+import { InputFormGroup, TextareaFormGroup } from './form_groups'
+import { updateTitle, createArticle } from '../reducers/root'
 
+const validate = values => {
+  const errors = {}
+  if (!values.title) {
+    errors.title = 'Required'
+  }
 
-  </div>
+  if (!values.content) {
+    errors.content = 'Required'
+  }
+
+  return errors
+}
+
+let ArticleForm = ({handleSubmit, pristine}) => (
+  <form onSubmit={handleSubmit}>
+    <Field name="title" component={InputFormGroup} type="text" label="Title" />
+    <Field name="content" component={TextareaFormGroup} label="Content" rows="10" />
+    <button className="btn btn-outline-primary" disabled={pristine}>Save</button>
+  </form>
 )
+
+ArticleForm = reduxForm({
+  form: 'article',
+  validate,
+})(ArticleForm)
+
+const initialValues = {
+  title: 'title...',
+  content: 'content...',
+}
+
+class ArticleNew extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.props.updateTitle('article new')
+  }
+
+
+  render() {
+    return (
+      <div>
+        <ArticleForm initialValues={initialValues} onSubmit={this.props.createArticle}/>
+        <hr/>
+        <Link to="/draft/articles">Back</Link>
+      </div>
+    )
+  }
+}
 
 function mapStateToProps(state) {
   return {
@@ -17,7 +64,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-
+    updateTitle: (title) => {
+      dispatch(updateTitle(title))
+    },
+    createArticle: (article) => {
+      dispatch(createArticle(article))
+    }
   }
 }
 

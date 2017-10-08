@@ -24,6 +24,7 @@ class ArticleIndex extends React.Component {
   render() {
     return (
       <div>
+        <Link to="/draft/articles/new">New</Link>
         <div className="list-group">
           {this.articleItems()}
         </div>

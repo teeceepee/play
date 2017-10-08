@@ -2,7 +2,7 @@ import "draft/styles.scss"
 
 import React from "react"
 import ReactDOM from "react-dom"
-import { createStore, applyMiddleware, combineReducers } from "redux"
+import { createStore, applyMiddleware, combineReducers, compose } from "redux"
 import { Provider } from "react-redux"
 import thunkMiddleware from "redux-thunk"
 import loggerMiddleware from "redux-logger"
@@ -23,13 +23,16 @@ const rootReducer = combineReducers({
   router: routerReducer,
 })
 
+// https://github.com/zalmoxisus/redux-devtools-extension#usage
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 let store = createStore(
   rootReducer,
-  applyMiddleware(
+  composeEnhancers(applyMiddleware(
     reactRouterMiddleware,
     thunkMiddleware,
     loggerMiddleware
-  )
+  ))
 )
 
 const App = () => (

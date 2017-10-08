@@ -1,5 +1,6 @@
-import { combineReducers } from "redux"
+import { combineReducers } from 'redux'
 import { push } from 'react-router-redux'
+import { reducer as formReducer } from 'redux-form'
 import http from 'utils/http'
 
 const UPDATE_TITLE = "UPDATE_TITLE"
@@ -130,7 +131,17 @@ export function updateArticle(article) {
         dispatch(push('/draft/articles'))
       })
   }
+}
 
+export function createArticle(article) {
+  return function(dispatch) {
+    dispatch(submitArticle())
+
+    http.post('/articles', {article: article})
+      .then(_ => {
+        dispatch(push('/draft/articles'))
+      })
+  }
 }
 
 function articleForm(state = {title: '', content: ''}, action) {
@@ -155,4 +166,5 @@ export const rootReducerObject = {
   articles,
   selectedArticleId,
   forms,
+  form: formReducer,
 }
