@@ -42,3 +42,35 @@ export class TextareaFormGroup extends BaseFormGroup {
     )
   }
 }
+
+export class SelectFormGroup extends BaseFormGroup {
+
+  options() {
+    const {options, includeBlank } = this.props
+    let opts
+    if (includeBlank) {
+      opts = [['', '']].concat(options)
+    } else {
+      opts = options
+    }
+
+    return (
+      opts.map(option => <option value={option[1]} key={option[0]}>{option[0]}</option>)
+    )
+  }
+
+  render() {
+    const {input, meta: { touched, error }, label} = this.props
+    const cls = 'form-control' + (touched && error ? ' is-invalid' : '')
+
+    return (
+      <div className="form-group">
+        <label htmlFor={this.identity()}>{label}</label>
+        <select {...input} id={this.identity()} className={cls}>
+          {this.options()}
+        </select>
+        {touched && error && <div className="invalid-feedback">{error}</div>}
+      </div>
+    )
+  }
+}
