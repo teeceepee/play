@@ -16,7 +16,7 @@ class ArticleIndex extends React.Component {
       <div className="list-group-item list-group-item-action flex-column align-items-start" key={article.id}>
         <h4>{article.title}</h4>
         <div>{article.content}</div>
-        <Link to={'/draft/articles/edit/' + article.id} >Edit</Link>
+        <Link to={'/articles/edit/' + article.id} >Edit</Link>
       </div>
     ))
   }
@@ -24,7 +24,7 @@ class ArticleIndex extends React.Component {
   render() {
     return (
       <div>
-        <Link to="/draft/articles/new">New</Link>
+        <Link to="/articles/new">New</Link>
         <div className="list-group">
           {this.articleItems()}
         </div>

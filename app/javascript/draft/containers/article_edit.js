@@ -51,7 +51,7 @@ class ArticleEdit extends React.Component {
           <button className="btn btn-outline-primary">Save</button>
         </form>
         <hr/>
-        <Link to="/draft/articles">Back</Link>
+        <Link to="/articles">Back</Link>
       </div>
     )
   }

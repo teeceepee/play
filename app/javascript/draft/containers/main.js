@@ -11,10 +11,10 @@ class Main extends React.Component {
     return (
       <div>
         <Switch>
-          <Route path="/draft/articles/edit/:id" component={ArticleEditCont} />
-          <Route path="/draft/articles" exact={true} component={ArticleIndexCont} />
-          <Route path="/draft/articles/new" component={ArticleNewCont} />
-          <Route path="/draft" render={() => <Link to="/draft/articles">Articles</Link>} />
+          <Route path="/articles/edit/:id" component={ArticleEditCont} />
+          <Route path="/articles" exact={true} component={ArticleIndexCont} />
+          <Route path="/articles/new" component={ArticleNewCont} />
+          <Route path="" render={() => <Link to="/articles">Articles</Link>} />
         </Switch>
       </div>
     )

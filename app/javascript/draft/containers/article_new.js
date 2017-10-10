@@ -60,7 +60,7 @@ class ArticleNew extends React.Component {
       <div>
         <ArticleForm initialValues={initialValues} onSubmit={this.props.createArticle}/>
         <hr/>
-        <Link to="/draft/articles">Back</Link>
+        <Link to="/articles">Back</Link>
       </div>
     )
   }

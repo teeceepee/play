@@ -128,7 +128,7 @@ export function updateArticle(article) {
     http.patch(`/articles/${article.id}`, article)
       .then(_ => {
         dispatch(savedArticle(article))
-        dispatch(push('/draft/articles'))
+        dispatch(push('/articles'))
       })
   }
 }
@@ -139,7 +139,7 @@ export function createArticle(article) {
 
     http.post('/articles', {article: article})
       .then(_ => {
-        dispatch(push('/draft/articles'))
+        dispatch(push('/articles'))
       })
   }
 }
