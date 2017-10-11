@@ -1,10 +1,10 @@
-require("../pages/index_page/style.scss")
+require("pages/index_page/style.scss")
 
 import React from "react"
 import ReactDOM from "react-dom"
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
-import { name } from "constants"
+import { name } from "consts"
 
 const Index = props => (
   <CSSTransitionGroup
