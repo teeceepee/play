@@ -103,7 +103,9 @@ namespace :letsencrypt do
           # execute :openssl, 'genrsa 4096',  '>', pem_file
         end
 
-        execute :rake, 'letsencrypt_plugin'
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'letsencrypt_plugin'
+        end
       end
     end
   end
