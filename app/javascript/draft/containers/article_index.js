@@ -23,11 +23,13 @@ class ArticleIndex extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <Link to="/articles/new">New</Link>
         <div className="list-group">
           {this.articleItems()}
         </div>
+        <hr/>
+        <Link to="/">Back to index</Link>
       </div>
     )
   }

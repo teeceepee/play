@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'buyers#index', constraints: {domain: 'xiumaijia.com'}
   root to: 'pages#index'
+  get 'y/(*custom)', to: 'articles#draft'
 
   resources :taobao_items, path: :items, param: :item_no, only: [:index, :show]
   resources :taobao_reviews, path: :reviews, param: :review_no, only: [:show]
@@ -29,7 +30,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create]
   resources :pictures, only: [:index, :show, :create], param: :pid
   resources :articles, only: [:index, :show, :new, :edit, :create, :update]
-  get 'draft/(*custom)', to: 'articles#draft'
 
   namespace :pages do
     get :girls

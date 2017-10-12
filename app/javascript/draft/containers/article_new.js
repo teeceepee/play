@@ -57,7 +57,7 @@ class ArticleNew extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <ArticleForm initialValues={initialValues} onSubmit={this.props.createArticle}/>
         <hr/>
         <Link to="/articles">Back</Link>

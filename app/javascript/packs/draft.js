@@ -15,7 +15,7 @@ import { rootReducerObject } from "draft/reducers/root"
 
 
 const history = createBrowserHistory({
-  basename: '/draft',
+  basename: '/y',
 })
 const reactRouterMiddleware = routerMiddleware(history)
 
@@ -37,10 +37,7 @@ let store = createStore(
 )
 
 const App = () => (
-  <div>
-    <HeaderCont />
-    <MainCont />
-  </div>
+  <MainCont/>
 )
 
 ReactDOM.render(
