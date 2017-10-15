@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
+    "antd": "^2.13.6",
     "axios": "^0.16.2",
     "babel-preset-react": "^6.24.1",
     "bootstrap": "next",
