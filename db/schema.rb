@@ -55,6 +55,18 @@ ActiveRecord::Schema.define(version: 20171127144053) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "nba_games", force: :cascade do |t|
+    t.string "season_year"
+    t.string "season_type"
+    t.date "date"
+    t.string "road"
+    t.string "home"
+    t.integer "road_score"
+    t.integer "home_score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pictures", id: :serial, force: :cascade do |t|
     t.string "filename"
     t.string "pid"
