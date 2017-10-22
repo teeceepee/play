@@ -1,10 +1,9 @@
-import 'custom_antd.less'
+// import 'custom_antd.less'
 import './styles.scss'
 
 import React from "react"
 import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
-import Icon from 'antd/lib/icon'
 
 class LandingPage extends React.Component {
 
@@ -19,7 +18,6 @@ class LandingPage extends React.Component {
           <div className="block">
             <Link to="/articles">
               <span>Articles </span>
-              <Icon type="link" />
             </Link>
           </div>
           <div className="block">
