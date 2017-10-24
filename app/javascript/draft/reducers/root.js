@@ -25,6 +25,8 @@ function articles(state = [], action) {
   switch (action.type) {
     case RECEIVE_ARTICLES:
       return action.articles
+    case SAVED_ARTICLE:
+      return state.map(article => (article.id === action.payload.id ? action.payload : article))
     default:
       return state
   }
@@ -117,7 +119,7 @@ function submitArticle() {
 function savedArticle(article) {
   return {
     type: SAVED_ARTICLE,
-    article: article,
+    payload: article,
   }
 }
 

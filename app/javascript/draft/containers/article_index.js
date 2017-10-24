@@ -1,7 +1,8 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
-import { updateTitle, fetchArticles } from "../reducers/root"
+import { ArticleForm } from './article_form'
+import { updateTitle, fetchArticles, updateArticle } from "../reducers/root"
 
 class ArticleIndex extends React.Component {
 
@@ -10,13 +11,18 @@ class ArticleIndex extends React.Component {
     this.props.fetchArticles()
   }
 
+  updateArticle = (article) => {
+    this.props.updateArticle(article)
+  }
+
   articleItems() {
     const { articles } = this.props
     return articles.map(article => (
-      <div className="list-group-item list-group-item-action flex-column align-items-start" key={article.id}>
+      <div className="list-group-item  flex-column align-items-start" key={article.id}>
         <h4>{article.title}</h4>
         <div>{article.content}</div>
-        <Link to={'/articles/edit/' + article.id} >Edit</Link>
+        {/*<Link to={'/articles/edit/' + article.id} >Edit</Link>*/}
+        <ArticleForm form={`article-${article.id}`} initialValues={article} onSubmit={this.updateArticle} />
       </div>
     ))
   }
@@ -49,6 +55,9 @@ function mapDispatchToProps(dispatch) {
     },
     fetchArticles: () => {
       dispatch(fetchArticles())
+    },
+    updateArticle: (article) => {
+      dispatch(updateArticle(article))
     }
   }
 }
