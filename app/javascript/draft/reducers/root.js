@@ -1,21 +1,17 @@
 import { combineReducers } from 'redux'
 import { push } from 'react-router-redux'
 import { reducer as formReducer } from 'redux-form'
+import { createAction } from 'redux-actions'
 import http from 'utils/http'
 
 const UPDATE_TITLE = "UPDATE_TITLE"
 
-export function updateTitle(title) {
-  return {
-    type: UPDATE_TITLE,
-    title: title,
-  }
-}
+export const updateTitle = createAction(UPDATE_TITLE)
 
 function currentTitle(state = "draft", action) {
   switch (action.type) {
     case UPDATE_TITLE:
-      return action.title
+      return action.payload
     default:
       return state
   }
@@ -24,7 +20,7 @@ function currentTitle(state = "draft", action) {
 function articles(state = [], action) {
   switch (action.type) {
     case RECEIVE_ARTICLES:
-      return action.articles
+      return action.payload
     case SAVED_ARTICLE:
       return state.map(article => (article.id === action.payload.id ? action.payload : article))
     default:
@@ -46,18 +42,8 @@ export const REQUEST_ARTICLES = "REQUEST_ARTICLES"
 export const RECEIVE_ARTICLES = "RECEIVE_ARTICLES"
 export const RECEIVE_ARTICLE = "RECEIVE_ARTICLE"
 
-function requestArticles() {
-  return {
-    type: REQUEST_ARTICLES,
-  }
-}
-
-function receiveArticles(articles) {
-  return {
-    type: RECEIVE_ARTICLES,
-    articles: articles
-  }
-}
+const requestArticles = createAction(REQUEST_ARTICLES)
+const receiveArticles = createAction(RECEIVE_ARTICLES)
 
 function receiveArticle(article) {
   return {
