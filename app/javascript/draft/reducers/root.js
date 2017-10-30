@@ -1,57 +1,17 @@
 import { combineReducers } from 'redux'
 import { push } from 'react-router-redux'
 import { reducer as formReducer } from 'redux-form'
-import { createAction } from 'redux-actions'
+import { createAction, handleActions } from 'redux-actions'
 import http from 'utils/http'
 
-const UPDATE_TITLE = "UPDATE_TITLE"
+export const updateTitle = createAction('UPDATE_TITLE')
 
-export const updateTitle = createAction(UPDATE_TITLE)
+const currentTitle = handleActions({
+  [updateTitle]: (state, action) => action.payload,
+}, 'draft')
 
-function currentTitle(state = "draft", action) {
-  switch (action.type) {
-    case UPDATE_TITLE:
-      return action.payload
-    default:
-      return state
-  }
-}
-
-function articles(state = [], action) {
-  switch (action.type) {
-    case RECEIVE_ARTICLES:
-      return action.payload
-    case SAVED_ARTICLE:
-      return state.map(article => (article.id === action.payload.id ? action.payload : article))
-    default:
-      return state
-  }
-
-}
-
-function selectedArticleId(state = null, action) {
-  switch (action.type) {
-    case EDIT_ARTICLE:
-      return action.article.id
-    default:
-      return state
-  }
-}
-
-export const REQUEST_ARTICLES = "REQUEST_ARTICLES"
-export const RECEIVE_ARTICLES = "RECEIVE_ARTICLES"
-export const RECEIVE_ARTICLE = "RECEIVE_ARTICLE"
-
-const requestArticles = createAction(REQUEST_ARTICLES)
-const receiveArticles = createAction(RECEIVE_ARTICLES)
-
-function receiveArticle(article) {
-  return {
-    type: RECEIVE_ARTICLE,
-    article: article
-  }
-}
-
+const requestArticles = createAction('REQUEST_ARTICLES')
+const receiveArticles = createAction('RECEIVE_ARTICLES')
 
 export function fetchArticles() {
   return function(dispatch) {
@@ -62,6 +22,46 @@ export function fetchArticles() {
         dispatch(receiveArticles(resp.data))
       })
 
+  }
+}
+
+const submitArticle = createAction('SUBMIT_ARTICLE')
+const savedArticle = createAction('SAVED_ARTICLE', article => article)
+
+export function updateArticle(article) {
+  return function(dispatch) {
+    dispatch(submitArticle())
+
+    http.patch(`/articles/${article.id}`, article)
+      .then(_ => {
+        dispatch(savedArticle(article))
+        dispatch(push('/articles'))
+      })
+  }
+}
+
+const articles = handleActions({
+  [receiveArticles]: (state, action) => action.payload,
+  [savedArticle]: (state, action) => (
+    state.map(article => (article.id === action.payload.id ? action.payload : article))
+  ),
+}, [])
+
+
+function selectedArticleId(state = null, action) {
+  switch (action.type) {
+    case EDIT_ARTICLE:
+      return action.article.id
+    default:
+      return state
+  }
+}
+
+const RECEIVE_ARTICLE = "RECEIVE_ARTICLE"
+function receiveArticle(article) {
+  return {
+    type: RECEIVE_ARTICLE,
+    article: article
   }
 }
 
@@ -93,33 +93,7 @@ export function updateArticleForm(editedArticle) {
   }
 }
 
-export const SUBMIT_ARTICLE = "SUBMIT_ARTICLE"
-export const SAVED_ARTICLE = "SAVED_ARTICLE"
 
-function submitArticle() {
-  return {
-    type: SUBMIT_ARTICLE,
-  }
-}
-
-function savedArticle(article) {
-  return {
-    type: SAVED_ARTICLE,
-    payload: article,
-  }
-}
-
-export function updateArticle(article) {
-  return function(dispatch) {
-    dispatch(submitArticle())
-
-    http.patch(`/articles/${article.id}`, article)
-      .then(_ => {
-        dispatch(savedArticle(article))
-        dispatch(push('/articles'))
-      })
-  }
-}
 
 export function createArticle(article) {
   return function(dispatch) {
