@@ -25,7 +25,7 @@ const rootReducer = combineReducers({
 })
 
 // https://github.com/zalmoxisus/redux-devtools-extension#usage
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = process.env.NODE_ENV !== 'production' ? (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) : compose
 
 let store = createStore(
   rootReducer,
