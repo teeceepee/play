@@ -20,7 +20,7 @@ class ArticleIndex extends React.Component {
     return articles.map(article => (
       <div className="list-group-item  flex-column align-items-start" key={article.id}>
         <h4>{article.title}</h4>
-        <div>{article.content}</div>
+        <div style={{whiteSpace: 'pre-wrap'}}>{article.content}</div>
         {/*<Link to={'/articles/edit/' + article.id} >Edit</Link>*/}
         <ArticleForm form={`article-${article.id}`} initialValues={article} onSubmit={this.updateArticle} />
       </div>
