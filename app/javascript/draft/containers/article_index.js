@@ -2,7 +2,12 @@ import React from "react"
 import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
 import { ArticleForm } from './article_form'
-import { updateTitle, fetchArticles, updateArticle } from "../reducers/root"
+import {
+  updateTitle,
+  fetchArticles,
+  updateArticle,
+  toggleArticleForm,
+} from "../reducers/root"
 
 class ArticleIndex extends React.Component {
 
@@ -22,7 +27,10 @@ class ArticleIndex extends React.Component {
         <h4>{article.title}</h4>
         <div style={{whiteSpace: 'pre-wrap'}}>{article.content}</div>
         {/*<Link to={'/articles/edit/' + article.id} >Edit</Link>*/}
-        <ArticleForm form={`article-${article.id}`} initialValues={article} onSubmit={this.updateArticle} />
+        <div onClick={() => this.props.toggleArticleForm(article)} className="btn btn-outline-primary btn-sm">Edit</div>
+        <div className={this.props.articleFormVisible[article.id] ? '' : 'd-none'}>
+          <ArticleForm form={`article-${article.id}`} initialValues={article} onSubmit={this.updateArticle} />
+        </div>
       </div>
     ))
   }
@@ -44,7 +52,8 @@ class ArticleIndex extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    articles: state.articles
+    articles: state.articles,
+    articleFormVisible: state.articleFormVisible,
   }
 }
 
@@ -58,6 +67,9 @@ function mapDispatchToProps(dispatch) {
     },
     updateArticle: (article) => {
       dispatch(updateArticle(article))
+    },
+    toggleArticleForm: (article) => {
+      dispatch(toggleArticleForm(article))
     }
   }
 }

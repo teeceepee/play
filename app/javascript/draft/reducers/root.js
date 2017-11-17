@@ -35,6 +35,7 @@ export function updateArticle(article) {
     http.patch(`/articles/${article.id}`, article)
       .then(_ => {
         dispatch(savedArticle(article))
+        dispatch(toggleArticleForm(article))
         dispatch(push('/articles'))
       })
   }
@@ -119,6 +120,17 @@ function articleForm(state = {title: '', content: ''}, action) {
   }
 }
 
+export const toggleArticleForm = createAction('TOGGLE_ARTICLE_FORM')
+
+const articleFormVisible = handleActions({
+  [toggleArticleForm]: (state, action) => {
+    const articleId = action.payload.id
+    return {
+      [articleId]: !state[articleId],
+    }
+  }
+}, {})
+
 const forms = combineReducers({
   articleForm
 })
@@ -127,6 +139,7 @@ export const rootReducerObject = {
   currentTitle,
   articles,
   selectedArticleId,
+  articleFormVisible,
   forms,
   form: formReducer,
 }
