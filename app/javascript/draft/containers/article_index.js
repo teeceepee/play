@@ -37,7 +37,7 @@ class ArticleIndex extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container mt-3">
         <Link to="/articles/new">New</Link>
         <div className="list-group">
           {this.articleItems()}

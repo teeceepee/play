@@ -12,6 +12,7 @@ import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-r
 import { HeaderCont } from "draft/containers/header"
 import { MainCont } from "draft/containers/main"
 import { rootReducerObject } from "draft/reducers/root"
+import { Navbar } from "navbar/index"
 
 
 const history = createBrowserHistory({
@@ -37,7 +38,10 @@ let store = createStore(
 )
 
 const App = () => (
-  <MainCont/>
+  <div>
+    <Navbar/>
+    <MainCont/>
+  </div>
 )
 
 ReactDOM.render(
