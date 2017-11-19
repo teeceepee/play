@@ -120,10 +120,21 @@ function articleForm(state = {title: '', content: ''}, action) {
   }
 }
 
-export const toggleArticleForm = createAction('TOGGLE_ARTICLE_FORM')
+export const toggleArticleForm = createAction('TOGGLE_ARTICLE_FORM', article => article)
 
 const articleFormVisible = handleActions({
   [toggleArticleForm]: (state, action) => {
+    const articleId = action.payload.id
+    return {
+      [articleId]: !state[articleId],
+    }
+  }
+}, {})
+
+export const toggleArticleDropdown = createAction('TOGGLE_ARTICLE_DROPDOWN', article => article)
+
+const articleDropdownVisible = handleActions({
+  [toggleArticleDropdown]: (state, action) => {
     const articleId = action.payload.id
     return {
       [articleId]: !state[articleId],
@@ -140,6 +151,7 @@ export const rootReducerObject = {
   articles,
   selectedArticleId,
   articleFormVisible,
+  articleDropdownVisible,
   forms,
   form: formReducer,
 }

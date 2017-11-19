@@ -1,15 +1,37 @@
-import React from "react"
+import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
+import { Dropdown } from '../../common/dropdown'
 import { ArticleForm } from './article_form'
 import {
   updateTitle,
   fetchArticles,
   updateArticle,
   toggleArticleForm,
+  toggleArticleDropdown,
 } from "../reducers/root"
 
-class ArticleIndex extends React.Component {
+class ArticleDropdown extends Component {
+  handleToggle = () => {
+    this.props.toggleArticleDropdown(this.props.article)
+  }
+
+  render() {
+    const article = this.props.article
+    return (
+      <Dropdown
+        trigger=""
+        isOpen={this.props.isOpen}
+        open={this.handleToggle}
+        close={this.handleToggle}
+      >
+        <Link to={`/articles/edit/${article.id}`} className="dropdown-item">Edit in new page</Link>
+      </Dropdown>
+    )
+  }
+}
+
+class ArticleIndex extends Component {
 
   componentDidMount() {
     this.props.updateTitle('article index')
@@ -24,9 +46,17 @@ class ArticleIndex extends React.Component {
     const { articles } = this.props
     return articles.map(article => (
       <div className="list-group-item  flex-column align-items-start" key={article.id}>
-        <h4>{article.title}</h4>
+        <h4>
+          {article.title}
+          <div className="float-right">
+            <ArticleDropdown
+              article={article}
+              isOpen={this.props.articleDropdownVisible[article.id]}
+              toggleArticleDropdown={this.props.toggleArticleDropdown}
+            />
+          </div>
+        </h4>
         <div style={{whiteSpace: 'pre-wrap'}}>{article.content}</div>
-        {/*<Link to={'/articles/edit/' + article.id} >Edit</Link>*/}
         <div onClick={() => this.props.toggleArticleForm(article)} className="btn btn-outline-primary btn-sm">Edit</div>
         <div className={this.props.articleFormVisible[article.id] ? '' : 'd-none'}>
           <ArticleForm form={`article-${article.id}`} initialValues={article} onSubmit={this.updateArticle} />
@@ -54,6 +84,7 @@ function mapStateToProps(state) {
   return {
     articles: state.articles,
     articleFormVisible: state.articleFormVisible,
+    articleDropdownVisible: state.articleDropdownVisible,
   }
 }
 
@@ -70,6 +101,9 @@ function mapDispatchToProps(dispatch) {
     },
     toggleArticleForm: (article) => {
       dispatch(toggleArticleForm(article))
+    },
+    toggleArticleDropdown: (article) => {
+      dispatch(toggleArticleDropdown(article))
     }
   }
 }
