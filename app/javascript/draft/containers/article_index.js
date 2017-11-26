@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
 import { Dropdown } from '../../common/dropdown'
+import { Modal } from "../../common/modal"
 import { ArticleForm } from './article_form'
 import {
   updateTitle,
@@ -9,6 +10,8 @@ import {
   updateArticle,
   toggleArticleForm,
   toggleArticleDropdown,
+  openArticlesModal,
+  closeArticlesModal,
 } from "../reducers/root"
 
 class ArticleDropdown extends Component {
@@ -69,6 +72,17 @@ class ArticleIndex extends Component {
     return (
       <div className="container mt-3">
         <Link to="/articles/new">New</Link>
+        <div className="mb-1">
+          <button onClick={this.props.openArticlesModal} className="btn btn-primary">Open modal</button>
+          <Modal
+            isOpen={this.props.articlesModalIsOpen}
+            onClose={this.props.closeArticlesModal}
+          >
+            <h1>An Open Modal</h1>
+            <p>modal content...</p>
+            <p>modal content...</p>
+          </Modal>
+        </div>
         <div className="list-group">
           {this.articleItems()}
         </div>
@@ -85,6 +99,7 @@ function mapStateToProps(state) {
     articles: state.articles,
     articleFormVisible: state.articleFormVisible,
     articleDropdownVisible: state.articleDropdownVisible,
+    articlesModalIsOpen: state.articlesModalIsOpen,
   }
 }
 
@@ -104,7 +119,13 @@ function mapDispatchToProps(dispatch) {
     },
     toggleArticleDropdown: (article) => {
       dispatch(toggleArticleDropdown(article))
-    }
+    },
+    openArticlesModal: () => {
+      dispatch(openArticlesModal())
+    },
+    closeArticlesModal: () => {
+      dispatch(closeArticlesModal())
+    },
   }
 }
 
