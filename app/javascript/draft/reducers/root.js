@@ -142,13 +142,13 @@ const articleDropdownVisible = handleActions({
   }
 }, {})
 
-export const openArticlesModal = createAction('OPEN_ARTICLES_MODAL')
-export const closeArticlesModal = createAction('CLOSE_ARTICLES_MODAL')
+export const showModal = createAction('SHOW_MODAL', identity => identity)
+export const hideModal = createAction('HIDE_MODAL', identity => identity)
 
-export const articlesModalIsOpen = handleActions({
-  [openArticlesModal]: () => true,
-  [closeArticlesModal]: () => false,
-}, false)
+const modals = handleActions({
+  [showModal]: (state, action) => ({[action.payload]: true}),
+  [hideModal]: (state, action) => ({[action.payload]: false})
+}, {})
 
 const forms = combineReducers({
   articleForm
@@ -160,7 +160,7 @@ export const rootReducerObject = {
   selectedArticleId,
   articleFormVisible,
   articleDropdownVisible,
-  articlesModalIsOpen,
+  modals,
   forms,
   form: formReducer,
 }

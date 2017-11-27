@@ -10,8 +10,8 @@ import {
   updateArticle,
   toggleArticleForm,
   toggleArticleDropdown,
-  openArticlesModal,
-  closeArticlesModal,
+  showModal,
+  hideModal,
 } from "../reducers/root"
 
 class ArticleDropdown extends Component {
@@ -93,13 +93,14 @@ class ArticleIndex extends Component {
   }
 }
 
+const modalIdentity = 'articles-modal'
 
 function mapStateToProps(state) {
   return {
     articles: state.articles,
     articleFormVisible: state.articleFormVisible,
     articleDropdownVisible: state.articleDropdownVisible,
-    articlesModalIsOpen: state.articlesModalIsOpen,
+    articlesModalIsOpen: state.modals[modalIdentity] || false,
   }
 }
 
@@ -121,10 +122,10 @@ function mapDispatchToProps(dispatch) {
       dispatch(toggleArticleDropdown(article))
     },
     openArticlesModal: () => {
-      dispatch(openArticlesModal())
+      dispatch(showModal(modalIdentity))
     },
     closeArticlesModal: () => {
-      dispatch(closeArticlesModal())
+      dispatch(hideModal(modalIdentity))
     },
   }
 }
