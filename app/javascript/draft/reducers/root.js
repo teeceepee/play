@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { push } from 'react-router-redux'
-import { reducer as formReducer } from 'redux-form'
+import { reducer as formReducer, stopSubmit } from 'redux-form'
 import { createAction, handleActions } from 'redux-actions'
 import http from 'utils/http'
 
@@ -103,6 +103,19 @@ export function createArticle(article) {
     http.post('/articles', {article: article})
       .then(_ => {
         dispatch(push('/articles'))
+      })
+      .catch(error => {
+        const errors = error.response.data.errors
+        const fields = Object.keys(errors)
+        let submitErrors = {}
+
+        fields.forEach(field => {
+          if (errors[field] && errors[field].length > 0) {
+            submitErrors[field] = errors[field].join(' ')
+          }
+        })
+
+        dispatch(stopSubmit('article-new', submitErrors))
       })
   }
 }
