@@ -4,6 +4,12 @@ module ApplicationHelper
     "<!-- #{Rails.root.basename} -->"
   end
 
+  def global_options
+    {
+      'article.status' => Article.status.options,
+    }
+  end
+
   def current_domain
     @_current_domain ||= request.domain(1)
   end

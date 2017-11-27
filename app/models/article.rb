@@ -1,4 +1,17 @@
 class Article < ApplicationRecord
+
+  ## validations
+  validates :title, presence: true
+  validates :content, presence: true
+  validates :status, presence: true
+
+  ## enums
+  enumerize :status, in: [
+    :draft,
+    :published,
+  ], scope: true
+
+
   include Elasticsearch::Model if defined?(Elasticsearch)
 
   # elasticsearch-plugin install analysis-smartcn

@@ -3,11 +3,7 @@ import { reduxForm, Field } from 'redux-form'
 
 import { InputFormGroup, TextareaFormGroup, SelectFormGroup } from './form_groups'
 
-
-const statusOptions = [
-  ['Draft', 'draft'],
-  ['Published', 'published'],
-]
+const statusOptions = JSON.parse(document.querySelector('meta[name=global-options]').content)['article.status']
 
 const validate = values => {
   const errors = {}

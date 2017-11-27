@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'enumerize', '2.1.2' # https://github.com/brainspec/enumerize
 gem 'active_model_serializers', '0.10.6'  # https://github.com/rails-api/active_model_serializers
 gem 'sassc-rails', '1.3.0'  # https://github.com/sass/sassc-rails
 gem 'letsencrypt_plugin', '0.0.10'  # https://github.com/lgromanowski/letsencrypt-plugin

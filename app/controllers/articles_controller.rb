@@ -44,7 +44,7 @@ class ArticlesController < ApplicationController
     else
       respond_to do |format|
         format.html { render 'new' }
-        format.json { render json: {}, status: :unprocessable_entity }
+        format.json { render json: {errors: @article.errors}, status: :unprocessable_entity }
       end
     end
   end

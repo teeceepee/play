@@ -5,6 +5,7 @@ html
     title Draft
     = csrf_meta_tags
     = stylesheet_pack_tag 'draft'
+    meta name="global-options" content=global_options.to_json
   body
     #root
     = javascript_pack_tag 'draft'
