@@ -41,7 +41,7 @@ export class Dropdown extends Component {
     let el
 
     if (typeof trigger === 'string') {
-      el = <div className="btn btn-primary dropdown-toggle">{trigger}</div>
+      el = <div className="btn btn-outline-primary dropdown-toggle">{trigger}</div>
     } else {
       el = trigger
     }

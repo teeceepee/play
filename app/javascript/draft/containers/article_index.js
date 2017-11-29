@@ -48,21 +48,23 @@ class ArticleIndex extends Component {
   articleItems() {
     const { articles } = this.props
     return articles.map(article => (
-      <div className="list-group-item  flex-column align-items-start" key={article.id}>
-        <h4>
-          {article.title}
-          <div className="float-right">
-            <ArticleDropdown
-              article={article}
-              isOpen={this.props.articleDropdownVisible[article.id]}
-              toggleArticleDropdown={this.props.toggleArticleDropdown}
-            />
+      <div className="card mb-3" key={article.id}>
+        <div className="card-body">
+          <h4 className="card-title">
+            {article.title}
+            <div className="float-right">
+              <ArticleDropdown
+                article={article}
+                isOpen={this.props.articleDropdownVisible[article.id]}
+                toggleArticleDropdown={this.props.toggleArticleDropdown}
+              />
+            </div>
+          </h4>
+          <p className="card-text" style={{whiteSpace: 'pre-wrap'}}>{article.content}</p>
+          <div onClick={() => this.props.toggleArticleForm(article)} className="btn btn-outline-primary btn-sm">Edit</div>
+          <div className={this.props.articleFormVisible[article.id] ? '' : 'd-none'}>
+            <ArticleForm form={`article-${article.id}`} initialValues={article} onSubmit={this.updateArticle} />
           </div>
-        </h4>
-        <div style={{whiteSpace: 'pre-wrap'}}>{article.content}</div>
-        <div onClick={() => this.props.toggleArticleForm(article)} className="btn btn-outline-primary btn-sm">Edit</div>
-        <div className={this.props.articleFormVisible[article.id] ? '' : 'd-none'}>
-          <ArticleForm form={`article-${article.id}`} initialValues={article} onSubmit={this.updateArticle} />
         </div>
       </div>
     ))
@@ -83,7 +85,7 @@ class ArticleIndex extends Component {
             <p>modal content...</p>
           </Modal>
         </div>
-        <div className="list-group">
+        <div>
           {this.articleItems()}
         </div>
         <hr/>
