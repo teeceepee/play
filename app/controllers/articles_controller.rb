@@ -6,12 +6,16 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.all.order(updated_at: :desc)
+    @articles = Article.all.order(updated_at: :desc).page(params[:page]).per(params[:per_page] || 5)
 
     respond_to do |format|
       format.html
       format.json do
-        render json: @articles
+        pagination = {
+          current_page: @articles.current_page,
+          total_pages: @articles.total_pages,
+        }
+        render_json(@articles, pagination: pagination)
       end
     end
   end

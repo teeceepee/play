@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include UserAuth
 
+  def render_json(data, meta = {})
+    render(json: data, root: :data, meta: meta)
+  end
+
   private
 
   def set_locale

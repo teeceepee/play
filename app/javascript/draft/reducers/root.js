@@ -13,11 +13,13 @@ const currentTitle = handleActions({
 const requestArticles = createAction('REQUEST_ARTICLES')
 const receiveArticles = createAction('RECEIVE_ARTICLES')
 
-export function fetchArticles() {
+export function fetchArticles(pageNumber) {
   return function(dispatch) {
     dispatch(requestArticles())
 
-    http.get("/articles")
+    http.get("/articles", {
+      params: {page: pageNumber}
+    })
       .then(resp => {
         dispatch(receiveArticles(resp.data))
       })
@@ -42,11 +44,22 @@ export function updateArticle(article) {
 }
 
 const articles = handleActions({
-  [receiveArticles]: (state, action) => action.payload,
+  [receiveArticles]: (state, action) => action.payload.data,
   [savedArticle]: (state, action) => (
     state.map(article => (article.id === action.payload.id ? action.payload : article))
   ),
 }, [])
+
+const articlesPagination = handleActions({
+  [receiveArticles]: (state, action) => {
+    const currentPage = action.payload.meta.pagination.current_page
+    const totalPages = action.payload.meta.pagination.total_pages
+    return {
+      currentPage,
+      totalPages,
+    }
+  },
+}, {})
 
 
 function selectedArticleId(state = null, action) {
@@ -170,6 +183,7 @@ const forms = combineReducers({
 export const rootReducerObject = {
   currentTitle,
   articles,
+  articlesPagination,
   selectedArticleId,
   articleFormVisible,
   articleDropdownVisible,

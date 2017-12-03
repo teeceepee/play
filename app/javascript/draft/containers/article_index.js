@@ -2,7 +2,8 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
 import { Dropdown } from '../../common/dropdown'
-import { Modal } from "../../common/modal"
+import { Modal } from '../../common/modal'
+import { Pagination } from '../../common/pagination'
 import { ArticleForm } from './article_form'
 import {
   updateTitle,
@@ -41,8 +42,37 @@ class ArticleIndex extends Component {
     this.props.fetchArticles()
   }
 
+  handlePageChange = (pageNumber) => {
+    this.props.fetchArticles(pageNumber)
+  }
+
   updateArticle = (article) => {
     this.props.updateArticle(article)
+  }
+
+  render() {
+    return (
+      <div className="container mt-3">
+        <Link to="/articles/new">New</Link>
+        <div className="mb-1">
+          <button onClick={this.props.openArticlesModal} className="btn btn-primary">Open modal</button>
+          <Modal
+            isOpen={this.props.articlesModalIsOpen}
+            onClose={this.props.closeArticlesModal}
+          >
+            <h1>An Open Modal</h1>
+            <p>modal content...</p>
+            <p>modal content...</p>
+          </Modal>
+        </div>
+        <div>
+          {this.articleItems()}
+        </div>
+        {this.pagination()}
+        <hr/>
+        <Link to="/">Back to index</Link>
+      </div>
+    )
   }
 
   articleItems() {
@@ -70,28 +100,11 @@ class ArticleIndex extends Component {
     ))
   }
 
-  render() {
-    return (
-      <div className="container mt-3">
-        <Link to="/articles/new">New</Link>
-        <div className="mb-1">
-          <button onClick={this.props.openArticlesModal} className="btn btn-primary">Open modal</button>
-          <Modal
-            isOpen={this.props.articlesModalIsOpen}
-            onClose={this.props.closeArticlesModal}
-          >
-            <h1>An Open Modal</h1>
-            <p>modal content...</p>
-            <p>modal content...</p>
-          </Modal>
-        </div>
-        <div>
-          {this.articleItems()}
-        </div>
-        <hr/>
-        <Link to="/">Back to index</Link>
-      </div>
-    )
+  pagination() {
+    const articlesPagination = this.props.articlesPagination
+    if (articlesPagination.totalPages) {
+      return <Pagination onPageChange={this.handlePageChange} {...this.props.articlesPagination}/>
+    }
   }
 }
 
@@ -100,6 +113,7 @@ const modalIdentity = 'articles-modal'
 function mapStateToProps(state) {
   return {
     articles: state.articles,
+    articlesPagination: state.articlesPagination,
     articleFormVisible: state.articleFormVisible,
     articleDropdownVisible: state.articleDropdownVisible,
     articlesModalIsOpen: state.modals[modalIdentity] || false,
@@ -111,8 +125,8 @@ function mapDispatchToProps(dispatch) {
     updateTitle: (title) => {
       dispatch(updateTitle(title))
     },
-    fetchArticles: () => {
-      dispatch(fetchArticles())
+    fetchArticles: (pageNumber) => {
+      dispatch(fetchArticles(pageNumber))
     },
     updateArticle: (article) => {
       dispatch(updateArticle(article))
