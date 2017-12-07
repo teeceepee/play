@@ -5,6 +5,7 @@ import { ArticleIndexCont } from "./article_index"
 import { ArticleNewCont } from "./article_new"
 import { ArticleEditCont } from "./article_edit"
 import { LandingPagePage } from 'landing_page/index'
+import { CalendarPage } from '../../calendar/index'
 
 class Main extends React.Component {
 
@@ -12,8 +13,9 @@ class Main extends React.Component {
     return (
       <Switch>
         <Route path="/articles/edit/:id" component={ArticleEditCont} />
-        <Route path="/articles" exact={true} component={ArticleIndexCont} />
+        <Route path="/articles" exact component={ArticleIndexCont} />
         <Route path="/articles/new" component={ArticleNewCont} />
+        <Route path="/calendar" exact component={CalendarPage} />
         <Route component={LandingPagePage} />
       </Switch>
     )

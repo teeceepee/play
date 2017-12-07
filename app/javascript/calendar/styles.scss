@@ -1,0 +1,27 @@
+@import "~bootstrap/scss/_functions.scss";
+@import "~bootstrap/scss/_variables.scss";
+
+.calendar-table {
+  .weekend {
+    background-color: $gray-100;
+  }
+
+  .day-number {
+    width: 24px;
+  }
+
+  .day-cell {
+    height: 80px;
+
+    &:hover {
+      .day-number {
+        transform: scale(1.1);
+      }
+    }
+
+    &:not(.current-month) {
+      color: $gray-400;
+    }
+  }
+
+}

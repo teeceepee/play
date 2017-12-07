@@ -11,6 +11,7 @@ export class Navbar extends Component {
           <ul className="navbar-nav">
             <NavLink exact to="/" className="nav-item nav-link">Home</NavLink>
             <NavLink to="/articles" className="nav-item nav-link">Articles</NavLink>
+            <NavLink to="/calendar" className="nav-item nav-link">Calendar</NavLink>
           </ul>
         </div>
       </nav>

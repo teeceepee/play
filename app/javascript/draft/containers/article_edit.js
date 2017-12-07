@@ -38,7 +38,7 @@ class ArticleEdit extends React.Component {
   render() {
     const { article } = this.props
     return (
-      <div className="container mt-3">
+      <div className="container mt-4">
         <form action="" onSubmit={this.onSubmit}>
           <div className="form-group">
             <input type="text" name="title" value={article.title} className="form-control" onChange={this.onChange} />

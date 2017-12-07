@@ -52,7 +52,7 @@ class ArticleIndex extends Component {
 
   render() {
     return (
-      <div className="container mt-3">
+      <div className="container mt-4">
         <Link to="/articles/new">New</Link>
         <div className="mb-1">
           <button onClick={this.props.openArticlesModal} className="btn btn-primary">Open modal</button>
