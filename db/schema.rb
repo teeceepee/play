@@ -67,6 +67,18 @@ ActiveRecord::Schema.define(version: 20171127144053) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "nba_images", force: :cascade do |t|
+    t.bigint "topic_id"
+    t.string "url"
+    t.text "content"
+    t.bigint "nba_game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image"
+    t.index ["nba_game_id"], name: "index_nba_images_on_nba_game_id"
+    t.index ["topic_id"], name: "index_nba_images_on_topic_id"
+  end
+
   create_table "pictures", id: :serial, force: :cascade do |t|
     t.string "filename"
     t.string "pid"
@@ -125,6 +137,14 @@ ActiveRecord::Schema.define(version: 20171127144053) do
     t.index ["review_no"], name: "index_taobao_reviews_on_review_no"
   end
 
+  create_table "topics", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.jsonb "json"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -135,5 +155,7 @@ ActiveRecord::Schema.define(version: 20171127144053) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "nba_images", "nba_games"
+  add_foreign_key "nba_images", "topics"
   add_foreign_key "tags", "repos"
 end

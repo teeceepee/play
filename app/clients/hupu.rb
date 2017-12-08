@@ -3,6 +3,18 @@ class Hupu
 
   attr_accessor :logger
 
+  def self.save_thread_images(thread_id)
+    h = Hupu.new
+
+    h.fetch_gifs(thread_id) do |thread_data|
+      topic = Topic.create(thread_id: thread_id)
+      urls = thread_data[:urls]
+      urls.each do |url|
+        topic.nba_images.create(url: url, remote_image_url: url)
+      end
+    end
+  end
+
   def self.fetch_recent_news
     Timeout.timeout(600) do
       h = Hupu.new
@@ -54,6 +66,32 @@ class Hupu
       else
         news_data
       end
+    end
+  end
+
+  # 20543141
+  # 20524732
+  def fetch_gifs(thread_id, &block)
+    url = "https://m.hupu.com/bbs/#{thread_id}.html"
+    @connection ||= HTTP.persistent(url).headers({
+      'User-Agent': Fetcher::IOS_USER_AGENT
+    })
+    resp = @connection.get(url)
+    body = resp.body.to_s
+    doc = Nokogiri::HTML(body)
+
+    urls = doc.css('.article-content img').map do |img|
+      img.attr('data-gif')
+    end.compact
+
+    thread_data = {
+      urls: urls,
+    }
+
+    if block_given?
+      block.call(thread_data)
+    else
+      thread_data
     end
   end
 

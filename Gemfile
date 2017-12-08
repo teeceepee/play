@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'carrierwave-aliyun', '0.9.0' # https://github.com/huacnlee/carrierwave-aliyun
 gem 'enumerize', '2.1.2' # https://github.com/brainspec/enumerize
 gem 'active_model_serializers', '0.10.6'  # https://github.com/rails-api/active_model_serializers
 gem 'sassc-rails', '1.3.0'  # https://github.com/sass/sassc-rails

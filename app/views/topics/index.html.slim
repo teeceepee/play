@@ -1,0 +1,10 @@
+h1 Topics
+
+.row
+  - @topics.each do |topic|
+    .col-sm-7 data-topic-id=topic.id
+      - topic.nba_images.each do |nba_image|
+        .thumbnail
+          - if nba_image.image_url.present?
+            = image_tag(nba_image.image_url)
+
