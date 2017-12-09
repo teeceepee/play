@@ -4,6 +4,7 @@ class Fetcher
   def self.fetch_all
     # Jiandan.fetch_new
     Hupu.fetch_recent_news
+    NbaGame.fetch_schedule
     # Weibo.fetch_cookie
     # self.bitcoin
   end
