@@ -12,6 +12,7 @@
 
   .day-cell {
     height: 80px;
+    padding: .25rem;
 
     &:hover {
       .day-number {
@@ -24,4 +25,14 @@
     }
   }
 
+}
+
+.games {
+  .game {
+    margin-top: .25rem;
+    padding: 0 .25rem;
+    font-size: 12px;
+    background-color: $gray-200;
+    cursor: pointer;
+  }
 }

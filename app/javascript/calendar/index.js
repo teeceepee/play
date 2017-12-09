@@ -4,6 +4,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
+import { Modal } from '../common/modal'
+import {
+  showModal,
+} from "../draft/reducers/root"
+
 import {
   selectPrevMonth,
   selectNextMonth,
@@ -11,6 +16,10 @@ import {
 } from './actions'
 
 class DayCell extends Component {
+
+  handleGamesClick = () => {
+    this.props.showModal(this.cellId())
+  }
 
   render() {
     let cellCls = ''
@@ -26,6 +35,16 @@ class DayCell extends Component {
       <td className={"day-cell" + cellCls}>
         <div className="text-right">
           <div className={"day-number d-inline-block rounded-circle text-center" + cls}>{this.dayNumber()}</div>
+        </div>
+        <div>
+          <div className="games-wrapper">
+            <div onClick={this.handleGamesClick} className="games">
+              <div className="game"></div>
+            </div>
+
+            <Modal identity={this.cellId()} title={this.cellId()}>
+            </Modal>
+          </div>
         </div>
       </td>
     )
@@ -48,12 +67,18 @@ class DayCell extends Component {
   dayNumber() {
     return this.props.date.format('D')
   }
+
+  cellId() {
+    return this.props.date.format('YYYY-MM-DD')
+  }
 }
 
 DayCell.proptypes = {
   today: PropTypes.any.isRequired,
   date: PropTypes.any.isRequired,
 }
+
+const DayCellCont = connect(null, {showModal})(DayCell)
 
 class Calendar extends Component {
 
@@ -71,7 +96,7 @@ class Calendar extends Component {
 
   render() {
     return (
-      <div className="container mt-4">
+      <div className="container-fluid mt-4">
         <div className="d-flex justify-content-between mb-4">
           <h2 className="current-month mb-0">{this.monthText()}</h2>
           <div className="btn-group">
@@ -80,7 +105,7 @@ class Calendar extends Component {
             <div onClick={this.handleSelectNext} className="btn btn-outline-secondary">&gt;</div>
           </div>
         </div>
-        <table className="calendar-table table table-bordered text-right">
+        <table className="calendar-table table table-bordered">
           <thead>
             <tr className="text-right">
               <th className="weekend">Sun</th>
@@ -116,7 +141,7 @@ class Calendar extends Component {
 
     return (
       <tr key={startOfWeek.unix()}>
-        {days.map(day => <DayCell date={day} calendar={this.props.calendar} key={day.unix()}/>)}
+        {days.map(day => <DayCellCont date={day} calendar={this.props.calendar} key={day.unix()}/>)}
       </tr>
     )
   }
