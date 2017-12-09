@@ -1,12 +1,16 @@
 defaults: &defaults
   foo:
     bar: baz
-  smtp_settings:
-    user_name:
-    password:
   mailer:
     default_from:
     default_to:
+  oss:
+    endpoint:
+    access_key_id:
+    access_key_secret:
+  smtp_settings:
+    user_name:
+    password:
 
 development:
   <<: *defaults
