@@ -56,10 +56,7 @@ class ArticleIndex extends Component {
         <Link to="/articles/new">New</Link>
         <div className="mb-1">
           <button onClick={this.props.openArticlesModal} className="btn btn-primary">Open modal</button>
-          <Modal
-            isOpen={this.props.articlesModalIsOpen}
-            onClose={this.props.closeArticlesModal}
-          >
+          <Modal identity="articles-modal">
             <h1>An Open Modal</h1>
             <p>modal content...</p>
             <p>modal content...</p>
@@ -116,7 +113,6 @@ function mapStateToProps(state) {
     articlesPagination: state.articlesPagination,
     articleFormVisible: state.articleFormVisible,
     articleDropdownVisible: state.articleDropdownVisible,
-    articlesModalIsOpen: state.modals[modalIdentity] || false,
   }
 }
 
@@ -139,9 +135,6 @@ function mapDispatchToProps(dispatch) {
     },
     openArticlesModal: () => {
       dispatch(showModal(modalIdentity))
-    },
-    closeArticlesModal: () => {
-      dispatch(hideModal(modalIdentity))
     },
   }
 }

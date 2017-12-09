@@ -171,7 +171,7 @@ const articleDropdownVisible = handleActions({
 export const showModal = createAction('SHOW_MODAL', identity => identity)
 export const hideModal = createAction('HIDE_MODAL', identity => identity)
 
-const modals = handleActions({
+const modal = handleActions({
   [showModal]: (state, action) => ({[action.payload]: true}),
   [hideModal]: (state, action) => ({[action.payload]: false})
 }, {})
@@ -187,7 +187,7 @@ export const rootReducerObject = {
   selectedArticleId,
   articleFormVisible,
   articleDropdownVisible,
-  modals,
+  modal,
   forms,
   form: formReducer,
 }

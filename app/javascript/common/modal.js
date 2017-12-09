@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { hideModal } from '../draft/reducers/root'
 
 const MODAL_OPEN = 'modal-open'
 const MODAL_DIALOG = 'modal-dialog'
@@ -47,7 +49,7 @@ class ScrollbarChecker {
   }
 }
 
-export class Modal extends Component {
+class PureModal extends Component {
 
   constructor(props) {
     super(props)
@@ -56,7 +58,8 @@ export class Modal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.isOpen && nextProps.isOpen) {
+    const nextIsOpen = !!nextProps.modal[this.props.identity]
+    if (!this.isOpen() && nextIsOpen) {
       this.beforeOpen()
     }
   }
@@ -71,7 +74,7 @@ export class Modal extends Component {
     document.querySelector('body').classList.remove(MODAL_OPEN)
     this.scrollbarChecker.resetScrollbar()
 
-    this.props.onClose()
+    this.props.hideModal(this.props.identity)
   }
 
   handleBackdropClick = (event) => {
@@ -83,7 +86,7 @@ export class Modal extends Component {
   }
 
   render() {
-    if (this.props.isOpen) {
+    if (this.isOpen()) {
       return (
         <div>
           <div onClick={this.handleBackdropClick} style={{display: 'block'}} className={"modal show"} tabIndex="-1">
@@ -102,21 +105,41 @@ export class Modal extends Component {
             </div>
           </div>
 
-          {this.props.isOpen && <div className="modal-backdrop show"/>}
+          {this.isOpen() && <div className="modal-backdrop show"/>}
         </div>
       )
     } else {
       return null
     }
   }
+
+  isOpen() {
+    return !!this.props.modal[this.props.identity]
+  }
 }
 
-Modal.defaultProps = {
+PureModal.defaultProps = {
   title: '',
 }
 
-Modal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
+PureModal.propTypes = {
+  identity: PropTypes.string.isRequired,
+  modal: PropTypes.object.isRequired,
+  hideModal: PropTypes.func.isRequired,
   title: PropTypes.string,
 }
+
+
+function mapStateToProps(state) {
+  return {
+    modal: state.modal,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    hideModal: (identity) => dispatch(hideModal(identity))
+  }
+}
+
+export const Modal = connect(mapStateToProps, mapDispatchToProps)(PureModal)
