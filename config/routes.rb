@@ -57,7 +57,9 @@ Rails.application.routes.draw do
   end
 
   namespace :d do
-    resources :photos do
+    resources :nba_games, only: [:index]
+
+    resources :photos, only: [] do
       collection do
         get :random
       end

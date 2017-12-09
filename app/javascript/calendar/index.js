@@ -13,6 +13,7 @@ import {
   selectPrevMonth,
   selectNextMonth,
   selectCurrentMonth,
+  fetchNbaGames,
 } from './actions'
 
 class DayCell extends Component {
@@ -38,11 +39,10 @@ class DayCell extends Component {
         </div>
         <div>
           <div className="games-wrapper">
-            <div onClick={this.handleGamesClick} className="games">
-              <div className="game"></div>
-            </div>
+            {this.brief()}
 
             <Modal identity={this.cellId()} title={this.cellId()}>
+              {this.games()}
             </Modal>
           </div>
         </div>
@@ -71,16 +71,54 @@ class DayCell extends Component {
   cellId() {
     return this.props.date.format('YYYY-MM-DD')
   }
+
+  brief() {
+    if (this.props.games.length > 0) {
+      const firstGame = this.props.games[0]
+      return (
+        <div onClick={this.handleGamesClick} className="games">
+          <div className="game">{firstGame.road.toUpperCase()} vs {firstGame.home.toUpperCase()}</div>
+          <div className="game">and {this.props.games.length - 1} other games</div>
+        </div>
+      )
+    }
+  }
+
+  games() {
+    return this.props.games.map(game => (
+      <div key={game.id}>
+        <h3 className="text-center">
+          {game.road.toUpperCase()} vs {game.home.toUpperCase()}
+        </h3>
+        <p className="text-center">{game.startTime.utcOffset(this.props.calendar.utcOffset).format('hh:mm Z')}</p>
+      </div>
+    ))
+  }
 }
 
 DayCell.proptypes = {
-  today: PropTypes.any.isRequired,
   date: PropTypes.any.isRequired,
+  calendar: PropTypes.object.isRequired,
+  games: PropTypes.array.isRequired,
 }
 
-const DayCellCont = connect(null, {showModal})(DayCell)
+
+function mapStateToPropsCell(state, ownProps) {
+  return {
+    games: state.nbaGames.filter(nbaGame => {
+      return nbaGame.startTime.isSame(ownProps.date, 'day')
+    })
+  }
+}
+
+const DayCellCont = connect(mapStateToPropsCell, {showModal})(DayCell)
 
 class Calendar extends Component {
+
+  componentDidMount() {
+    const { year, month, utcOffset } = this.props.calendar
+    this.props.fetchNbaGames(year, month, utcOffset)
+  }
 
   handleSelectPrev = () => {
     this.props.selectPrevMonth()
@@ -178,6 +216,7 @@ function mapDispatchToProps(dispatch) {
     selectPrevMonth: () => dispatch(selectPrevMonth()),
     selectNextMonth: () => dispatch(selectNextMonth()),
     selectCurrentMonth: () => dispatch(selectCurrentMonth()),
+    fetchNbaGames: (year, month, utcOffset) => dispatch(fetchNbaGames(year, month, utcOffset)),
   }
 }
 

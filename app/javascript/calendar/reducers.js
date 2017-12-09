@@ -4,6 +4,7 @@ import {
   selectNextMonth,
   selectPrevMonth,
   selectCurrentMonth,
+  fetchNbaGamesSuccess,
 } from './actions'
 
 const today = moment()
@@ -12,6 +13,7 @@ const initialState = {
   year: today.year(),
   month: today.month(),
   today: today.format('YYYY-MM-DD'),
+  utcOffset: '+08:00',
 }
 
 export const calendar = handleActions({
@@ -58,3 +60,9 @@ export const calendar = handleActions({
     }
   },
 }, initialState)
+
+export const nbaGames = handleActions({
+  [fetchNbaGamesSuccess]: (state, action) => {
+    return action.payload
+  },
+}, [])

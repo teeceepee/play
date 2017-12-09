@@ -47,6 +47,10 @@ class NbaGame < ApplicationRecord
   enumerize :road, in: TEAMS + ['other']
   enumerize :home, in: TEAMS + ['other']
 
+  def self.between_range(from, to)
+    self.where('start_time >= ? AND start_time < ?', from, to)
+  end
+
   def self.fetch_schedule(season_year = '2017')
     resp = HTTP.get(season_url(season_year))
 
@@ -58,6 +62,7 @@ class NbaGame < ApplicationRecord
     opener_date = Date.new(2017, 10, 17)
 
     games.each do |game|
+      start_time = Time.parse("#{game['gdtutc']} #{game['utctm']} Z")
       date = Date.strptime(game['gdte'], '%F')
 
       season_type = if date >= opener_date
@@ -82,6 +87,7 @@ class NbaGame < ApplicationRecord
       attrs = {
         season_year: season_year,
         season_type: season_type,
+        start_time: start_time,
         date: date,
         road: road,
         home: home,
