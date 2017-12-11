@@ -116,20 +116,22 @@ const DayCellCont = connect(mapStateToPropsCell, {showModal})(DayCell)
 class Calendar extends Component {
 
   componentDidMount() {
-    const { year, month, utcOffset } = this.props.calendar
-    this.props.fetchNbaGames(year, month, utcOffset)
+    this.props.fetchNbaGames()
   }
 
   handleSelectPrev = () => {
     this.props.selectPrevMonth()
+    this.props.fetchNbaGames()
   }
 
   handleSelectCurrent = () => {
     this.props.selectCurrentMonth()
+    this.props.fetchNbaGames()
   }
 
   handleSelectNext = () => {
     this.props.selectNextMonth()
+    this.props.fetchNbaGames()
   }
 
   render() {
@@ -216,7 +218,7 @@ function mapDispatchToProps(dispatch) {
     selectPrevMonth: () => dispatch(selectPrevMonth()),
     selectNextMonth: () => dispatch(selectNextMonth()),
     selectCurrentMonth: () => dispatch(selectCurrentMonth()),
-    fetchNbaGames: (year, month, utcOffset) => dispatch(fetchNbaGames(year, month, utcOffset)),
+    fetchNbaGames: () => dispatch(fetchNbaGames()),
   }
 }
 

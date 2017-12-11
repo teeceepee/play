@@ -63,6 +63,10 @@ export const calendar = handleActions({
 
 export const nbaGames = handleActions({
   [fetchNbaGamesSuccess]: (state, action) => {
-    return action.payload
+    const newGames = action.payload
+    const newIds = newGames.map(game => game.id)
+    const filteredGames = state.filter(game => !newIds.includes(game.id))
+
+    return [...filteredGames, ...action.payload]
   },
 }, [])

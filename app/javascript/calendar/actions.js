@@ -8,13 +8,15 @@ export const selectCurrentMonth = createAction('SELECT_CURRENT_MONTH')
 
 export const fetchNbaGamesSuccess = createAction('FETCH_NBA_GAMES_SUCCESS', games => games)
 
-export function fetchNbaGames(year, month, utcOffset) {
-  return function(dispatch) {
+export function fetchNbaGames() {
+  return function(dispatch, getState) {
+    const { calendar } = getState()
+
     http.get("/d/nba_games", {
       params: {
-        year: year,
-        month: month + 1,
-        utc_offset: utcOffset,
+        year: calendar.year,
+        month: calendar.month + 1,
+        utc_offset: calendar.utcOffset,
       }
     }).then(resp => {
       const games = resp.data.data.map(game => ({...game, startTime: moment(game.start_time)}))
