@@ -7,13 +7,15 @@ import {
   fetchNbaGamesSuccess,
 } from './actions'
 
+const utcOffset = '+08:00'
 const today = moment()
+today.utcOffset(utcOffset)
 
 const initialState = {
   year: today.year(),
   month: today.month(),
-  today: today.format('YYYY-MM-DD'),
-  utcOffset: '+08:00',
+  today: today,
+  utcOffset: utcOffset,
 }
 
 export const calendar = handleActions({
@@ -52,7 +54,7 @@ export const calendar = handleActions({
     return newDate
   },
   [selectCurrentMonth]: (state) => {
-    const today = moment(state.today)
+    const today = state.today
     return {
       ...state,
       year: today.year(),

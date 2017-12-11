@@ -19,7 +19,11 @@ export function fetchNbaGames() {
         utc_offset: calendar.utcOffset,
       }
     }).then(resp => {
-      const games = resp.data.data.map(game => ({...game, startTime: moment(game.start_time)}))
+      const games = resp.data.data.map(game => {
+        const startTime = moment(game.start_time)
+        startTime.utcOffset(calendar.utcOffset)
+        return {...game, startTime}
+      })
       dispatch(fetchNbaGamesSuccess(games))
     })
   }

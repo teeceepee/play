@@ -90,7 +90,7 @@ class DayCell extends Component {
         <h3 className="text-center">
           {game.road.toUpperCase()} vs {game.home.toUpperCase()}
         </h3>
-        <p className="text-center">{game.startTime.utcOffset(this.props.calendar.utcOffset).format('hh:mm Z')}</p>
+        <p className="text-center">{game.startTime.utcOffset(this.props.calendar.utcOffset).format('HH:mm Z')}</p>
       </div>
     ))
   }
@@ -187,8 +187,9 @@ class Calendar extends Component {
   }
 
   body() {
-    const { year, month } = this.props.calendar
+    const { year, month, utcOffset } = this.props.calendar
     const startOfMonth = moment([year, month])
+    startOfMonth.utcOffset(utcOffset)
     const firstDay = startOfMonth.startOf('week')
 
     const startOfWeeks = [
