@@ -6,7 +6,7 @@ import { hideModal } from '../draft/reducers/root'
 
 const MODAL_OPEN = 'modal-open'
 const MODAL_DIALOG = 'modal-dialog'
-
+const MODAL_ROOT_WRAPPER = 'modal-root-wrapper'
 const ClassName = {
   SCROLLBAR_MEASURER : 'modal-scrollbar-measure',
 }
@@ -87,7 +87,7 @@ class PureModal extends Component {
 
   render() {
     if (this.isOpen()) {
-      return (
+      return ReactDOM.createPortal(
         <div>
           <div onClick={this.handleBackdropClick} style={{display: 'block'}} className={"modal show"} tabIndex="-1">
             <div className={MODAL_DIALOG}>
@@ -106,11 +106,24 @@ class PureModal extends Component {
           </div>
 
           {this.isOpen() && <div className="modal-backdrop show"/>}
-        </div>
+        </div>,
+        this.modalRoot()
       )
     } else {
       return null
     }
+  }
+
+  modalRoot() {
+    let wrapper = document.getElementById(MODAL_ROOT_WRAPPER)
+
+    if (!wrapper) {
+      wrapper = document.createElement('div')
+      wrapper.setAttribute('id', MODAL_ROOT_WRAPPER)
+      document.body.appendChild(wrapper)
+    }
+
+    return wrapper
   }
 
   isOpen() {
