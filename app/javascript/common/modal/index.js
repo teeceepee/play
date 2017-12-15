@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { hideModal } from '../draft/reducers/root'
+import { showModal, hideModal } from './actions'
+import { modal } from './reducers'
 
 const MODAL_OPEN = 'modal-open'
 const MODAL_DIALOG = 'modal-dialog'
@@ -156,3 +157,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export const Modal = connect(mapStateToProps, mapDispatchToProps)(PureModal)
+export { showModal, hideModal, modal }

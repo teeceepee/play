@@ -4,10 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
-import { Modal } from '../common/modal'
-import {
-  showModal,
-} from "../draft/reducers/root"
+import { Modal, showModal } from '../common/modal'
 
 import {
   selectPrevMonth,

@@ -12,6 +12,7 @@ import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-r
 import { HeaderCont } from "draft/containers/header"
 import { MainCont } from "draft/containers/main"
 import { rootReducerObject } from "draft/reducers/root"
+import { modal } from 'common/modal'
 import { calendar, nbaGames } from 'calendar/reducers'
 import { Navbar } from "navbar/index"
 
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   ...rootReducerObject,
   calendar,
   nbaGames,
+  modal,
   router: routerReducer,
 })
 

@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
 import { Dropdown } from '../../common/dropdown'
-import { Modal } from '../../common/modal'
+import { Modal, showModal } from '../../common/modal'
 import { Pagination } from '../../common/pagination'
 import { ArticleForm } from './article_form'
 import {
@@ -11,9 +11,7 @@ import {
   updateArticle,
   toggleArticleForm,
   toggleArticleDropdown,
-  showModal,
-  hideModal,
-} from "../reducers/root"
+} from '../reducers/root'
 
 class ArticleDropdown extends Component {
   handleToggle = () => {
