@@ -15,3 +15,14 @@ $enable-shadows: true;
 
 @import "~bootstrap/scss/bootstrap.scss";
 
+// Editor styles
+.DraftEditor-root {
+  padding: 10px;
+  border: 1px solid $blue;
+}
+
+.address, .token {
+  margin: 0 2px;
+  padding: 2px;
+  background-color: rgba(204, 204, 255, 1.0);
+}
