@@ -9,18 +9,20 @@ import {
   EditorState,
   RichUtils,
   Modifier,
+  SelectionState,
 } from 'draft-js'
+import { getEntities } from './utils'
 
 let rawContent = {
   blocks: [
     {
       text: (
-        'This is an "immutable" entity: ADDRESS. Deleting any ' +
+        'This is an "immutable" entity: <address>. Deleting any ' +
         'characters will delete the entire entity. Adding characters ' +
         'will remove the entity from the range.'
       ),
       type: 'unstyled',
-      entityRanges: [{offset: 31, length: 7, key: 'first'}],
+      entityRanges: [{offset: 31, length: 9, key: 'first'}],
     },
     {
       text: (
@@ -33,11 +35,8 @@ let rawContent = {
   ],
   entityMap: {
     first: {
-      type: 'TOKEN',
+      type: 'ADDRESS',
       mutability: 'IMMUTABLE',
-      data: {
-        variableType: 'address',
-      }
     },
   },
 };
@@ -62,13 +61,11 @@ class TokenSpan extends React.Component {
 
   render() {
     const { offsetkey, children, contentState, entityKey } = this.props
-
     const entity = contentState.getEntity(entityKey)
-    const mut = contentState.getEntity(entityKey).getMutability()
 
-
+    const cls = `${entity.getType().toLowerCase()}-token`
     return (
-      <span data-offset-key={offsetkey} className={'token ' + mut.toLowerCase()}>{children}</span>
+      <span data-offset-key={offsetkey} className={cls} >{children}</span>
     )
   }
 }
@@ -98,7 +95,8 @@ class EditorInner extends React.Component {
 
     this.state = {
       editorState: newEditorState,
-      address: '1 Hacker Way, Menlo Park',
+      nameValue: 'Facebook',
+      addressValue: '1 Hacker Way, Menlo Park',
     }
 
     this.handleEvents()
@@ -109,7 +107,7 @@ class EditorInner extends React.Component {
       this.setState({editorState})
     }
 
-    this.insertVariable = (variableType) => {
+    this.insertVariable = (entityType) => {
       const { editorState } = this.state
 
       const selection = editorState.getSelection()
@@ -118,18 +116,15 @@ class EditorInner extends React.Component {
         const contentState = editorState.getCurrentContent()
 
         contentState.createEntity(
-          'TOKEN',
+          entityType.toUpperCase(),
           'IMMUTABLE',
-          {
-            variableType: variableType,
-          },
         )
 
         const entityKey = contentState.getLastCreatedEntityKey()
         const newContentState = Modifier.replaceText(
           contentState,
           selection,
-          variableType,
+          `<${entityType}>`,
           null,
           entityKey,
         )
@@ -147,14 +142,98 @@ class EditorInner extends React.Component {
     }
   }
 
+  handleReplace = () => {
+    const { editorState } = this.state
+    const contentState = editorState.getCurrentContent()
+
+    let newContentState = contentState
+
+    const entities = getEntities(newContentState)
+
+    for (let i = 0; i < entities.length; i++) {
+      const entity = getEntities(newContentState)[i]
+      const block = contentState.getBlockForKey(entity.blockKey)
+
+      let selection = SelectionState.createEmpty(block.getKey())
+      selection = selection.merge({
+        anchorOffset: entity.start,
+        focusOffset: entity.end,
+      })
+
+
+      let replacedText = ''
+
+      if (entity.entity.getType() === 'NAME') {
+        replacedText = this.state.nameValue
+      } else if (entity.entity.getType() === 'ADDRESS') {
+        replacedText = this.state.addressValue
+      }
+
+      newContentState = Modifier.replaceText(
+        newContentState,
+        selection,
+        replacedText,
+        null,
+        entity.entityKey
+      )
+    }
+
+    let newEditorState = EditorState.set(editorState, {
+      currentContent: newContentState,
+    })
+    this.setState({
+      editorState: newEditorState,
+    })
+  }
+
+  handleFormChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+
   render() {
     return (
       <div>
-        <div>
-          <span className="address" onClick={() => { this.insertVariable('name') }}>Facebook</span>
+        <div className="row">
+          <div className="col-sm-6">
+            <table className="table">
+              <tbody>
+              <tr>
+                <td>
+                  <span className="name-token" onClick={() => { this.insertVariable('name') }}>Name</span>
+                </td>
+                <td>
+                  <input
+                    name="nameValue"
+                    value={this.state.nameValue}
+                    onChange={this.handleFormChange}
+                    type="text"
+                    className="form-control form-control-sm"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="address-token" onClick={() => { this.insertVariable('address') }}>Address</span>
+                </td>
+                <td>
+                  <input
+                    name="addressValue"
+                    value={this.state.addressValue}
+                    onChange={this.handleFormChange}
+                    type="text"
+                    className="form-control form-control-sm"
+                  />
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div className="mb-1">
-          <span className="address" onClick={() => { this.insertVariable('address') }}>{this.state.address}</span>
+
+        <div className="btn-group btn-group-sm mb-1">
+          <button type="button" className="btn btn-outline-primary" onClick={this.handleReplace}>Replace text</button>
         </div>
         <Editor editorState={this.state.editorState} onChange={this.onChange} />
         <hr/>

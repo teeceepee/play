@@ -21,8 +21,16 @@ $enable-shadows: true;
   border: 1px solid $blue;
 }
 
-.address, .token {
+.name-token,
+.address-token {
   margin: 0 2px;
   padding: 2px;
+}
+
+.name-token {
+  background-color: #ffd5b7;
+}
+
+.address-token {
   background-color: rgba(204, 204, 255, 1.0);
 }
