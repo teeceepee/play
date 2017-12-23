@@ -9,7 +9,6 @@ end
 gem 'carrierwave-aliyun', '0.9.0' # https://github.com/huacnlee/carrierwave-aliyun
 gem 'enumerize', '2.1.2' # https://github.com/brainspec/enumerize
 gem 'active_model_serializers', '0.10.6'  # https://github.com/rails-api/active_model_serializers
-gem 'sassc-rails', '1.3.0'  # https://github.com/sass/sassc-rails
 gem 'letsencrypt_plugin', '0.0.10'  # https://github.com/lgromanowski/letsencrypt-plugin
 gem 'webpacker', '3.0.2'  # https://github.com/rails/webpacker
 gem 'bindata', '2.3.5' # https://github.com/dmendel/bindata
