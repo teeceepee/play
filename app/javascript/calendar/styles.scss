@@ -2,6 +2,8 @@
 @import "~bootstrap/scss/_variables.scss";
 
 .calendar-table {
+  table-layout: fixed;
+
   .weekend {
     background-color: $gray-100;
   }
