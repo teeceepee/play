@@ -100,10 +100,11 @@ class EditorInner extends Component {
         )
 
         const entityKey = contentState.getLastCreatedEntityKey()
+        const variableName = `<${variableType}>`
         const newContentState = Modifier.replaceText(
           contentState,
           selection,
-          `<${variableType}>`,
+          variableName,
           null,
           entityKey,
         )
@@ -112,7 +113,13 @@ class EditorInner extends Component {
           currentContent: newContentState,
         })
 
-
+        // move cursor to the end of the inserted variable
+        const newOffset = selection.getAnchorOffset() + variableName.length
+        const newSelection = selection.merge({
+          anchorOffset: newOffset,
+          focusOffset: newOffset,
+        })
+        newEditorState = EditorState.forceSelection(newEditorState, newSelection)
 
         this.setState({
           editorState: newEditorState,
