@@ -10,6 +10,7 @@
     "casperjs": "^1.1.4",
     "coffeescript": "1.12.7",
     "draft-js": "^0.10.4",
+    "draft-js-plugins-editor": "^2.0.4",
     "history": "^4.7.2",
     "less": "2.7.2",
     "less-loader": "^4.0.5",

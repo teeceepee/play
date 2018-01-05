@@ -1,16 +1,19 @@
 import 'draft-js/dist/Draft.css'
-import React from 'react'
+import React, { Component } from 'react'
 import {
   convertFromRaw,
   convertToRaw,
-  CompositeDecorator,
   ContentState,
-  Editor,
   EditorState,
   RichUtils,
   Modifier,
   SelectionState,
 } from 'draft-js'
+import Editor from 'draft-js-plugins-editor'
+import {
+  createVariablePlugin,
+  VARIABLE_ENTITY_TYPE,
+} from './variable_plugin'
 import { getEntities } from './utils'
 
 let rawContent = {
@@ -35,56 +38,29 @@ let rawContent = {
   ],
   entityMap: {
     first: {
-      type: 'ADDRESS',
+      type: VARIABLE_ENTITY_TYPE,
       mutability: 'IMMUTABLE',
+      data: {
+        name: 'address'
+      }
     },
   },
-};
-
-function getEntityStrategy(mutability) {
-  return function(contentBlock, callback, contentState) {
-    contentBlock.findEntityRanges(
-      (character) => {
-        const entityKey = character.getEntity();
-        if (entityKey === null) {
-          return false;
-        }
-        return contentState.getEntity(entityKey).getMutability() === mutability;
-      },
-      callback
-    );
-  };
 }
 
-
-class TokenSpan extends React.Component {
-
-  render() {
-    const { offsetkey, children, contentState, entityKey } = this.props
-    const entity = contentState.getEntity(entityKey)
-
-    const cls = `${entity.getType().toLowerCase()}-token`
-    return (
-      <span data-offset-key={offsetkey} className={cls} >{children}</span>
-    )
-  }
-}
-
-class EditorInner extends React.Component {
+class EditorInner extends Component {
   constructor(props) {
     super(props)
 
-    const decorator = new CompositeDecorator([
-      {
-        strategy: getEntityStrategy('IMMUTABLE'),
-        component: TokenSpan,
-      },
-    ])
+    const variablePlugin = createVariablePlugin()
+
+    this.plugins = [
+      variablePlugin,
+    ]
 
     const blocks = convertFromRaw(rawContent)
 
 
-    const editorState = EditorState.createWithContent(blocks, decorator)
+    const editorState = EditorState.createWithContent(blocks)
     const contentState = editorState.getCurrentContent()
 
 
@@ -107,7 +83,7 @@ class EditorInner extends React.Component {
       this.setState({editorState})
     }
 
-    this.insertVariable = (entityType) => {
+    this.insertVariable = (variableType) => {
       const { editorState } = this.state
 
       const selection = editorState.getSelection()
@@ -116,15 +92,18 @@ class EditorInner extends React.Component {
         const contentState = editorState.getCurrentContent()
 
         contentState.createEntity(
-          entityType.toUpperCase(),
+          VARIABLE_ENTITY_TYPE,
           'IMMUTABLE',
+          {
+            name: variableType,
+          }
         )
 
         const entityKey = contentState.getLastCreatedEntityKey()
         const newContentState = Modifier.replaceText(
           contentState,
           selection,
-          `<${entityType}>`,
+          `<${variableType}>`,
           null,
           entityKey,
         )
@@ -161,12 +140,18 @@ class EditorInner extends React.Component {
       })
 
 
+      const variableName = entity.entity.getData().name
       let replacedText = ''
 
-      if (entity.entity.getType() === 'NAME') {
-        replacedText = this.state.nameValue
-      } else if (entity.entity.getType() === 'ADDRESS') {
-        replacedText = this.state.addressValue
+      switch (variableName) {
+        case 'name':
+          replacedText = this.state.nameValue
+          break
+        case 'address':
+          replacedText = this.state.addressValue
+          break
+        default:
+          replacedText = ''
       }
 
       newContentState = Modifier.replaceText(
@@ -201,7 +186,7 @@ class EditorInner extends React.Component {
               <tbody>
               <tr>
                 <td>
-                  <span className="name-token" onClick={() => { this.insertVariable('name') }}>Name</span>
+                  <span className="name-variable" onClick={() => { this.insertVariable('name') }}>Name</span>
                 </td>
                 <td>
                   <input
@@ -215,7 +200,7 @@ class EditorInner extends React.Component {
               </tr>
               <tr>
                 <td>
-                  <span className="address-token" onClick={() => { this.insertVariable('address') }}>Address</span>
+                  <span className="address-variable" onClick={() => { this.insertVariable('address') }}>Address</span>
                 </td>
                 <td>
                   <input
@@ -235,7 +220,14 @@ class EditorInner extends React.Component {
         <div className="btn-group btn-group-sm mb-1">
           <button type="button" className="btn btn-outline-primary" onClick={this.handleReplace}>Replace text</button>
         </div>
-        <Editor editorState={this.state.editorState} onChange={this.onChange} />
+        <div className="editor-wrapper">
+          <Editor
+            editorState={this.state.editorState}
+            onChange={this.onChange}
+            plugins={this.plugins}
+            placeholder="Write down something..."
+          />
+        </div>
         <hr/>
         <pre>{JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()), null, 2)}</pre>
       </div>
