@@ -63,6 +63,7 @@ server {
     error_log <%= shared_path %>/log/nginx.error.log;
   }
 
+  <% if fetch(:nginx_assets_server_name) %>
   location ^~ /assets/ {
     return 404;
   }
@@ -70,8 +71,24 @@ server {
   location ^~ /packs/ {
     return 404;
   }
+  <% else %>
+  location ^~ /assets/ {
+    gzip_static on;
+    expires max;
+    add_header Cache-Control public;
+    etag off;
+  }
+
+  location ^~ /packs/ {
+    gzip_static on;
+    expires max;
+    add_header Cache-Control public;
+    etag off;
+  }
+  <% end %>
 }
 
+<% if fetch(:nginx_assets_server_name) %>
 server {
   listen 443 ssl http2;
 
@@ -108,3 +125,4 @@ server {
     etag off;
   }
 }
+<% end %>
