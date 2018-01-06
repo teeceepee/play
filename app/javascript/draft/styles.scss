@@ -15,6 +15,11 @@ $enable-shadows: true;
 
 @import "~bootstrap/scss/bootstrap.scss";
 
+.paragraph {
+  margin-top: 0;
+  margin-bottom: $paragraph-margin-bottom;
+}
+
 .editor-wrapper {
   padding: 10px;
   border: 1px solid $blue;

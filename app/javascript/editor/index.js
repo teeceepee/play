@@ -16,6 +16,13 @@ import {
 } from './variable_plugin'
 import { getEntities } from './utils'
 
+function blockStyleFn(contentBlock) {
+  const type = contentBlock.getType()
+  if (type === 'unstyled') {
+    return 'paragraph'
+  }
+}
+
 let rawContent = {
   blocks: [
     {
@@ -233,6 +240,7 @@ class EditorInner extends Component {
             onChange={this.onChange}
             plugins={this.plugins}
             placeholder="Write down something..."
+            blockStyleFn={blockStyleFn}
           />
         </div>
         <hr/>
