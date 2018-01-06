@@ -1,6 +1,7 @@
 defaults: &defaults
   foo:
     bar: baz
+  asset_host:
   mailer:
     default_from:
     default_to:
