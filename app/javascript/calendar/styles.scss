@@ -38,3 +38,42 @@
     cursor: pointer;
   }
 }
+
+.game-card {
+  .headline {
+    font-size: .75rem;
+  }
+  .final {
+    color: $orange;
+  }
+  .start-time {
+    color: $gray-500;
+  }
+
+  .game-line {
+    position: relative;
+
+    &.won:after {
+      content: '';
+      position: absolute;
+      right: -0.5rem;
+
+      border: .25rem solid transparent;
+      border-right-color: $orange;
+    }
+    &.lost {
+      .score {
+        color: $gray-600;
+      }
+    }
+
+    .logo {
+      height: 2rem;
+    }
+
+    .score {
+      font-size: 1.5rem;
+      line-height: 2.25rem;
+    }
+  }
+}

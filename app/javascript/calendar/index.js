@@ -5,13 +5,68 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 
 import { Modal, showModal } from '../common/modal'
-
 import {
   selectPrevMonth,
   selectNextMonth,
   selectCurrentMonth,
   fetchNbaGames,
 } from './actions'
+import * as teamLogos from '../team_logos'
+
+function gameStatus(game, isHome) {
+  if (game.home_score && game.road_score) {
+    if (isHome) {
+      return game.home_score > game.road_score ? 'won' : 'lost'
+    } else {
+      return game.home_score < game.road_score ? 'won' : 'lost'
+    }
+  } else {
+    return ''
+  }
+}
+
+class GameCard extends Component {
+
+  render() {
+    const { game } = this.props
+    return (
+      <div className="game-card card mb-3">
+        <div className="card-body py-2">
+          <div className="headline">
+            {this.final()}
+            <span className="start-time float-right">
+              {game.startTime.utcOffset(this.props.calendar.utcOffset).format('HH:mm A Z')}
+            </span>
+          </div>
+
+          {this.gameLine(game.road, game.road.toUpperCase(), game.road_score, gameStatus(game, false))}
+          {this.gameLine(game.home, game.home.toUpperCase(), game.home_score, gameStatus(game, true))}
+        </div>
+      </div>
+    )
+  }
+
+  final() {
+    const { game } = this.props
+    if (game.road_score && game.home_score) {
+      return <span className="final">Final</span>
+    } else {
+      return <span>&nbsp;</span>
+    }
+  }
+
+  gameLine(team, teamName, teamScore, status) {
+    return (
+      <div className={"game-line d-flex align-items-center " + status}>
+        <div className="mr-2">
+          <img src={teamLogos[team]} className="logo" alt={team}/>
+        </div>
+        <div className="font-weight-bold">{teamName}</div>
+        <div className="score ml-auto font-weight-bold">{teamScore}</div>
+      </div>
+    )
+  }
+}
 
 class DayCell extends Component {
 
@@ -82,14 +137,15 @@ class DayCell extends Component {
   }
 
   games() {
-    return this.props.games.map(game => (
-      <div key={game.id}>
-        <h3 className="text-center">
-          {game.road.toUpperCase()} vs {game.home.toUpperCase()}
-        </h3>
-        <p className="text-center">{game.startTime.utcOffset(this.props.calendar.utcOffset).format('HH:mm Z')}</p>
+    return (
+      <div className="row">
+        {this.props.games.map(game => (
+          <div className="col-sm-6">
+            <GameCard game={game} calendar={this.props.calendar} key={game.id}/>
+          </div>
+        ))}
       </div>
-    ))
+    )
   }
 }
 
