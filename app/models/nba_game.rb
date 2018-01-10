@@ -47,6 +47,22 @@ class NbaGame < ApplicationRecord
   enumerize :road, in: TEAMS + ['other']
   enumerize :home, in: TEAMS + ['other']
 
+
+  def road_logo
+    self.class.team_logo(self.road)
+  end
+
+  def home_logo
+    self.class.team_logo(self.home)
+  end
+
+  def self.team_logo(team)
+    if TEAMS.include?(team)
+      host = Rails.configuration.action_controller.asset_host
+      ActionController::Base.helpers.asset_pack_path("team_logos/#{team}.png", host: host)
+    end
+  end
+
   def self.between_range(from, to)
     self.where('start_time >= ? AND start_time < ?', from, to)
   end

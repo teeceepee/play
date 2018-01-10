@@ -11,7 +11,6 @@ import {
   selectCurrentMonth,
   fetchNbaGames,
 } from './actions'
-import * as teamLogos from '../team_logos'
 
 function gameStatus(game, isHome) {
   if (game.home_score && game.road_score) {
@@ -39,8 +38,8 @@ class GameCard extends Component {
             </span>
           </div>
 
-          {this.gameLine(game.road, game.road.toUpperCase(), game.road_score, gameStatus(game, false))}
-          {this.gameLine(game.home, game.home.toUpperCase(), game.home_score, gameStatus(game, true))}
+          {this.gameLine(game.road_logo, game.road_text, game.road_score, gameStatus(game, false))}
+          {this.gameLine(game.home_logo, game.home_text, game.home_score, gameStatus(game, true))}
         </div>
       </div>
     )
@@ -55,11 +54,11 @@ class GameCard extends Component {
     }
   }
 
-  gameLine(team, teamName, teamScore, status) {
+  gameLine(teamLogo, teamName, teamScore, status) {
     return (
       <div className={"game-line d-flex align-items-center " + status}>
         <div className="mr-2">
-          <img src={teamLogos[team]} className="logo" alt={team}/>
+          <img src={teamLogo} className="logo" alt={teamName}/>
         </div>
         <div className="font-weight-bold">{teamName}</div>
         <div className="score ml-auto font-weight-bold">{teamScore}</div>
@@ -129,7 +128,7 @@ class DayCell extends Component {
       const firstGame = this.props.games[0]
       return (
         <div onClick={this.handleGamesClick} className="games">
-          <div className="game">{firstGame.road.toUpperCase()} vs {firstGame.home.toUpperCase()}</div>
+          <div className="game">{firstGame.road_text} vs {firstGame.home_text}</div>
           <div className="game">and {this.props.games.length - 1} other games</div>
         </div>
       )
@@ -140,8 +139,8 @@ class DayCell extends Component {
     return (
       <div className="row">
         {this.props.games.map(game => (
-          <div className="col-sm-6">
-            <GameCard game={game} calendar={this.props.calendar} key={game.id}/>
+          <div className="col-sm-6" key={game.id}>
+            <GameCard game={game} calendar={this.props.calendar}/>
           </div>
         ))}
       </div>

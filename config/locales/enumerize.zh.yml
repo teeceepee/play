@@ -1,0 +1,37 @@
+zh:
+  enumerize:
+    nba_game:
+      home: &teams
+        atl: 老鹰
+        bkn: 篮网
+        bos: 凯尔特人
+        cha: 黄蜂
+        chi: 公牛
+        cle: 骑士
+        dal: 独行侠
+        den: 掘金
+        det: 活塞
+        gsw: 勇士
+        hou: 火箭
+        ind: 步行者
+        lac: 快船
+        lal: 湖人
+        mem: 灰熊
+        mia: 热火
+        mil: 雄鹿
+        min: 森林狼
+        nop: 鹈鹕
+        nyk: 尼克斯
+        okc: 雷霆
+        orl: 魔术
+        phi: 76人
+        phx: 太阳
+        por: 开拓者
+        sac: 国王
+        sas: 马刺
+        tor: 猛龙
+        uta: 爵士
+        was: 奇才
+        other: ""
+      road:
+        <<: *teams
