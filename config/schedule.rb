@@ -22,6 +22,6 @@
 env :PATH, ENV['PATH']
 set :output, '~/cron_log.log'
 
-every 12.hours do
+every 1.hour do
   runner 'Fetcher.fetch_all'
 end
