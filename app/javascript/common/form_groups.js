@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
+import Select from 'react-select'
+import 'react-select/dist/react-select.css'
 
 class BaseFormGroup extends React.Component {
 
@@ -14,7 +16,7 @@ class BaseFormGroup extends React.Component {
 export class InputFormGroup extends BaseFormGroup {
 
   render() {
-    const {input, meta: { touched, error }, label, type } = this.props
+    const { input, meta: { touched, error }, label, type } = this.props
     const cls = 'form-control' + (touched && error ? ' is-invalid' : '')
 
     return (
@@ -30,7 +32,7 @@ export class InputFormGroup extends BaseFormGroup {
 export class TextareaFormGroup extends BaseFormGroup {
 
   render() {
-    const {input, meta: { touched, error }, label, rows } = this.props
+    const { input, meta: { touched, error }, label, rows } = this.props
     const cls = 'form-control' + (touched && error ? ' is-invalid' : '')
 
     return (
@@ -43,10 +45,53 @@ export class TextareaFormGroup extends BaseFormGroup {
   }
 }
 
+const textParams = {
+  placeholder: '', // default: 'Select ...'
+  noResultsText: 'No results found', // default: 'No results found'
+  clearValueText: '', // default: 'Clear value'
+}
+
 export class SelectFormGroup extends BaseFormGroup {
 
+  handleFocus = () => {
+    this.select && this.select.focus()
+  }
+
+  handleBlur = () => {
+    this.props.input.onBlur(this.props.input.value)
+  }
+
+  render() {
+    const { input, meta: { touched, error }, label } = this.props
+
+    return (
+        <div className="form-group">
+          <label onClick={this.handleFocus}>{label}</label>
+          <Select
+            options={this.selectOptions()}
+            value={input.value}
+            onChange={input.onChange} simpleValue={true}
+            onFocus={input.onFocus}
+            onBlur={this.handleBlur}
+            openOnFocus={true}
+            ref={(el) => this.select = el}
+            {...textParams}
+          />
+          {touched && error && <div className="invalid-feedback" style={{display: 'block'}}>{error}</div>}
+      </div>
+    )
+  }
+
+  selectOptions() {
+    const {options} = this.props
+    return options.map(o => ({label: o[0], value: o[1]}))
+  }
+}
+
+export class NSelectFormGroup extends BaseFormGroup {
+
   options() {
-    const {options, includeBlank } = this.props
+    const { options, includeBlank } = this.props
     let opts
     if (includeBlank) {
       opts = [['', '']].concat(options)
@@ -60,7 +105,7 @@ export class SelectFormGroup extends BaseFormGroup {
   }
 
   render() {
-    const {input, meta: { touched, error }, label} = this.props
+    const { input, meta: { touched, error }, label } = this.props
     const cls = 'form-control' + (touched && error ? ' is-invalid' : '')
 
     return (
