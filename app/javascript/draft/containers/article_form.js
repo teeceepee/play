@@ -5,7 +5,7 @@ import {
   InputFormGroup,
   TextareaFormGroup,
   SelectFormGroup,
-} from 'common/form_groups'
+} from 'common/FormGroups'
 
 const statusOptions = JSON.parse(document.querySelector('meta[name=global-options]').content)['article.status']
 
