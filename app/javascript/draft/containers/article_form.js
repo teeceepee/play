@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 
-import { InputFormGroup, TextareaFormGroup, SelectFormGroup } from './form_groups'
+import { InputFormGroup, TextareaFormGroup, SelectFormGroup } from 'common/form_groups'
 
 const statusOptions = JSON.parse(document.querySelector('meta[name=global-options]').content)['article.status']
 
