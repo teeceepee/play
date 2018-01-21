@@ -1,18 +1,5 @@
-//$white:  #fff;
-//$black:  #000;
-//$red:    #d9534f;
-//$orange: #f0ad4e;
-//$yellow: #ffd500;
-//$green:  #5cb85c;
-//$blue:   #0275d8;
-//$teal:   #5bc0de;
-//$pink:   #ff5b77;
-//$purple: #613d7c;
-
-// https://teamcolorcodes.com/philadelphia-76ers-color-codes/
-$blue:    #006BB6;
-
-@import "~bootstrap/scss/bootstrap.scss";
+@import "../common/global-styles";
+@import "~bootstrap/scss/bootstrap";
 
 .paragraph {
   margin-top: 0;

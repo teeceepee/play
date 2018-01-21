@@ -1,0 +1,24 @@
+@import "../global-styles";
+
+// control options
+$select-input-border-color:         $input-border-color;
+$select-input-border-focus:         $input-focus-border-color;
+$select-input-box-shadow-focus:     $input-focus-box-shadow;
+$select-input-height:               38px;
+$select-input-placeholder:          $input-border-color;
+$select-text-color:                 $input-color;
+$select-input-hover-box-shadow:     none;
+
+// clear "x" button
+$select-clear-color:                $input-border-color;
+$select-clear-hover-color:          $input-color;
+
+// arrow indicator
+$select-arrow-color:                $input-border-color;
+$select-arrow-color-hover:          $input-color;
+
+@import "~react-select/scss/default";
+
+.Select-control {
+  @include transition($input-transition);
+}

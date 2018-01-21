@@ -1,6 +1,6 @@
+import './react-select-bootstrap.scss'
 import React, { Component } from 'react'
 import Select from 'react-select'
-import 'react-select/dist/react-select.css'
 
 class BaseFormGroup extends Component {
 
@@ -46,7 +46,7 @@ export class TextareaFormGroup extends BaseFormGroup {
 }
 
 const textParams = {
-  placeholder: '', // default: 'Select ...'
+  placeholder: 'Select ...', // default: 'Select ...'
   noResultsText: 'No results found', // default: 'No results found'
   clearValueText: '', // default: 'Clear value'
 }
