@@ -9,6 +9,7 @@ defaults: &defaults
     endpoint:
     access_key_id:
     access_key_secret:
+  oss_dir:
   smtp_settings:
     user_name:
     password:
