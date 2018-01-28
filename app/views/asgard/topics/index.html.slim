@@ -1,0 +1,22 @@
+
+= simple_form_for [:asgard, Topic.new] do |f|
+  = f.input :thread_id
+  = f.submit
+
+table.table.table-striped
+  thead
+    tr
+      th = Topic.han(:id)
+      th = Topic.han(:thread_id)
+      th = NbaImage.model_name.human
+      th = Topic.han(:created_at)
+
+  tbody
+    - @topics.each do |topic|
+      tr
+        td = topic.id
+        td = link_to topic.thread_id, topic.thread_url, target: '_blank'
+        td
+          - topic.nba_images.each do |nba_image|
+            = link_to "##{nba_image.id}", nba_image.url, title: nba_image.url, target: '_blank'
+        td = l(topic.created_at)

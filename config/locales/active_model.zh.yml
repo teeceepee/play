@@ -34,3 +34,5 @@ zh:
       other_than: "must be other than %{count}"
       odd: "must be odd"
       even: "must be even"
+      required: "must exist"
+      taken: "has already been taken"

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'asgard', to: 'asgard#index'
   namespace :asgard do
     resources :taobao_items, only: [:index, :create]
+    resources :topics, only: [:index, :create]
   end
 
   get 'comments/index'

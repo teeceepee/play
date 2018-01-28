@@ -3,15 +3,21 @@ class Hupu
 
   attr_accessor :logger
 
+  # @return [Topic]
   def self.save_thread_images(thread_id)
     h = Hupu.new
 
-    h.fetch_gifs(thread_id) do |thread_data|
+    h.fetch_gifs(thread_id.to_s) do |thread_data|
       topic = Topic.create(thread_id: thread_id)
-      urls = thread_data[:urls]
-      urls.each do |url|
-        topic.nba_images.create(url: url, remote_image_url: url)
+
+      if topic.persisted?
+        urls = thread_data[:urls]
+        urls.each do |url|
+          topic.nba_images.create(url: url, remote_image_url: url)
+        end
       end
+
+      topic
     end
   end
 
