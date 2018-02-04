@@ -2,7 +2,6 @@ require("../pages/bilibili_gifs/style.scss")
 
 import React from "react"
 import ReactDOM from "react-dom"
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
 var Gif = React.createClass({
   displayName: 'Gif',
@@ -61,11 +60,7 @@ var Gif = React.createClass({
       onMouseLeave: this.handleMouseLeave,
     });
 
-    return React.createElement(CSSTransitionGroup, {
-      transitionName: "gif-transition",
-      transitionAppear: true,
-      transitionAppearTimeout: 5000,
-    }, React.createElement('div', null, img));
+    return React.createElement('div', null, img);
 
   },
 
