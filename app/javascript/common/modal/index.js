@@ -51,6 +51,16 @@ class ScrollbarChecker {
 }
 
 class PureModal extends Component {
+  static propTypes = {
+    identity: PropTypes.string.isRequired,
+    modal: PropTypes.object.isRequired,
+    hideModal: PropTypes.func.isRequired,
+    title: PropTypes.string,
+  }
+
+  static defaultProps = {
+    title: '',
+  }
 
   constructor(props) {
     super(props)
@@ -132,17 +142,6 @@ class PureModal extends Component {
   }
 }
 
-PureModal.defaultProps = {
-  title: '',
-}
-
-PureModal.propTypes = {
-  identity: PropTypes.string.isRequired,
-  modal: PropTypes.object.isRequired,
-  hideModal: PropTypes.func.isRequired,
-  title: PropTypes.string,
-}
-
 
 function mapStateToProps(state) {
   return {
@@ -156,5 +155,28 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
+class PureModalTrigger extends Component {
+  static propTypes = {
+    identity: PropTypes.string.isRequired,
+    tag: PropTypes.oneOf(['div', 'span', 'button']),
+  }
+  static defaultProps = {
+    tag: 'div',
+  }
+
+  handleClick = () => {
+    this.props.showModal(this.props.identity)
+  }
+
+  render() {
+    return React.createElement(this.props.tag, {
+      onClick: this.handleClick,
+      className: this.props.className,
+    }, this.props.children)
+  }
+}
+
+
+export const ModalTrigger = connect(null, {showModal})(PureModalTrigger)
 export const Modal = connect(mapStateToProps, mapDispatchToProps)(PureModal)
 export { showModal, hideModal, modal }

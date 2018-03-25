@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
 import { Dropdown } from '../../common/dropdown'
-import { Modal, showModal } from '../../common/modal'
+import { Modal, ModalTrigger } from 'common/modal'
 import { Pagination } from '../../common/pagination'
 import { ArticleForm } from './article_form'
 import {
@@ -49,12 +49,16 @@ class ArticleIndex extends Component {
   }
 
   render() {
+    const modalIdentity = 'articles-modal'
+
     return (
       <div className="container mt-4">
         <Link to="/articles/new">New</Link>
         <div className="mb-1">
-          <button onClick={this.props.openArticlesModal} className="btn btn-primary">Open modal</button>
-          <Modal identity="articles-modal">
+          <ModalTrigger identity={modalIdentity} tag="button" className="btn btn-primary">
+            Open modal
+          </ModalTrigger>
+          <Modal identity={modalIdentity}>
             <h1>An Open Modal</h1>
             <p>modal content...</p>
             <p>modal content...</p>
@@ -103,8 +107,6 @@ class ArticleIndex extends Component {
   }
 }
 
-const modalIdentity = 'articles-modal'
-
 function mapStateToProps(state) {
   return {
     articles: state.articles,
@@ -130,9 +132,6 @@ function mapDispatchToProps(dispatch) {
     },
     toggleArticleDropdown: (article) => {
       dispatch(toggleArticleDropdown(article))
-    },
-    openArticlesModal: () => {
-      dispatch(showModal(modalIdentity))
     },
   }
 }

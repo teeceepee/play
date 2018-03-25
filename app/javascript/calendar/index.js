@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
-import { Modal, showModal } from '../common/modal'
+import { Modal, ModalTrigger } from 'common/modal'
 import {
   selectPrevMonth,
   selectNextMonth,
@@ -69,10 +69,6 @@ class GameCard extends Component {
 
 class DayCell extends Component {
 
-  handleGamesClick = () => {
-    this.props.showModal(this.cellId())
-  }
-
   render() {
     let cellCls = ''
     if (this.isWeekend()) {
@@ -127,10 +123,10 @@ class DayCell extends Component {
     if (this.props.games.length > 0) {
       const firstGame = this.props.games[0]
       return (
-        <div onClick={this.handleGamesClick} className="games">
+        <ModalTrigger identity={this.cellId()} className="games">
           <div className="game">{firstGame.road_text} vs {firstGame.home_text}</div>
           <div className="game">and {this.props.games.length - 1} other games</div>
-        </div>
+        </ModalTrigger>
       )
     }
   }
@@ -163,7 +159,7 @@ function mapStateToPropsCell(state, ownProps) {
   }
 }
 
-const DayCellCont = connect(mapStateToPropsCell, {showModal})(DayCell)
+const DayCellCont = connect(mapStateToPropsCell)(DayCell)
 
 class Calendar extends Component {
 
