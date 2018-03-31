@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   end
 
   namespace :d do
+    resources :authors, only: [:index, :create, :update]
     resources :nba_games, only: [:index]
     resources :nba_images, only: [] do
       collection do
