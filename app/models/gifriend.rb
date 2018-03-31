@@ -96,11 +96,25 @@ module Gifriend
     string :application_identifier, length: 8
     string :application_authentication_code, length: 3
     data_sub_blocks :application_data_and_block_terminator
+
+    def to_metadata
+      {
+        application_identifier: self.application_identifier.to_s,
+        application_authentication_code: self.application_authentication_code.to_s,
+      }
+    end
   end
 
   # 0x21 '!' 0xFE
   class CommentExtension < BinData::Record
     data_sub_blocks :comment_data_and_block_terminator
+
+    def to_metadata
+      comment = self.comment_data_and_block_terminator.sub_blocks.first.data_values.to_s
+      {
+        comment: comment
+      }
+    end
   end
 
   # 0x21 '!' 0xF9
@@ -180,7 +194,19 @@ module Gifriend
     data_block_inner :inner, selection: :separator
 
     def graphic?
-      self.separator == 0x21 && self.inner.label == 0xF9 # self.separator == 0x2C
+      self.separator == 0x21 && self.inner.label == 0xF9
+    end
+
+    def image?
+      self.graphic? && self.inner.inner.graphic_rendering_block.separator == 0x2C
+    end
+
+    def application?
+      self.separator == 0x21 && self.inner.label == 0xFF
+    end
+
+    def comment?
+      self.separator == 0x21 && self.inner.label == 0xFE
     end
   end
 
@@ -196,17 +222,47 @@ module Gifriend
 
     array :data_list, type: :data_wrapper, read_until: :eof
 
+    def metadata
+      {
+        header: {
+          signature: self.header.signature.to_s,
+          version: self.header.version.to_s,
+        },
+        logical_screen_descriptor: {
+          logical_screen_width: self.logical_screen_descriptor.logical_screen_width.to_i,
+          logical_screen_height: self.logical_screen_descriptor.logical_screen_height.to_i,
+        },
+        has_gct: self.has_gct?,
+        block_count: self.data_list.size,
+        image_count: self.image_indicies.size,
+        applications: self.applications.map(&:to_metadata),
+        comments: self.comments.map(&:to_metadata),
+      }
+    end
+
+    # @return Array<Gifriend::GraphicRenderingBlockInner>
     def images
-      r = []
-      self.data_list.each do |b|
-        if b.separator == 0x21 && b.inner.label == 0xF9 && b.inner.inner.graphic_rendering_block.separator == 0x2C
-          r.push b.inner.inner.graphic_rendering_block.inner
+      self.data_list.select { |b| b.image? }.map { |b| b.inner.inner.graphic_rendering_block.inner }
+    end
+
+    def image_indicies
+      indicies = []
+      self.data_list.each_with_index do |b, i|
+        if b.image?
+          indicies.push(i)
         end
       end
 
-      r
+      indicies
     end
 
+    def applications
+      self.data_list.select { |b| b.application? }.map { |b| b.inner.inner }
+    end
+
+    def comments
+      self.data_list.select { |b| b.comment? }.map { |b| b.inner.inner }
+    end
 
     def has_gct?
       self.logical_screen_descriptor.global_color_table_flag == 1
@@ -238,8 +294,24 @@ module Gifriend
       end
     end
 
-    File.open('gray.gif', 'wb') do |f|
+    FileUtils.mkdir_p('tmp/gif')
+    File.open('tmp/gif/gray.gif', 'wb') do |f|
       f.write(g.to_binary_s)
+    end
+  end
+
+
+  def self.sub_frames
+    f = File.new(Rails.root.join('app/assets/images/test.gif'))
+    g = Gifriend::Gif.read(f); nil
+    original_list = g.data_list.clone
+
+    FileUtils.mkdir_p('tmp/gif')
+    g.image_indicies.each do |index|
+      File.open("tmp/gif/#{index}.gif", 'wb') do |f|
+        g.data_list = [original_list[index], original_list.last]
+        f.write(g.to_binary_s)
+      end
     end
   end
 end

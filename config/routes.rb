@@ -34,6 +34,11 @@ Rails.application.routes.draw do
   resources :pictures, only: [:index, :show, :create], param: :pid
   resources :articles, only: [:index, :show, :new, :edit, :create, :update]
 
+  get 'gif', to: 'gif#index'
+  namespace :gif do
+    post :metadata
+  end
+
   namespace :pages do
     get :girls
     get :send_mail
