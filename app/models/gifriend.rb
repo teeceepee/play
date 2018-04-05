@@ -1,5 +1,6 @@
 require 'bindata'
 
+# https://www.w3.org/Graphics/GIF/spec-gif89a.txt
 module Gifriend
 
   # primary blocks
@@ -129,6 +130,26 @@ module Gifriend
     uint16le :delay_time
     uint8 :transparent_color_index
     uint8 :block_terminator
+
+    def to_metadata
+      {
+        disposal_method: self.disposal_method_text,
+        user_input_flag: self.user_input_flag.to_i,
+        delay_time: self.delay_time.to_i,
+        transparent_color_index: self.transparent_color_index.to_i,
+      }
+    end
+
+    def disposal_method_text
+      DISPOSAL_METHODS[self.disposal_method.to_i]
+    end
+
+    DISPOSAL_METHODS = {
+      0 => 'No disposal specified',
+      1 => 'Do not dispose',
+      2 => 'Restore to background color',
+      3 => 'Restore to previous',
+    }
   end
 
   # 0x21 '!'
@@ -237,7 +258,12 @@ module Gifriend
         image_count: self.image_indicies.size,
         applications: self.applications.map(&:to_metadata),
         comments: self.comments.map(&:to_metadata),
+        graphic_controls: self.graphic_controls.map(&:to_metadata),
       }
+    end
+
+    def graphic_controls
+      self.data_list.select { |b| b.image? }.map { |b| b.inner.inner.graphic_control_extension }
     end
 
     # @return Array<Gifriend::GraphicRenderingBlockInner>
@@ -312,6 +338,22 @@ module Gifriend
         g.data_list = [original_list[index], original_list.last]
         f.write(g.to_binary_s)
       end
+    end
+  end
+
+  def self.change_speed(factor = 2.0)
+    f = File.new(Rails.root.join('app/assets/images/test.gif'))
+    g = Gifriend::Gif.read(f); nil
+
+    g.graphic_controls.each do |graphic_control|
+      time = (graphic_control.delay_time / factor.to_f).floor
+      new_time = time > 0 ? time : 2 # TODO, why zero and one don't work
+      graphic_control.delay_time = new_time
+    end
+
+    FileUtils.mkdir_p('tmp/gif')
+    File.open('tmp/gif/speed.gif', 'wb') do |f|
+      f.write(g.to_binary_s)
     end
   end
 end
