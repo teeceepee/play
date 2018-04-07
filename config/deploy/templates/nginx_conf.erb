@@ -22,7 +22,13 @@ server {
   listen 80;
   server_name <%= fetch(:nginx_server_name) %> <%= fetch(:nginx_assets_server_name) %>;
 
-  return 301 https://$host$request_uri;
+  location ^~ /.well-known/ {
+    root <%= current_path %>/public;
+  }
+
+  location ^~ / {
+    return 301 https://$host$request_uri;
+  }
 }
 
 server {
@@ -106,10 +112,6 @@ server {
 
   server_name <%= fetch(:nginx_assets_server_name) %>;
   root <%= current_path %>/public;
-
-  location ^~ /.well-known/ {
-    return 302 https://<%= fetch(:nginx_server_name) %>$request_uri;
-  }
 
   location ^~ /assets/ {
     gzip_static on;
