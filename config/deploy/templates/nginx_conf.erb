@@ -81,14 +81,12 @@ server {
   location ^~ /assets/ {
     gzip_static on;
     expires max;
-    add_header Cache-Control public;
     etag off;
   }
 
   location ^~ /packs/ {
     gzip_static on;
     expires max;
-    add_header Cache-Control public;
     etag off;
   }
   <% end %>
@@ -116,14 +114,12 @@ server {
   location ^~ /assets/ {
     gzip_static on;
     expires max;
-    add_header Cache-Control public;
     etag off;
   }
 
   location ^~ /packs/ {
     gzip_static on;
     expires max;
-    add_header Cache-Control public;
     etag off;
   }
 }
