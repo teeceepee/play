@@ -55,10 +55,15 @@ export const calendar = handleActions({
   },
   [selectCurrentMonth]: (state) => {
     const today = state.today
-    return {
-      ...state,
-      year: today.year(),
-      month: today.month(),
+
+    if (state.year === today.year() && state.month === today.month()) {
+      return state
+    } else {
+      return {
+        ...state,
+        year: today.year(),
+        month: today.month(),
+      }
     }
   },
 }, initialState)

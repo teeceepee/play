@@ -1,5 +1,5 @@
 import './styles.scss'
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import moment from 'moment'
@@ -68,6 +68,11 @@ class GameCard extends Component {
 }
 
 class DayCell extends Component {
+  static propTypes = {
+    date: PropTypes.any.isRequired,
+    calendar: PropTypes.object.isRequired,
+    games: PropTypes.array.isRequired,
+  }
 
   render() {
     let cellCls = ''
@@ -144,12 +149,6 @@ class DayCell extends Component {
   }
 }
 
-DayCell.proptypes = {
-  date: PropTypes.any.isRequired,
-  calendar: PropTypes.object.isRequired,
-  games: PropTypes.array.isRequired,
-}
-
 
 function mapStateToPropsCell(state, ownProps) {
   return {
@@ -161,7 +160,10 @@ function mapStateToPropsCell(state, ownProps) {
 
 const DayCellCont = connect(mapStateToPropsCell)(DayCell)
 
-class Calendar extends Component {
+class Calendar extends PureComponent {
+  static propTypes = {
+    calendar: PropTypes.object.isRequired,
+  }
 
   componentDidMount() {
     this.props.fetchNbaGames()
