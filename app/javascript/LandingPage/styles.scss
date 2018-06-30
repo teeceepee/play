@@ -1,0 +1,33 @@
+@import "../common/global-styles";
+
+$index-bg: $gray-800;
+
+.index-page {
+  .banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    height: 600px;
+    background-color: $index-bg;
+
+    .title {
+      font-size: 60px;
+      color: $white;
+    }
+  }
+
+  .libraries {
+    max-width: 800px;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    color: $white;
+    background-color: $index-bg;
+  }
+}

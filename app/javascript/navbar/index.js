@@ -9,9 +9,10 @@ export class Navbar extends PureComponent {
         <div className="container justify-content-start">
           <a className="navbar-brand" href="#">Y</a>
           <ul className="navbar-nav">
-            <NavLink exact to="/" className="nav-item nav-link">Home</NavLink>
+            <NavLink to="/" className="nav-item nav-link">Home</NavLink>
             <NavLink to="/articles" className="nav-item nav-link">Articles</NavLink>
             <NavLink to="/calendar" className="nav-item nav-link">Calendar</NavLink>
+            {/*<NavLink to="/dashboard" className="nav-item nav-link">Dashboard</NavLink>*/}
           </ul>
         </div>
       </nav>

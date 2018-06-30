@@ -4,9 +4,10 @@ import { Switch, Route, Link, withRouter } from 'react-router-dom'
 import { ArticleIndexCont } from "./article_index"
 import { ArticleNewCont } from "./article_new"
 import { ArticleEditCont } from "./article_edit"
-import { LandingPagePage } from 'landing_page/index'
+import { LandingPagePage } from 'LandingPage'
 import { CalendarPage } from '../../calendar/index'
 import { EditorPage } from '../../editor'
+import { DashboardPage } from 'Dashboard'
 
 class Main extends React.Component {
 
@@ -18,6 +19,7 @@ class Main extends React.Component {
         <Route path="/articles/new" component={ArticleNewCont} />
         <Route path="/calendar" exact component={CalendarPage} />
         <Route path="/editor" exact component={EditorPage}/>
+        <Route path="/dashboard" exact component={DashboardPage}/>
         <Route component={LandingPagePage} />
       </Switch>
     )

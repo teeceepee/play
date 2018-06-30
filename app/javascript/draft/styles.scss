@@ -1,6 +1,10 @@
 @import "../common/global-styles";
 @import "~bootstrap/scss/bootstrap";
 
+html, body {
+  height: 100%;
+}
+
 .paragraph {
   margin-top: 0;
   margin-bottom: $paragraph-margin-bottom;
