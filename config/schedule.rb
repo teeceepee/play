@@ -26,6 +26,6 @@ every 1.hour do
   runner 'Fetcher.fetch_all'
 end
 
-every 2.hours do
+every 60.days do
   rake 'letsencrypt_plugin'
 end
