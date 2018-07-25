@@ -17,7 +17,7 @@ default: &default
   # in situations when database will not be used
   # NOTE: on Heroku, comment out this line and use the database
   challenge_dir_name: "letsencrypt/"
-  cert_name: "cert"
+  cert_name: "teeceepee.com"
 
 production:
   # if 'cert_name' is set, the keys are saved with this name, if not the first string from key 'domain' will be used
