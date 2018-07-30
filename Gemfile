@@ -23,7 +23,8 @@ gem 'slack-notifier', '1.5.1'  # https://github.com/stevenosloan/slack-notifier
 gem 'settingslogic', '2.0.9'  # https://github.com/settingslogic/settingslogic
 gem 'exception_notification', '4.2.1'  # https://github.com/smartinez87/exception_notification
 gem 'sidekiq', '~> 5.1.3'  # https://github.com/mperham/sidekiq
-gem 'redis', '~> 3.3.0'  # https://github.com/redis/redis-rb
+gem 'hiredis', '0.6.1'  # https://github.com/redis/hiredis-rb
+gem 'redis', '~> 4.0.1', require: ['redis', 'redis/connection/hiredis']  # https://github.com/redis/redis-rb
 gem 'nokogiri', '1.8.1'  # https://github.com/sparklemotion/nokogiri
 gem 'http', '~> 2.0.1'  # https://github.com/httprb/http
 gem 'pg', '~> 0.18.4'  # https://github.com/ged/ruby-pg
