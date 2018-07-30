@@ -89,6 +89,10 @@ Rails.application.routes.draw do
 
   mount LetsencryptPlugin::Engine, at: '/'  # It must be at root level
 
+  if Rails.env.development?
+    require 'sidekiq/web'
+    mount Sidekiq::Web, at: '/sidekiq'
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
