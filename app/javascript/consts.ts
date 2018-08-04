@@ -1,7 +1,7 @@
 
 const foo = "foo"
 const bar = () => "bar"
-const name = () => "play"
+const name = () : string => "play"
 
 export {
   foo,
