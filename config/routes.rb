@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'buyers#index', constraints: {domain: 'xiumaijia.com'}
   root to: 'pages#index'
   get 'y/(*custom)', to: 'articles#draft'
+  get 'v/(*custom)', to: 'pages#v'
 
   resources :topics, only: [:index]
 
