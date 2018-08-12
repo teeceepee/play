@@ -4,19 +4,21 @@
   </div>
 </template>
 
-<script>
-export default {
-  data: function () {
-    return {
-      message: "Hello Vue"
-    }
-  }
-}
+<script lang="ts">
+  import Vue from 'vue'
+
+  export default Vue.extend({
+    data: function (): object {
+      return {
+        message: 'Hello Vue with TypeScript'
+      }
+    },
+  })
 </script>
 
 <style scoped>
-.title {
-  font-size: 3rem;
-  text-align: center;
-}
+  .title {
+    font-size: 2rem;
+    text-align: center;
+  }
 </style>
