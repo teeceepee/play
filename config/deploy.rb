@@ -42,7 +42,13 @@ set :nvm_node, File.read('.nvmrc').strip
 set :nvm_map_bins, fetch(:nvm_map_bins, []).push('bower', 'rake', 'bundle')
 set :bower_flags, '--config.interactive=false --allow-root'
 
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/settings.yml')
+LINKED_FILES = %w(
+  config/database.yml
+  config/secrets.yml
+  config/settings.yml
+  config/newrelic.yml
+)
+append :linked_files, *LINKED_FILES
 
 # 'taobao' 'official'
 set :yarn_registry, 'taobao'

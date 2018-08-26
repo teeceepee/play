@@ -19,6 +19,8 @@
 # Ignore config files.
 /config/database.yml
 /config/secrets.yml
+/config/settings.yml
+/config/newrelic.yml
 
 # Ignore RubyMine project files.
 /.idea
@@ -37,9 +39,6 @@
 
 # Ignore vendor assets
 /vendor/assets/bower_components/
-
-# Ignore settings file
-/config/settings.yml
 
 # Ignore I18n-js tmp segment files
 /app/assets/javascripts/i18n_segments/
