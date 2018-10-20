@@ -11,7 +11,7 @@ gem 'carrierwave-aliyun', '0.9.0' # https://github.com/huacnlee/carrierwave-aliy
 gem 'enumerize', '2.1.2' # https://github.com/brainspec/enumerize
 gem 'active_model_serializers', '0.10.6'  # https://github.com/rails-api/active_model_serializers
 gem 'letsencrypt_plugin', '0.0.10'  # https://github.com/lgromanowski/letsencrypt-plugin
-gem 'webpacker', '>= 4.0.x'  # https://github.com/rails/webpacker
+# gem 'webpacker', '>= 4.0.x'  # https://github.com/rails/webpacker
 gem 'bindata', '2.3.5' # https://github.com/dmendel/bindata
 gem 'kaminari', '1.0.1' # https://github.com/kaminari/kaminari
 gem 'font-awesome-sass', '4.7.0'  # https://github.com/FortAwesome/font-awesome-sass
