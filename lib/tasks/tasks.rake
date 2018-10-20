@@ -31,8 +31,8 @@ task :db_backup do
   filename = backup_dir.join("#{Time.now.utc.strftime('%Y%m%d%H%M%S')}.sql").to_s
   file = ['--file', filename].join(' ')
 
-  # cmd = "pg_dump #{conn} #{file} --data-only --table taobao_items --table taobao_reviews #{database}"
-  cmd = "pg_dump #{conn} #{file} #{database}"
+  # cmd = "pg_dump -O -x #{conn} #{file} --data-only --table taobao_items --table taobao_reviews #{database}"
+  cmd = "pg_dump --no-owner --no-privileges #{conn} #{file} #{database}"
 
   system(cmd)
 end
