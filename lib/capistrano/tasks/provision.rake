@@ -126,6 +126,42 @@ namespace :provision do
     end
   end
 
+  # https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04
+  namespace :swap_file do
+    desc 'Add an 1G swap file'
+    task :add do
+      on release_roles(:all) do
+        file = fetch(:swap_file_path)
+        execute "fallocate -l 1G #{file}"
+        execute "chmod 600 #{file}"
+        execute "mkswap #{file}"
+      end
+    end
+
+    desc 'Enable swap file'
+    task :swapon do
+      on release_roles(:all) do
+        execute "swapon #{fetch(:swap_file_path)}"
+      end
+    end
+
+    desc 'Disable swap file'
+    task :swapoff do
+      on release_roles(:all) do
+        execute "swapoff #{fetch(:swap_file_path)}"
+      end
+    end
+
+    desc 'Show enabled swap files'
+    task :show do
+      on release_roles(:all) do
+        is_ub14 = capture('cat /etc/issue').match(/14/)
+        option = is_ub14 ? '--summary' : '--show'
+        execute "swapon #{option}"
+      end
+    end
+  end
+
 end
 
 namespace :load do
@@ -158,5 +194,7 @@ namespace :load do
     )
 
     set :dep_packages, (packages + lib_packages)
+
+    set :swap_file_path, '/swapfile'
   end
 end
