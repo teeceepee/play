@@ -13,6 +13,7 @@ export class Navbar extends PureComponent {
             <NavLink to="/articles" className="nav-item nav-link">Articles</NavLink>
             <NavLink to="/calendar" className="nav-item nav-link">Calendar</NavLink>
             {/*<NavLink to="/dashboard" className="nav-item nav-link">Dashboard</NavLink>*/}
+            <NavLink to="/player" className="nav-item nav-link">Player</NavLink>
           </ul>
         </div>
       </nav>

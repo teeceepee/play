@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const token: string = document.querySelector('[name=csrf-token]').getAttribute('content')
+const token: string = document.querySelector('[name=csrf-token]')!.getAttribute('content') || ''
 
 export default axios.create({
   headers: {

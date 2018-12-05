@@ -8,6 +8,7 @@ import { LandingPagePage } from 'LandingPage'
 import { CalendarPage } from '../../calendar/index'
 import { EditorPage } from '../../editor'
 import { DashboardPage } from 'Dashboard'
+import { PlayerPage } from 'PlayerPage/index'
 
 class Main extends React.Component {
 
@@ -20,6 +21,7 @@ class Main extends React.Component {
         <Route path="/calendar" exact component={CalendarPage} />
         <Route path="/editor" exact component={EditorPage}/>
         <Route path="/dashboard" exact component={DashboardPage}/>
+        <Route path="/player" exact component={PlayerPage}/>
         <Route component={LandingPagePage} />
       </Switch>
     )
