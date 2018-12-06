@@ -81,13 +81,16 @@ class ProgressBar extends PureComponent<BarProps> {
       const scaledLeft = this.props.left * factor
       this.maxLeft = width
 
-      this.change(scaledLeft)
+      this.change(scaledLeft, false)
     }
   }
 
-  private change (newLeft: number) {
+  private change (newLeft: number, changeNumber: boolean = true) {
     this.props.onChange(newLeft)
-    this.props.onNumberChange(Math.floor(newLeft / this.maxLeft * this.props.max))
+
+    if (changeNumber) {
+      this.props.onNumberChange(Math.floor(newLeft / this.maxLeft * this.props.max))
+    }
   }
 
   render () {
