@@ -157,7 +157,7 @@ interface ExampleStates {
 export class ProgressBarExample extends PureComponent<any, ExampleStates> {
 
   state = {
-    current: 1000,
+    current: 100,
   }
 
   handleNumberChange = (n: number) => {
