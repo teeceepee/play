@@ -9,6 +9,7 @@ import { CalendarPage } from '../../calendar/index'
 import { EditorPage } from '../../editor'
 import { DashboardPage } from 'Dashboard'
 import { PlayerPage } from 'PlayerPage/index'
+import { MachineLearningPage } from 'MachineLearning/index'
 
 class Main extends React.Component {
 
@@ -22,6 +23,7 @@ class Main extends React.Component {
         <Route path="/editor" exact component={EditorPage}/>
         <Route path="/dashboard" exact component={DashboardPage}/>
         <Route path="/player" exact component={PlayerPage}/>
+        <Route path="/machine" exact component={MachineLearningPage}/>
         <Route component={LandingPagePage} />
       </Switch>
     )
