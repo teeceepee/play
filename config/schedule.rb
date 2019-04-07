@@ -28,4 +28,5 @@ end
 
 every 60.days do
   rake 'letsencrypt_plugin'
+  command 'service nginx reload'
 end
