@@ -1,4 +1,4 @@
-source 'https://gems.ruby-china.com'
+source 'https://rubygems.org'
 
 # http://bundler.io/git.html
 git_source(:github) do |repo_name|
