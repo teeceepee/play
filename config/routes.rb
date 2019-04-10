@@ -83,6 +83,12 @@ Rails.application.routes.draw do
         get :random
       end
     end
+
+    resources :ninety, only: [] do
+      collection do
+        get :fetch
+      end
+    end
   end
 
   mount EchoServer.new, at: '/ws/echo_server', as: :echo_server
