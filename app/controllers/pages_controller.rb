@@ -7,10 +7,6 @@ class PagesController < ApplicationController
 
   end
 
-  def v
-    render layout: false
-  end
-
   def girls
     @urls = JiandanComment.all_urls
   end
