@@ -8,7 +8,7 @@ import { name } from "consts"
 const Index = props => (
   <h1>
     Welcome to&nbsp;
-    <a href="http://www.xiumaijia.com/">{props.name}</a>
+    <span>{props.name}</span>
   </h1>
 )
 
