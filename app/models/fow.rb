@@ -113,7 +113,7 @@ class Fow
     endian :big
 
     uint16 :version
-    uint16 :number
+    uint16 :num
     array :sub_tables, type: :cmap_sub_table, initial_length: -> { self.number }
     format_four_sub_table :format_four_sub_table
   end

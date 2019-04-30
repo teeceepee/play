@@ -1,0 +1,29 @@
+
+.miner-page {
+  .miner-grid {
+    display: inline-block;
+    //border-top: 1px solid gray;
+    //border-left: 1px solid gray;
+  }
+
+  .miner-cell {
+    display: inline-block;
+    vertical-align: top;
+    width: 45px;
+    height: 45px;
+    line-height: 44px;
+    text-align: center;
+    border-style: outset;
+    user-select: none;
+    background-color: #ccc;
+    color: blue;
+    font-weight: bold;
+
+    &.exposed {
+      background-color: #eee;
+      border-style: none;
+      border-right: 1px solid gray;
+      border-bottom: 1px solid gray;
+    }
+  }
+}
