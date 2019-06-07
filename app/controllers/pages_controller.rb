@@ -75,6 +75,10 @@ class PagesController < ApplicationController
     render layout: 'lite'
   end
 
+  def ordered_load
+    render layout: 'lite'
+  end
+
   def dns
     @domain = params[:domain]
     @result = Dns.question(@domain) if @domain.present?

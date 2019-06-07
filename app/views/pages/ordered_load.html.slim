@@ -1,0 +1,82 @@
+#para-container
+
+javascript:
+  const paragraphs = [
+    'Step 1: Break The UI Into A Component Hierarchy',
+    'Step 2: Build A Static Version in React',
+    'Step 3: Identify The Minimal (but complete) Representation Of UI State',
+    'Step 4: Identify Where Your State Should Live',
+    'Step 5: Add Inverse Data Flow',
+  ]
+
+  function getPara (n) {
+    return paragraphs[n - 1] || ''
+  }
+
+javascript:
+  function fetchPara (n) {
+    const latency = Math.ceil(Math.random() * 3000) + 200
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(getPara(n))
+        console.log(`Load Paragraph ${n} in ${latency}ms`)
+      }, latency)
+    })
+  }
+
+javascript:
+  function appendPara (para) {
+    const cont = document.querySelector('#para-container')
+
+    const newPara = document.createElement('p')
+    newPara.textContent = para
+
+    cont.appendChild(newPara)
+  }
+
+javascript:
+  function loadParagraphsOrdered () {
+    const count = paragraphs.length
+
+    const promises = []
+    for (let i = 1; i <= count; i++) {
+      promises.push(fetchPara(i))
+    }
+
+    consumeByLoop(promises)
+    // consumeByReduce(promises)
+    // consumeByAwait(promises)
+  }
+
+  function consumeByLoop (promises) {
+    let lastPromise = Promise.resolve(null)
+
+    for (let i = 0; i < promises.length; i++) {
+      lastPromise = lastPromise.then(() => {
+        return promises[i].then((para) => {
+          appendPara(para)
+        })
+      })
+    }
+  }
+
+  function consumeByReduce (promises) {
+    promises.reduce((acc, promise) => {
+      return acc.then(() => {
+        return promise.then((para) => {
+          appendPara(para)
+        })
+      })
+    }, Promise.resolve(null))
+  }
+
+  async function consumeByAwait (promises) {
+    for (const promise of promises) {
+      const p = await promise
+
+      appendPara(p)
+    }
+  }
+
+  loadParagraphsOrdered()

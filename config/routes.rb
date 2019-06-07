@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     get :time_zone
     get :navigation
     get :background
+    get :ordered_load
     get :dns
   end
 
