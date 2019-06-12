@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     get :navigation
     get :background
     get :ordered_load
+    get :bind
     get :dns
   end
 

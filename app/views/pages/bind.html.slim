@@ -1,0 +1,19 @@
+javascript:
+  Function.prototype.myBind = function(context) {
+    const self = this // 返回的是普通函数，所以要用局部变量暂存 this
+
+    // 返回的新函数的所有参数在 arguments 中，所以不能返回箭头函数，因为箭头函数没有自己的 arguments
+    return function() {
+      self.apply(context, arguments)
+    }
+  }
+
+javascript:
+  function foo (n) {
+    console.log(this.name, n)
+  }
+
+  const o = {name: 'Doe'}
+
+  foo.bind(o)(123)   // => Doe 123
+  foo.myBind(o)(123) // => Doe 123
