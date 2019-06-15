@@ -79,6 +79,10 @@ class PagesController < ApplicationController
     render layout: 'lite'
   end
 
+  def ordered_load_logos
+    render layout: 'lite'
+  end
+
   def bind
     render layout: 'lite'
   end
