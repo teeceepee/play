@@ -59,6 +59,7 @@ Rails.application.routes.draw do
     get :ordered_load_logos
     get :bind
     get :dns
+    get :swipe
   end
 
   namespace :demos do

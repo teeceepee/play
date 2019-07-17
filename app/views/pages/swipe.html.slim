@@ -1,0 +1,80 @@
+.nav Nav
+
+.swipe-x
+  section
+    h2 Slider 1
+  section
+    h2 Slider 2
+  section
+    h2 Slider 3
+  section
+    h2 Slider 4
+
+article.scroll-y
+  section
+    h2 Section one
+    p Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko.
+
+    p Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko.
+
+  section
+    h2 Section two
+
+    p Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko.
+
+    p Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko.
+
+  section
+    h2 Section three
+
+    p Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko.
+
+    p Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko.
+
+css:
+  body {
+    margin: 0;
+  }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: #006bb6;
+    color: #FFF;
+  }
+
+  .swipe-x {
+    margin: 10px auto;
+    padding: 10px;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 10px;
+    background-color: #FAFAFA;
+    white-space: nowrap;
+  }
+
+  .swipe-x section {
+    scroll-snap-align: start;
+    display: inline-block;
+    width: 100vw;
+  }
+
+  .scroll-y {
+    margin: 5px auto;
+    padding: 10px;
+    max-width: 400px;
+    height: 300px;
+    overflow-y: auto;
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 10px;
+    background-color: #EEE;
+  }
+
+  .scroll-y section {
+    scroll-snap-align: start;
+    border-top: 1px solid #CCC;
+  }

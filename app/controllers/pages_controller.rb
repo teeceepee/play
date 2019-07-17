@@ -87,6 +87,10 @@ class PagesController < ApplicationController
     render layout: 'lite'
   end
 
+  def swipe
+    render layout: 'lite'
+  end
+
   def dns
     @domain = params[:domain]
     @result = Dns.question(@domain) if @domain.present?
