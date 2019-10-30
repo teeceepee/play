@@ -29,7 +29,7 @@ gem 'redis', '~> 4.0.1', require: ['redis', 'redis/connection/hiredis']  # https
 gem 'nokogiri', '1.8.1'  # https://github.com/sparklemotion/nokogiri
 gem 'http', '~> 2.0.1'  # https://github.com/httprb/http
 gem 'pg', '~> 0.18.4'  # https://github.com/ged/ruby-pg
-gem 'simple_form', '~> 3.5.0'  # https://github.com/plataformatec/simple_form
+gem 'simple_form', '~> 5.0.0'  # https://github.com/plataformatec/simple_form
 gem 'sprockets-es6', '~> 0.9.0'  # https://github.com/TannerRogalsky/sprockets-es6
 gem 'carrierwave', '~> 0.10.0'  # https://github.com/carrierwaveuploader/carrierwave
 gem 'rouge', '~> 1.10.1'  # https://github.com/jneen/rouge
