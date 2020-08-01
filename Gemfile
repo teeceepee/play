@@ -16,7 +16,7 @@ gem 'bindata', '2.3.5' # https://github.com/dmendel/bindata
 gem 'kaminari', '1.0.1' # https://github.com/kaminari/kaminari
 gem 'font-awesome-sass', '4.7.0'  # https://github.com/FortAwesome/font-awesome-sass
 gem 'i18n-js', '3.0.0.rc15'  # https://github.com/fnando/i18n-js
-gem 'faye-websocket', '0.10.5'  # https://github.com/faye/faye-websocket-ruby
+gem 'faye-websocket', '0.11.0'  # https://github.com/faye/faye-websocket-ruby
 gem 'redis-activesupport', '5.0.1'  # https://github.com/redis-store/redis-activesupport
 gem 'whenever', '0.9.7', require: false  # https://github.com/javan/whenever
 gem 'bcrypt', '3.1.10'  # https://github.com/codahale/bcrypt-ruby
