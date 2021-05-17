@@ -26,7 +26,7 @@ gem 'exception_notification', '4.2.1'  # https://github.com/smartinez87/exceptio
 gem 'sidekiq', '~> 5.1.3'  # https://github.com/mperham/sidekiq
 gem 'hiredis', '0.6.1'  # https://github.com/redis/hiredis-rb
 gem 'redis', '~> 4.0.1', require: ['redis', 'redis/connection/hiredis']  # https://github.com/redis/redis-rb
-gem 'nokogiri', '1.8.1'  # https://github.com/sparklemotion/nokogiri
+gem 'nokogiri', '1.11.4' # https://github.com/sparklemotion/nokogiri
 gem 'http', '~> 2.0.1'  # https://github.com/httprb/http
 gem 'pg', '~> 0.18.4'  # https://github.com/ged/ruby-pg
 gem 'simple_form', '~> 3.5.0'  # https://github.com/plataformatec/simple_form
